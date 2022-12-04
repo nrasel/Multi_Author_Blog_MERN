@@ -21,6 +21,7 @@ const Home = ({ history }) => {
       <div className="main-content">
         <div className="container">
           <div className="row">
+            <h1>Hello</h1>
             <div className="col-8">
               <Switch>
                 <Route path="/" component={HomeArticle} exact />
