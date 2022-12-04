@@ -4,9 +4,9 @@ import { BsGithub, BsTwitter } from "react-icons/bs";
 import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ nav }) => {
   return (
-    <div id="navbar" className="navbar">
+    <div ref={nav} id="navbar" className="navbar">
       <div className="container">
         <div className="row">
           <input type="checkbox" id="toggle" />

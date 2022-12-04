@@ -181,4 +181,24 @@
       }
     }
   }
+  #scroll {
+    .scroll-btn {
+      width: 35px;
+      height: 35px;
+      background-color: #008009;
+      border: none;
+      position: fixed;
+      right: 2%;
+      top: 92%;
+      cursor: pointer;
+      color: #fff;
+      font-size: 17px;
+      border-radius: 3px;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
 }

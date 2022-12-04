@@ -1,0 +1,37 @@
+#copy-right {
+  position: relative;
+  padding: 10px 0px;
+  background-color: #000;
+  .row {
+    .col-6 {
+      .right-side {
+        ul {
+          justify-content: flex-end !important;
+          li {
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+      .left-side,
+      .right-side {
+        ul {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          li {
+            padding: 4px 8px 4px 0px;
+            color: #fff;
+            a {
+              color: aqua;
+              font-size: 14px;
+              font-weight: 600;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+  }
+}
