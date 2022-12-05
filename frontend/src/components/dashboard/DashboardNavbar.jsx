@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsBell } from "react-icons/bs";
+import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AdminInfo from "./AdminInfo";
 import UserMessage from "./UserMessage";
@@ -18,9 +19,9 @@ const DashboardNavbar = () => {
               <AiOutlineMenu />
             </span>
           </label>
-          <h3>
+          <h2>
             <Link to="/dashboard">Naimur Rahman</Link>
-          </h3>
+          </h2>
         </div>
         <div className="dashboard-navbar-right-side">
           <h2>
@@ -39,6 +40,46 @@ const DashboardNavbar = () => {
                     <BsBell />
                   </span>
                   <div className="nCount">5</div>
+                </div>
+                <div className="notification show">
+                  <ul>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/">Naimur comment your article</Link>
+                      <div className="ndelete">
+                        <FaTrash />
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
               <UserMessage />

@@ -3,8 +3,8 @@
   display: flex;
   height: 70px;
   background-color: #fff;
-  box-shadow: 0 0 0 0rgba (90, 113, 208, 0.11) o 4px 16px 0
-    rgba(167, 175, 183, 0.83);
+  box-shadow: 0 0 0 0 rgba(90, 113, 208, 0.11),
+    0 4px 16px 0 rgba(167, 175, 183, 0.83);
   position: fixed;
   left: 0;
   top: 0;
@@ -39,25 +39,32 @@
         color: #fff;
       }
     }
-    // .h2 {
-    //   margin-left: ;
-    // }
   }
   .dashboard-navbar-right-side {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100%-275px);
+    width: calc(100% - 275px);
     padding: 0px 25px 0 10px;
+
     h2 {
       padding-left: 10px;
-      span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a {
         font-weight: 600;
         color: #404040;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
     .search {
       width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .user {
       display: flex;
@@ -65,7 +72,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        grid-gap: 10px;
+        margin-right: 25px;
         .message,
         .notification {
           position: relative;
@@ -76,11 +83,53 @@
             font-size: 17px;
             margin: 4px;
           }
+          .mCount {
+            background-color: #03ce03 !important;
+          }
           .nCount,
           .mCount {
             background-color: red;
             position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 12px;
           }
+        }
+      }
+      label {
+        display: flex;
+        align-items: center;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          grid-gap: 8px;
+          cursor: pointer;
+          border: 1px solid gray;
+        }
+      }
+      .name-time {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h3 {
+          font-size: 16px;
+          font-weight: 400;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        span {
+          font-size: 13px;
+          font-weight: 300;
         }
       }
     }
