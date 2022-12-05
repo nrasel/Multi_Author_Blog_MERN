@@ -9,7 +9,7 @@ const DashboardNavbar = () => {
   return (
     <>
       <div className="dashboard-navbar">
-        <div className="dashboard-navbar-left">
+        <div className="dashboard-navbar-left-side">
           <label htmlFor="" className="dash">
             <span>D</span>
           </label>
@@ -18,11 +18,11 @@ const DashboardNavbar = () => {
               <AiOutlineMenu />
             </span>
           </label>
-          <h2>
+          <h3>
             <Link to="/dashboard">Naimur Rahman</Link>
-          </h2>
+          </h3>
         </div>
-        <div className="dashboard-navbar-right">
+        <div className="dashboard-navbar-right-side">
           <h2>
             <Link to="/dashboard">
               <span>View Site</span>
@@ -43,13 +43,17 @@ const DashboardNavbar = () => {
               </div>
               <UserMessage />
             </div>
+            <label htmlFor="adminInfo">
+              <img
+                src="http://localhost:3000/designimage/register.jpg"
+                alt=""
+              />
+            </label>
+            <div className="name-time">
+              <h3>Naimur Rahman</h3>
+              <span>2 jun 2022</span>
+            </div>
           </div>
-          <label htmlFor="adminInfo">
-            <img
-              src="http://localhost:3000/articleImage/artificial.jpg"
-              alt=""
-            />
-          </label>
         </div>
       </div>
       <AdminInfo />

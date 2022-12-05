@@ -8,7 +8,7 @@ const UserMessage = () => {
         <span>
           <BsEnvelope />
         </span>
-        <div className="nCount">5</div>
+        <div className="mCount">5</div>
       </div>
     </div>
   );
