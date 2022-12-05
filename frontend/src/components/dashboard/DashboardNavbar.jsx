@@ -41,41 +41,41 @@ const DashboardNavbar = () => {
                   </span>
                   <div className="nCount">5</div>
                 </div>
-                <div className="notification show">
+                <div className="notifications show">
                   <ul>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
                     <li>
                       <Link to="/">Naimur comment your article</Link>
-                      <div className="ndelete">
+                      <div className="nDelete">
                         <FaTrash />
                       </div>
                     </li>
