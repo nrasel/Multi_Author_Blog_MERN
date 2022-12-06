@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "react-router-dom";
+import ArticleAdd from "./ArticleAdd";
 import DashboardArticle from "./DashboardArticle";
 import DashboardIndex from "./DashboardIndex";
 import DashboardNavbar from "./DashboardNavbar";
@@ -22,6 +23,7 @@ const Dashboard = () => {
             path="/dashboard/all-article"
             component={DashboardArticle}
           />
+          <Route exact path="/dashboard/article-add" component={ArticleAdd} />
         </Switch>
       </div>
     </div>

@@ -50,7 +50,7 @@ const Sidebar = () => {
               </span>
               <span>All Article</span>
             </Link>
-            <Link>
+            <Link to="/dashboard/article-add">
               <span>
                 <FaPlus />
               </span>

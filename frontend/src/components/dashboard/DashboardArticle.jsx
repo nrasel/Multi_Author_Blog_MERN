@@ -1,9 +1,12 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { FaSearch } from "react-icons/fa";
+import { FaRegEye, FaSearch } from "react-icons/fa";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Pagination from "../home/Pagination";
 
 const DashboardArticle = () => {
+  const text = "Lorem Ipsum is simply dummy text of the printing";
   return (
     <div className="dashboard-article">
       <Helmet>
@@ -32,6 +35,161 @@ const DashboardArticle = () => {
             </Link>
           </div>
         </div>
+        <div className="height-70vh">
+          <div className="articles">
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+            <div className="article">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+              <Link to="/article/details/slug">
+                Lorem Ipsum is simply dummy text of the printing
+              </Link>
+              <p>{text}</p>
+              <div className="action">
+                <span>
+                  <Link>
+                    <MdEdit />
+                  </Link>
+                </span>
+                <span>
+                  <Link>
+                    <FaRegEye />
+                  </Link>
+                </span>
+                <span>
+                  <MdDelete />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Pagination />
       </div>
     </div>
   );
