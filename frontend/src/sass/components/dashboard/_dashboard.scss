@@ -48,5 +48,52 @@
   .dashboard-main-content {
     min-height: 100vh;
     width: 100%;
+    &-elements {
+      margin-left: 275px;
+      padding: 95px 15px 15px 15px;
+      transition: all 0.5s;
+      .dashboard-elements {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 16px;
+        transition: all 0.5s;
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-gap: 16px;
+          .single-card {
+            position: relative;
+            display: flex;
+            background-color: #fff;
+            box-shadow: 0 0 0 0 rgba(90, 113, 208, 0.11),
+              0 4px 16px 0 rgba(167, 175, 183, 0.83);
+            overflow: hidden;
+            height: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.5s ease 0s;
+            color: #404040;
+            .card-icon {
+              width: 30%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 30px;
+              z-index: 1;
+            }
+            .card-info {
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              text-align: center;
+              justify-content: center;
+              z-index: 1;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
   }
 }

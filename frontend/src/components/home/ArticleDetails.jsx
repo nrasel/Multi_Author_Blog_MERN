@@ -93,16 +93,16 @@ const ArticleDetails = () => {
         <Link>Java</Link>
       </div>
       <div className="social-icon">
-        <a className="l1" href="">
+        <a className="l1" href="/">
           <FaFacebook />
         </a>
-        <a className="l2" href="">
+        <a className="l2" href="/">
           <FaTwitter />
         </a>
-        <a className="l3" href="">
+        <a className="l3" href="/">
           <FaGithub />
         </a>
-        <a className="l4" href="">
+        <a className="l4" href="/">
           <FaLinkedin />
         </a>
       </div>

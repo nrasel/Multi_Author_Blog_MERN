@@ -14,7 +14,7 @@ const UserMessage = () => {
       <div className="messages show">
         <ul>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
@@ -22,7 +22,7 @@ const UserMessage = () => {
             </div>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
@@ -30,7 +30,7 @@ const UserMessage = () => {
             </div>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
@@ -38,7 +38,7 @@ const UserMessage = () => {
             </div>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
@@ -46,7 +46,7 @@ const UserMessage = () => {
             </div>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
@@ -54,7 +54,7 @@ const UserMessage = () => {
             </div>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/" target="_blank">
               Naimur send an email
             </a>
             <div className="nDelete">
