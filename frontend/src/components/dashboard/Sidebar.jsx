@@ -1,7 +1,13 @@
 import React from "react";
 import { AiFillDashboard } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
-import { FaRegCaretSquareRight, FaTag, FaUser } from "react-icons/fa";
+import {
+  FaEye,
+  FaPlus,
+  FaRegCaretSquareRight,
+  FaTag,
+  FaUser,
+} from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -9,6 +15,10 @@ const Sidebar = () => {
   return (
     <div className="dashboard-main-content-sidebar">
       <ul>
+        <input type="checkbox" id="article" />
+        <input type="checkbox" id="category" />
+        <input type="checkbox" id="tag" />
+        <input type="checkbox" id="user" />
         <li>
           <Link to="/dashboard">
             <label>
@@ -29,10 +39,24 @@ const Sidebar = () => {
               </span>
               <span>Article</span>
             </h3>
-            <span className="righ-icon">
+            <span className="right-icon1">
               <BsChevronRight />
             </span>
           </label>
+          <div className="article-category">
+            <Link>
+              <span>
+                <FaEye />
+              </span>
+              <span>All Article</span>
+            </Link>
+            <Link>
+              <span>
+                <FaPlus />
+              </span>
+              <span>Add Article</span>
+            </Link>
+          </div>
         </li>
         <li>
           <label htmlFor="category">
@@ -42,10 +66,24 @@ const Sidebar = () => {
               </span>
               <span>Category</span>
             </h3>
-            <span className="righ-icon">
+            <span className="right-icon2">
               <BsChevronRight />
             </span>
           </label>
+          <div className="category-category">
+            <Link>
+              <span>
+                <FaEye />
+              </span>
+              <span>All Article</span>
+            </Link>
+            <Link>
+              <span>
+                <FaPlus />
+              </span>
+              <span>Add Article</span>
+            </Link>
+          </div>
         </li>
         <li>
           <label htmlFor="tag">
@@ -55,23 +93,51 @@ const Sidebar = () => {
               </span>
               <span>Tag</span>
             </h3>
-            <span className="righ-icon">
+            <span className="right-icon3">
               <BsChevronRight />
             </span>
           </label>
+          <div className="tag-category">
+            <Link>
+              <span>
+                <FaEye />
+              </span>
+              <span>All Article</span>
+            </Link>
+            <Link>
+              <span>
+                <FaPlus />
+              </span>
+              <span>Add Article</span>
+            </Link>
+          </div>
         </li>
         <li>
-          <label htmlFor="tag">
+          <label htmlFor="user">
             <h3>
               <span>
                 <FaUser />
               </span>
               <span>User</span>
             </h3>
-            <span className="righ-icon">
+            <span className="right-icon4">
               <BsChevronRight />
             </span>
           </label>
+          <div className="user-category">
+            <Link>
+              <span>
+                <FaEye />
+              </span>
+              <span>All User</span>
+            </Link>
+            <Link>
+              <span>
+                <FaEye />
+              </span>
+              <span>All Subadmin</span>
+            </Link>
+          </div>
         </li>
       </ul>
     </div>

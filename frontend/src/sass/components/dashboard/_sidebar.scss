@@ -14,6 +14,40 @@
     padding: 20px 0px;
     display: flex;
     flex-direction: column;
+    #article,
+    #category,
+    #tag,
+    #user {
+      display: none;
+    }
+    #article:checked ~ li .article-category {
+      height: 70px !important;
+    }
+    #article:checked ~ li label span.right-icon1 {
+      transform: rotate(90deg);
+      transition: all 0.5s;
+    }
+    #category:checked ~ li .category-category {
+      height: 70px !important;
+    }
+    #category:checked ~ li label span.right-icon2 {
+      transform: rotate(90deg);
+      transition: all 0.5s;
+    }
+    #tag:checked ~ li .tag-category {
+      height: 70px !important;
+    }
+    #tag:checked ~ li label span.right-icon3 {
+      transform: rotate(90deg);
+      transition: all 0.5s;
+    }
+    #user:checked ~ li .user-category {
+      height: 70px !important;
+    }
+    #user:checked ~ li label span.right-icon4 {
+      transform: rotate(90deg);
+      transition: all 0.5s;
+    }
     li {
       min-height: 35px;
       label {
@@ -22,19 +56,42 @@
         padding: 10px 20px;
         cursor: pointer;
         color: #fff;
-        label.right-icon {
+        span.right-icon {
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 14px;
+          transition: all 0.5s;
+        }
+        h3 {
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          grid-gap: 8px;
+          span {
+            font-size: 15px;
+          }
         }
       }
-      h3 {
+      .article-category,
+      .category-category,
+      .tag-category,
+      .user-category {
+        padding-left: 30px;
         display: flex;
-        justify-content: center;
-        align-content: center;
-        grid-gap: 8px;
-        span {
-          font-size: 15px;
+        flex-direction: column;
+        transition: all 0.5s;
+        height: 0;
+        overflow: hidden;
+        a {
+          cursor: pointer;
+          padding: 8px 0px 8px 20px;
+          align-items: center;
+          grid-gap: 8px;
+          span {
+            font-weight: 500;
+            color: #fff;
+          }
         }
       }
     }
