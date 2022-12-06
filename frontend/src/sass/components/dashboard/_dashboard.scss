@@ -91,7 +91,31 @@
               z-index: 1;
               text-transform: capitalize;
             }
+            &::before {
+              content: "";
+              width: 100%;
+              padding-top: 100%;
+              background-image: linear-gradient(to top right, gray, aqua);
+              position: absolute;
+              left: -50%;
+              right: 0;
+              transition: all 0.8s;
+              border-radius: 50%;
+            }
+            &:hover::before {
+              transform: scale(3);
+            }
+            &:hover {
+              color: #fff;
+            }
           }
+        }
+        .card-chart {
+          background-color: #fff;
+          box-shadow: 0 0 0 0 rgba(90, 113, 208, 0.11),
+            0 4px 16px 0 rgba(167, 175, 183, 0.83);
+          height: 300px;
+          border-radius: 3px;
         }
       }
     }
