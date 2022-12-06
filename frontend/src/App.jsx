@@ -25,7 +25,8 @@ function App() {
           exact
         />
         <Route path="/article/search/:searchValue" component={Home} exact />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/dashboard/all-article" component={Dashboard} exact />
       </Switch>
     </Router>
   );

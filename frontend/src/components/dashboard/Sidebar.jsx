@@ -44,7 +44,7 @@ const Sidebar = () => {
             </span>
           </label>
           <div className="article-category">
-            <Link>
+            <Link to="/dashboard/all-article">
               <span>
                 <FaEye />
               </span>
