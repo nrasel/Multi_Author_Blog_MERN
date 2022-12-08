@@ -32,8 +32,14 @@ function App() {
           component={Dashboard}
           exact
         />
+        <Route path="/dashboard/article-add" component={Dashboard} exact />
         <Route
-          path="/dashboard/article-add"
+          path="/dashboard/all-category/:currentPage?"
+          component={Dashboard}
+          exact
+        />
+        <Route
+          path="/dashboard/add-category/:currentPage?"
           component={Dashboard}
           exact
         />

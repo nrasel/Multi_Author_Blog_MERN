@@ -1,7 +1,4 @@
 .dashboard-article {
-  margin-left: 275px;
-  padding: 85px 12px 12px 12px;
-  transition: all 0.5s;
   .article-action-pagination {
     min-height: calc(100vh - 100px);
     background-color: #fff;
@@ -9,51 +6,7 @@
     border-radius: 4px;
     justify-content: space-between;
     flex-direction: column;
-    .numof-search-newAdd {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      background-color: #b4ccd8;
-      padding: 10px;
-      border-radius: 2px;
-      .numof {
-        h2 {
-          color: #404040;
-        }
-      }
-      .searchof {
-        position: relative;
-        width: 50%;
-        .search {
-          background-color: gray;
-          border-radius: 4px;
-          input {
-            border-radius: 4px;
-          }
-        }
-        span {
-          position: absolute;
-          padding: 10px;
-          right: 0;
-          display: flex;
-          top: 0;
-          color: #404040;
-        }
-      }
-      .newAdd {
-        .btn {
-          background-color: #58b15c;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          &:hover {
-            background-color: #40b646;
-          }
-        }
-      }
-    }
+
     .height-70vh {
       min-height: 70vh;
       display: flex;

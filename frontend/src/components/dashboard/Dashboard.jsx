@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "react-router-dom";
+import AllCategory from "./AllCategory";
 import ArticleAdd from "./ArticleAdd";
 import DashboardArticle from "./DashboardArticle";
 import DashboardIndex from "./DashboardIndex";
@@ -24,6 +25,11 @@ const Dashboard = () => {
             component={DashboardArticle}
           />
           <Route exact path="/dashboard/article-add" component={ArticleAdd} />
+          <Route
+            path="/dashboard/all-category/:currentPage?"
+            component={AllCategory}
+            exact
+          />
         </Switch>
       </div>
     </div>
