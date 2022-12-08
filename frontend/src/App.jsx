@@ -82,6 +82,18 @@ function App() {
           component={Dashboard}
           exact
         />
+
+        {/* for handle all tag under dashboard route */}
+        {/* dashboard all tag route and pagination */}
+        <Route
+          path="/dashboard/all-sub-admin/:currentPage?"
+          component={Dashboard}
+          exact
+        />
+        {/* tag add route under dashboard */}
+        <Route path="/dashboard/all-user" component={Dashboard} exact />
+        {/* category edit route to find the individual article using this articleSlug(slug) */}
+        
       </Switch>
     </Router>
   );

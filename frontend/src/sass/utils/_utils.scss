@@ -99,6 +99,12 @@
     }
   }
 }
+.dashboard-main-content-sidebar ul li .article-category a span,
+.dashboard-main-content-sidebar ul li .category-category a span,
+.dashboard-main-content-sidebar ul li .tag-category a span,
+.dashboard-main-content-sidebar ul li .user-category a span {
+  margin-right: 5px;
+}
 
 .numof-search-newAdd {
   display: flex;
@@ -147,7 +153,8 @@
 }
 .dashboard-article,
 .all-category,
-.add-category {
+.add-category,
+.all-sub-admin {
   margin-left: 275px;
   padding: 85px 12px 12px 12px;
   transition: all 0.5s;

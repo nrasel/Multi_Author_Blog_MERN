@@ -125,13 +125,13 @@ const Sidebar = () => {
             </span>
           </label>
           <div className="user-category">
-            <Link>
+            <Link to="/dashboard/all-user">
               <span>
                 <FaEye />
               </span>
               <span>All User</span>
             </Link>
-            <Link>
+            <Link to="/dashboard/all-sub-admin">
               <span>
                 <FaEye />
               </span>

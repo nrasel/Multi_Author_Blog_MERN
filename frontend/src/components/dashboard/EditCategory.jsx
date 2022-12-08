@@ -6,7 +6,7 @@ const EditCategory = () => {
   return (
     <div className="add-category">
       <Helmet>
-        <title>Edit Add</title>
+        <title>Edit Category</title>
       </Helmet>
       <div className="added">
         <div className="title-show-article">

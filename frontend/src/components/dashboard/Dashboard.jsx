@@ -4,7 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import AddCategory from "./AddCategory";
 import AddTag from "./AddTag";
 import AllCategory from "./AllCategory";
+import AllSubAdmin from "./AllSubAdmin";
 import AllTag from "./AllTag";
+import AllUser from "./AllUser";
 import ArticleAdd from "./ArticleAdd";
 import ArticleEdit from "./ArticleEdit";
 import DashboardArticle from "./DashboardArticle";
@@ -74,6 +76,14 @@ const Dashboard = () => {
             component={EditTag}
             exact
           />
+          <Route
+            path="/dashboard/all-sub-admin/:currentPage?"
+            component={AllSubAdmin}
+            exact
+          />
+          {/* tag add route under dashboard */}
+          <Route path="/dashboard/all-user" component={AllUser} exact />
+          {/* tag edit route to find the individual article using this articleSlug(slug) */}
         </Switch>
       </div>
     </div>
