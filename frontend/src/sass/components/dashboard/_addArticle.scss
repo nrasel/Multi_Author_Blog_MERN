@@ -27,6 +27,73 @@
       .form-control {
         border-radius: 3px;
       }
+      .form-group.img-upload {
+        position: relative;
+        .upload {
+          position: absolute;
+          right: 10px;
+          label {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            padding-left: 0px;
+          }
+          #uploadImage {
+            display: none;
+          }
+        }
+      }
+      .form-group {
+        .btn {
+          background-color: #1d244e;
+          color: #fff;
+          &:hover {
+            background-color: #181f46;
+          }
+        }
+        label {
+          color: #404040;
+        }
+        p.error {
+          color: red;
+        }
+        .form-control {
+          margin: 4px 0px;
+        }
+        .image-select {
+          margin: 5px 0px 15px 0px;
+          border: 1px solid #dee2e6;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 35px;
+          label {
+            padding: 0px 6px;
+            background-color: #b187ed;
+            border-color: #b187ed;
+            color: 500;
+            font-weight: 500;
+            cursor: pointer;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            transition: all 0.5s;
+            color: #fff;
+            &:hover {
+              background-color: #a372e7;
+            }
+          }
+          span {
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            color: #404040;
+          }
+        }
+        #image {
+          display: none;
+        }
+      }
     }
   }
 }

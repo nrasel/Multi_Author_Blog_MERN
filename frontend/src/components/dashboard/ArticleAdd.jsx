@@ -1,9 +1,15 @@
-import React from "react";
+import JoditEditor from "jodit-react";
+import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { BsCardImage } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const ArticleAdd = () => {
+  const [text, setText] = useState("");
+  const editor = useRef();
+  const config = {
+    readonly: false,
+  };
   return (
     <div className="add-article">
       <Helmet>
@@ -26,7 +32,7 @@ const ArticleAdd = () => {
               className="form-control"
               id="title"
             />
-            <p>Please Provide article title</p>
+            <p className="error">Please Provide article title</p>
           </div>
           <div className="form-group">
             <label htmlFor="slug">Article Slug</label>
@@ -37,7 +43,7 @@ const ArticleAdd = () => {
               name="slug"
               id="slug"
             />
-            <p>Please Provide article slug</p>
+            <p className="error">Please Provide article slug</p>
           </div>
           <button className="btn">Update</button>
           <div className="form-group">
@@ -49,7 +55,7 @@ const ArticleAdd = () => {
               <option value="cat3">Computer</option>
               <option value="cat4">Electrical</option>
             </select>
-            <p>Please Provide article slug</p>
+            <p className="error">Please Provide article slug</p>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Category</label>
@@ -60,7 +66,7 @@ const ArticleAdd = () => {
               <option value="cat3">Computer</option>
               <option value="cat4">Electrical</option>
             </select>
-            <p>Please Provide article slug</p>
+            <p className="error">Please Provide article slug</p>
           </div>
           <div className="form-group img-upload">
             <div className="upload">
@@ -70,10 +76,38 @@ const ArticleAdd = () => {
               <input type="file" id="uploadImage" />
             </div>
             <label htmlFor="articleText">Article Text</label>
-            <joditEditor>
-              value={"hello"}
-              tabIndex={1}
-            </joditEditor>
+            <JoditEditor
+              ref={editor}
+              value={text}
+              config={config}
+              tabIndex={1} // tabIndex of textarea
+              onBlur={(newText) => setText(newText)} // preferred to use only this option to update the content for performance reasons
+              onChange={(newContent) => {}}
+            />
+            <p className="error">Please Provide article slug</p>
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">Image</label>
+            <div className="image-select">
+              <span>Upload Image</span>
+              <label htmlFor="image">Select Image</label>
+              <input
+                type="file"
+                className="form-control"
+                name="image"
+                id="image"
+              />
+            </div>
+            <div className="image">
+              <img
+                src="http://localhost:3000/articleImage/artificial.jpg"
+                alt=""
+              />
+            </div>
+            <p className="error">Please Provide Article Image</p>
+          </div>
+          <div className="form-group">
+            <button className="btn btn-block">Add Article</button>
           </div>
         </form>
       </div>
