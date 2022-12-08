@@ -32,12 +32,8 @@ function App() {
         {/* article search route */}
         <Route path="/article/search/:searchValue" component={Home} exact />
 
-
-
-
         {/* dashboard route */}
         <Route path="/dashboard" component={Dashboard} exact />
-
 
         {/* for handle all article under dashboard  */}
         {/* dashboard all article route and pagination */}
@@ -55,7 +51,6 @@ function App() {
           exact
         />
 
-
         {/* for handle all category under dashboard route */}
         {/* dashboard all category route and pagination */}
         <Route
@@ -68,6 +63,22 @@ function App() {
         {/* article edit route to find the individual article using this articleSlug(slug) */}
         <Route
           path="/dashboard/category/edit/:catSlug"
+          component={Dashboard}
+          exact
+        />
+
+        {/* for handle all tag under dashboard route */}
+        {/* dashboard all tag route and pagination */}
+        <Route
+          path="/dashboard/all-tag/:currentPage?"
+          component={Dashboard}
+          exact
+        />
+        {/* tag add route under dashboard */}
+        <Route path="/dashboard/add-tag" component={Dashboard} exact />
+        {/* category edit route to find the individual article using this articleSlug(slug) */}
+        <Route
+          path="/dashboard/tag/edit/:tagSlug"
           component={Dashboard}
           exact
         />

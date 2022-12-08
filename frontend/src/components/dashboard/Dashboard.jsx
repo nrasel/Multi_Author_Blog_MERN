@@ -2,13 +2,16 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "react-router-dom";
 import AddCategory from "./AddCategory";
+import AddTag from "./AddTag";
 import AllCategory from "./AllCategory";
+import AllTag from "./AllTag";
 import ArticleAdd from "./ArticleAdd";
 import ArticleEdit from "./ArticleEdit";
 import DashboardArticle from "./DashboardArticle";
 import DashboardIndex from "./DashboardIndex";
 import DashboardNavbar from "./DashboardNavbar";
 import EditCategory from "./EditCategory";
+import EditTag from "./EditTag";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
@@ -53,6 +56,22 @@ const Dashboard = () => {
           <Route
             path="/dashboard/category/edit/:catSlug"
             component={EditCategory}
+            exact
+          />
+
+          {/* for handle all tag under dashboard route */}
+          {/* dashboard all tag route and pagination */}
+          <Route
+            path="/dashboard/all-tag/:currentPage?"
+            component={AllTag}
+            exact
+          />
+          {/* tag add route under dashboard */}
+          <Route path="/dashboard/add-tag" component={AddTag} exact />
+          {/* tag edit route to find the individual article using this articleSlug(slug) */}
+          <Route
+            path="/dashboard/tag/edit/:tagSlug"
+            component={EditTag}
             exact
           />
         </Switch>

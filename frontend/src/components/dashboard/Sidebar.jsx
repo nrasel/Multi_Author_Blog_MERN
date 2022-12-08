@@ -3,7 +3,7 @@ import { AiFillDashboard } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
 import {
   FaEye,
-  FaPlus,
+  FaPlusCircle,
   FaRegCaretSquareRight,
   FaTag,
   FaUser,
@@ -52,7 +52,7 @@ const Sidebar = () => {
             </Link>
             <Link to="/dashboard/add-article">
               <span>
-                <FaPlus />
+                <FaPlusCircle />
               </span>
               <span>Add Article</span>
             </Link>
@@ -79,7 +79,7 @@ const Sidebar = () => {
             </Link>
             <Link to="/dashboard/add-category">
               <span>
-                <FaPlus />
+                <FaPlusCircle />
               </span>
               <span>Add Category</span>
             </Link>
@@ -98,17 +98,17 @@ const Sidebar = () => {
             </span>
           </label>
           <div className="tag-category">
-            <Link>
+            <Link to="/dashboard/all-tag">
               <span>
                 <FaEye />
               </span>
-              <span>All Article</span>
+              <span>All Tag</span>
             </Link>
-            <Link>
+            <Link to="/dashboard/add-tag">
               <span>
-                <FaPlus />
+                <FaPlusCircle />
               </span>
-              <span>Add Article</span>
+              <span>Add Tag</span>
             </Link>
           </div>
         </li>
