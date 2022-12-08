@@ -30,26 +30,31 @@ const Home = ({ history }) => {
             <div className="col-8">
               <Switch>
                 <Route path="/" component={HomeArticle} exact />
+                {/*  article show for pagination route */}
                 <Route
                   path="/article/:currentPage?"
                   component={HomeArticle}
                   exact
                 />
+                {/*article details route find individual article using this slug  */}
                 <Route
                   path="/article/details/:slug"
                   component={ArticleDetails}
                   exact
                 />
+                {/* article category route   */}
                 <Route
                   path="/article/category/:categorySlug/:currentPage?"
                   component={CategoryArticle}
                   exact
                 />
+                {/* article tag route */}
                 <Route
                   path="/article/tag/:tagSlug/:currentPage?"
                   component={TagArticle}
                   exact
                 />
+                {/* article search route */}
                 <Route
                   path="/article/search/:searchValue"
                   component={HomeArticle}

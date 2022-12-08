@@ -1,11 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "react-router-dom";
+import AddCategory from "./AddCategory";
 import AllCategory from "./AllCategory";
 import ArticleAdd from "./ArticleAdd";
+import ArticleEdit from "./ArticleEdit";
 import DashboardArticle from "./DashboardArticle";
 import DashboardIndex from "./DashboardIndex";
 import DashboardNavbar from "./DashboardNavbar";
+import EditCategory from "./EditCategory";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
@@ -18,16 +21,38 @@ const Dashboard = () => {
       <div className="dashboard-main-content">
         <Sidebar />
         <Switch>
+          {/* dashboard home page route route */}
           <Route exact path="/dashboard" component={DashboardIndex} />
+
+          {/* for handle all article under dashboard  */}
+          {/* dashboard all article route and pagination */}
           <Route
             exact
-            path="/dashboard/all-article"
+            path="/dashboard/all-article/:currentPage?"
             component={DashboardArticle}
           />
-          <Route exact path="/dashboard/article-add" component={ArticleAdd} />
+          {/* article add route under dashboard */}
+          <Route exact path="/dashboard/add-article" component={ArticleAdd} />
+          {/* article edit route to find the individual article using this articleSlug(slug) */}
+          <Route
+            exact
+            path="/dashboard/article/edit/:articleSlug"
+            component={ArticleEdit}
+          />
+
+          {/* for handle all category under dashboard route */}
+          {/* dashboard all category route and pagination */}
           <Route
             path="/dashboard/all-category/:currentPage?"
             component={AllCategory}
+            exact
+          />
+          {/* category add route under dashboard */}
+          <Route path="/dashboard/add-category" component={AddCategory} exact />
+          {/* article edit route to find the individual article using this articleSlug(slug) */}
+          <Route
+            path="/dashboard/category/edit/:catSlug"
+            component={EditCategory}
             exact
           />
         </Switch>

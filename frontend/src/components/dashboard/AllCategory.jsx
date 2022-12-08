@@ -21,7 +21,7 @@ const AllCategory = () => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Find Your Article"
+                placeholder="Find Your Category"
               />
             </div>
             <span>
@@ -29,7 +29,7 @@ const AllCategory = () => {
             </span>
           </div>
           <div className="newAdd">
-            <Link className="btn" to="/dashboard/add-article">
+            <Link className="btn" to="/dashboard/add-category">
               Add New
             </Link>
           </div>

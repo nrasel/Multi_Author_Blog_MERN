@@ -17,6 +17,7 @@
   font-weight: 300;
   color: var(--text_color);
   background-color: var(--main_bg);
+  border-radius: 3px;
   &::placeholder {
     font-size: 15px;
     width: 300;
@@ -145,8 +146,24 @@
   }
 }
 .dashboard-article,
-.all-category {
+.all-category,
+.add-category {
   margin-left: 275px;
   padding: 85px 12px 12px 12px;
   transition: all 0.5s;
+}
+.title-show-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a.btn {
+    background-color: #58b15c;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s;
+    &:hover {
+      background-color: #459e49;
+    }
+  }
 }

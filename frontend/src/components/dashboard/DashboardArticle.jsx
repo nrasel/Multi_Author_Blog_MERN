@@ -48,7 +48,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>
@@ -73,7 +73,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>
@@ -98,7 +98,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>
@@ -123,7 +123,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>
@@ -148,7 +148,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>
@@ -173,7 +173,7 @@ const DashboardArticle = () => {
               <p>{text}</p>
               <div className="action">
                 <span>
-                  <Link>
+                  <Link to="/dashboard/article/edit/dkssd">
                     <MdEdit />
                   </Link>
                 </span>

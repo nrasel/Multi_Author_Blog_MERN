@@ -50,7 +50,7 @@ const Sidebar = () => {
               </span>
               <span>All Article</span>
             </Link>
-            <Link to="/dashboard/article-add">
+            <Link to="/dashboard/add-article">
               <span>
                 <FaPlus />
               </span>
@@ -71,13 +71,13 @@ const Sidebar = () => {
             </span>
           </label>
           <div className="category-category">
-            <Link to="/dashboard/all-category/">
+            <Link to="/dashboard/all-category">
               <span>
                 <FaEye />
               </span>
               <span>All Category</span>
             </Link>
-            <Link to="/dashboard/add-category/">
+            <Link to="/dashboard/add-category">
               <span>
                 <FaPlus />
               </span>
