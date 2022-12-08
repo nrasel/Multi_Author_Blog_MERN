@@ -35,181 +35,183 @@ const AllSubAdmin = () => {
           </div>
         </div>
         <div className="loading-elements">
-          <div className="table-wrapper">
-            <table>
-              <thead>
-                <tr className="tr">
-                  <th>No</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Image</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+          <div className="elements">
+            <div className="table-wrapper">
+              <table>
+                <thead>
+                  <tr className="tr">
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="No">1</td>
-                  <td data-label="Name">Naimur Rahman</td>
-                  <td data-label="Email">admin@gmail.com</td>
-                  <td data-label="Image">
-                    <img
-                      src="http://localhost:3000/articleImage/artificial.jpg"
-                      alt=""
-                    />
-                  </td>
-                  <td data-label="Action">
-                    {user === "admin" ? (
-                      status === "block" ? (
-                        <span className="unsus">unblock</span>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Name">Naimur Rahman</td>
+                    <td data-label="Email">admin@gmail.com</td>
+                    <td data-label="Image">
+                      <img
+                        src="http://localhost:3000/articleImage/artificial.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td data-label="Action">
+                      {user === "admin" ? (
+                        status === "block" ? (
+                          <span className="unsus">unblock</span>
+                        ) : (
+                          <span className="sus">block</span>
+                        )
                       ) : (
-                        <span className="sus">block</span>
-                      )
-                    ) : (
-                      ""
-                    )}
-                    <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                        ""
+                      )}
+                      <Link to="/dashboard/sub-admin-profile/32">Profile</Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
