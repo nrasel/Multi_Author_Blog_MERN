@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Pagination from "../home/Pagination";
 
 const AllSubAdmin = () => {
   const user = "admin";
@@ -212,6 +213,7 @@ const AllSubAdmin = () => {
                 </tbody>
               </table>
             </div>
+            <Pagination />
           </div>
         </div>
       </div>
