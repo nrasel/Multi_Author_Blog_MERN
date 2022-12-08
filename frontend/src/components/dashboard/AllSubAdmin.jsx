@@ -15,7 +15,7 @@ const AllSubAdmin = () => {
       <div className="elements-numberOf-search-add-new">
         <div className="numof-search-newAdd">
           <div className="numof">
-            <h2>All Sub Admin (22)</h2>
+            <h2> Sub Admin (22)</h2>
           </div>
           <div className="searchof">
             <div className="search">
@@ -31,7 +31,7 @@ const AllSubAdmin = () => {
           </div>
           <div className="newAdd">
             <Link className="btn" to="/dashboard/all-user">
-              User
+              All User
             </Link>
           </div>
         </div>
