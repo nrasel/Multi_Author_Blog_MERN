@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillDashboard } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
 import {
+  FaComments,
   FaEye,
   FaPlusCircle,
   FaRegCaretSquareRight,
@@ -138,6 +139,18 @@ const Sidebar = () => {
               <span>All Subadmin</span>
             </Link>
           </div>
+        </li>
+        <li>
+          <Link to="/dashboard/comments">
+            <label>
+              <h3>
+                <span>
+                  <FaComments />
+                </span>
+                <span>All Comments</span>
+              </h3>
+            </label>
+          </Link>
         </li>
       </ul>
     </div>

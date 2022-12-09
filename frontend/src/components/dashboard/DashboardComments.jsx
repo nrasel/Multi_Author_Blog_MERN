@@ -1,10 +1,16 @@
 import React from "react";
+import Helmet from "react-helmet";
 import { BsTrash } from "react-icons/bs";
+import Pagination from "../home/Pagination";
 
-const Comment = () => {
+const DashboardComments = () => {
   return (
-    <>
+    <div className="dashboard-comments">
+      <Helmet>
+        <title>All comments</title>
+      </Helmet>
       <div className="comments">
+        <h3>Article Comments</h3>
         <div className="main-reply-comment">
           <div className="image-comment-time-name">
             <img
@@ -251,25 +257,12 @@ const Comment = () => {
             <BsTrash />
           </div>
         </div>
-      </div>
-      <div className="comment-submit">
-        <h3>Give Your Comments</h3>
-        <div className="form-group">
-          <textarea
-            placeholder="Write something"
-            className="form-control"
-            name=""
-            id=""
-            cols="20"
-            rows="10"
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <button className="btn">Submit</button>
+        <div className="comment-pagination">
+          <Pagination />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Comment;
+export default DashboardComments;

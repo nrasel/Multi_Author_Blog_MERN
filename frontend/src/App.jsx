@@ -98,6 +98,12 @@ function App() {
           component={Dashboard}
           exact
         />
+        {/* dashboar comments route */}
+        <Route
+          path="/dashboard/comments/:currentPage?"
+          component={Dashboard}
+          exact
+        />
       </Switch>
     </Router>
   );

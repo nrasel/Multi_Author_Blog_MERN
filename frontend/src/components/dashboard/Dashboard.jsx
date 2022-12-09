@@ -10,6 +10,7 @@ import AllUser from "./AllUser";
 import ArticleAdd from "./ArticleAdd";
 import ArticleEdit from "./ArticleEdit";
 import DashboardArticle from "./DashboardArticle";
+import DashboardComments from "./DashboardComments";
 import DashboardIndex from "./DashboardIndex";
 import DashboardNavbar from "./DashboardNavbar";
 import EditCategory from "./EditCategory";
@@ -89,6 +90,13 @@ const Dashboard = () => {
             exact
             path="/dashboard/sub-admin-profile/:adminId"
             component={SubAdminProfile}
+          />
+
+          {/* dashboar comments route */}
+          <Route
+            path="/dashboard/comments/:currentPage?"
+            component={DashboardComments}
+            exact
           />
         </Switch>
       </div>
