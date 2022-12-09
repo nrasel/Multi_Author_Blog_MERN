@@ -15,6 +15,7 @@ import DashboardNavbar from "./DashboardNavbar";
 import EditCategory from "./EditCategory";
 import EditTag from "./EditTag";
 import Sidebar from "./Sidebar";
+import SubAdminProfile from "./SubAdminProfile";
 
 const Dashboard = () => {
   return (
@@ -70,7 +71,7 @@ const Dashboard = () => {
           />
           {/* tag add route under dashboard */}
           <Route path="/dashboard/add-tag" component={AddTag} exact />
-          {/* tag edit route to find the individual article using this articleSlug(slug) */}
+          {/* tag edit route to find the individual tag using this tagSlug(slug) */}
           <Route
             path="/dashboard/tag/edit/:tagSlug"
             component={EditTag}
@@ -81,9 +82,14 @@ const Dashboard = () => {
             component={AllSubAdmin}
             exact
           />
-          {/* tag add route under dashboard */}
+          {/* all user route under dashboard */}
           <Route path="/dashboard/all-user" component={AllUser} exact />
-          {/* tag edit route to find the individual article using this articleSlug(slug) */}
+          {/* sub admin profile route find individual sub admin profile using adminId reference and then get the info from database */}
+          <Route
+            exact
+            path="/dashboard/sub-admin-profile/:adminId"
+            component={SubAdminProfile}
+          />
         </Switch>
       </div>
     </div>

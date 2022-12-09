@@ -83,17 +83,21 @@ function App() {
           exact
         />
 
-        {/* for handle all tag under dashboard route */}
-        {/* dashboard all tag route and pagination */}
+        {/* for handle all sub admin under dashboard route */}
+        {/* dashboard all sub admin route and pagination */}
         <Route
           path="/dashboard/all-sub-admin/:currentPage?"
           component={Dashboard}
           exact
         />
-        {/* tag add route under dashboard */}
+        {/* all user route under dashboard */}
         <Route path="/dashboard/all-user" component={Dashboard} exact />
-        {/* category edit route to find the individual article using this articleSlug(slug) */}
-        
+        {/* sub admin profile route find individual sub admin profile using adminId reference and then get the info from database */}
+        <Route
+          path="/dashboard/sub-admin-profile/:adminId"
+          component={Dashboard}
+          exact
+        />
       </Switch>
     </Router>
   );
