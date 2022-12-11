@@ -10,6 +10,5 @@ export const admin_login = (data) => async (dispatch) => {
     console.log(response);
   } catch (error) {
     console.log(error.response);
-    console.log(error.response);
   }
 };
