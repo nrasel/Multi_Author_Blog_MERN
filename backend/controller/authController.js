@@ -17,7 +17,7 @@ module.exports.admin_login = async (req, res) => {
     error.email = "Please Provide Your Email";
   }
   if (!password) {
-    error.email = "Please Provide Your Password";
+    error.password = "Please Provide Your Password";
   }
 
   //যদি ইউজার ইনফরমেশন প্রোভাইড করে তাইলে কি সেট হবে নাইলে কি সেট হবে না সেই কন্ডিশন কে কানে লাগিয়ে নিচের কোডটা কাজ করবে
@@ -27,7 +27,7 @@ module.exports.admin_login = async (req, res) => {
   } else {
     try {
       const getAdmin = await adminModel.findOne({ email }).select("+password");
-      console.log(getAdmin);
+      // console.log(getAdmin);
       if (getAdmin) {
         const matchPassword = await bcrypt.compare(password, getAdmin.password);
         if (matchPassword) {
@@ -56,13 +56,17 @@ module.exports.admin_login = async (req, res) => {
         } else {
           return res
             .status(400)
-            .json({ errorMessage: "Password doesn't match" });
+            .json({ errorMessage: { error: "Password doesn't match" } });
         }
       } else {
-        return res.status(400).json({ errorMessage: "Email doesn't exist" });
+        return res
+          .status(400)
+          .json({ errorMessage: { error: "Email doesn't exist" } });
       }
     } catch (error) {
-      return res.status(500).json({ errorMessage: "Internal Server Error" });
+      return res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
     }
   }
 };

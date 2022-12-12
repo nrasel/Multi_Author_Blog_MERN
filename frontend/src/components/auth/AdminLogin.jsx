@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { BsAt } from "react-icons/bs";
 import { FaLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,10 +26,35 @@ const AdminLogin = () => {
     dispatch(admin_login(state));
     e.preventDefault();
   };
+
+  // show successMessage useEffect
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch({ type: "LOGIN_SUCCESS_CLEAR" });
+    }
+  }, [dispatch, successMessage]);
+
+  // show the error
+  useEffect(() => {
+    if (errorMessage.error) {
+      toast.error(errorMessage.error);
+    }
+    dispatch({ type: "LOGIN_ERROR_CLEAR" });
+  }, [dispatch, errorMessage.error]);
   return (
     <>
       <Navbar />
       <div className="admin_login">
+        <Toaster
+          position={"bottom-center"}
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              fontSize: "15px",
+            },
+          }}
+        />
         <div className="card">
           <div className="auth">
             <h3>Admin Login</h3>
@@ -49,6 +75,7 @@ const AdminLogin = () => {
                     onChange={inputHandle}
                   />
                 </div>
+                <p>{errorMessage?.email}</p>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -66,6 +93,7 @@ const AdminLogin = () => {
                     onChange={inputHandle}
                   />
                 </div>
+                <p>{errorMessage?.password}</p>
               </div>
               <div className="form-group">
                 {loader ? (

@@ -1,5 +1,6 @@
 const express = require("express");
 const dotEnv = require("dotenv");
+const cors = require("cors");
 // first of all req.body showed undefined. solve this problem we use body parser
 // body parser mainly handle json data.
 const bodyParser = require("body-parser");
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use(bodyParser());
 app.use(cookieParser());
+app.use(cors());
 
 app.use("/rest-api", authRoutes);
 
