@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { admin_login } from "../../store/actions/authAction";
 import Navbar from "../home/Navbar";
 
-const AdminLogin = () => {
+const AdminLogin = ({ history }) => {
   const dispatch = useDispatch();
   const { authenticate, userInfo, errorMessage, successMessage, loader } =
     useSelector((state) => state.adminReducer);
@@ -29,11 +29,14 @@ const AdminLogin = () => {
 
   // show successMessage useEffect
   useEffect(() => {
+    if (authenticate) {
+      history.push("/dashboard");
+    }
     if (successMessage) {
       toast.success(successMessage);
       dispatch({ type: "LOGIN_SUCCESS_CLEAR" });
     }
-  }, [dispatch, successMessage]);
+  }, [authenticate, dispatch, successMessage, history]);
 
   // show the error
   useEffect(() => {

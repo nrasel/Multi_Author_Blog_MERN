@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AdminLogin from "./components/auth/AdminLogin";
 import Login from "./components/auth/Login";
+import ProtectRoute from "./components/auth/ProtectRoute";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import Home from "./components/home/Home";
@@ -12,7 +13,7 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/register" component={Register} exact />
         <Route path="/login" component={Login} exact />
-        <Route path="/adminlogin" component={AdminLogin} exact />
+        <Route path="/admin/login" component={AdminLogin} exact />
         {/*  article show for pagination route */}
         <Route path="/article/:currentPage?" component={Home} exact />
         {/*article details route find individual article using this slug  */}
@@ -33,7 +34,7 @@ function App() {
         <Route path="/article/search/:searchValue" component={Home} exact />
 
         {/* dashboard route */}
-        <Route path="/dashboard" component={Dashboard} exact />
+        <ProtectRoute path="/dashboard" component={Dashboard} exact />
 
         {/* for handle all article under dashboard  */}
         {/* dashboard all article route and pagination */}
