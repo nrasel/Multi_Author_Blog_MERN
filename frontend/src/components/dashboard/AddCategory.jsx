@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { add_Category } from "../../store/actions/Dashboard/categoryAction";
 
 const AddCategory = () => {
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    categoryName: "",
+    categoryDes: "",
+  });
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const addCategory = (e) => {
+    e.preventDefault();
+    dispatch(add_Category(state));
+  };
+
   return (
     <div className="add-category">
       <Helmet>
@@ -15,14 +33,15 @@ const AddCategory = () => {
             All Category
           </Link>
         </div>
-        <form>
+        <form onSubmit={addCategory}>
           <div className="form-group">
             <label htmlFor="category_name">Category Name</label>
             <input
+              onChange={inputHandle}
               type="text"
               placeholder="Category Name"
               className="form-control"
-              name="cat_name"
+              name="categoryName"
               id="category_name"
             />
             <p className="error">Please Provide category name</p>
@@ -30,8 +49,9 @@ const AddCategory = () => {
           <div className="form-group">
             <label htmlFor="category_desc">Category Description</label>
             <textarea
+              onChange={inputHandle}
               className="form-control"
-              name="cate_desc"
+              name="categoryDes"
               id="category_desc"
               cols="30"
               rows="10"
