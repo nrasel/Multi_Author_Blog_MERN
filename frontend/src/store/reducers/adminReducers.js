@@ -9,7 +9,6 @@ const initState = {
 
 const DT = (token) => {
   const decodeToken = jwt_decode(token);
-  console.log(decodeToken);
   const expiresTime = new Date(decodeToken.exp * 1000);
   if (new Date() > expiresTime) {
     localStorage.removeItem("blog_token");

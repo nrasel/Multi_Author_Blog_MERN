@@ -5,6 +5,6 @@ export const add_Category = (data) => async (dispatch) => {
     const response = await axios.post("/rest-api/add-category", data);
     console.log(response);
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.errorMessage);
   }
 };

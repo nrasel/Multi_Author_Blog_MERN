@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const dbConnect = require("./config/dbConnect");
 const authRoutes = require("./routes/authRoutes");
+const dashboardRoutes = require("./routes/Dashboard/dashboardRoutes");
 
 const app = express();
 
@@ -15,11 +16,12 @@ app.get("/", (req, res) => {
   res.send("server start..");
 });
 
-app.use(bodyParser());
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(cors());
 
 app.use("/rest-api", authRoutes);
+app.use("/rest-api", dashboardRoutes);
 
 // fonfigure
 dotEnv.config({
