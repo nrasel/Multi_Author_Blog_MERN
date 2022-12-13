@@ -10,7 +10,7 @@ const AddCategory = ({ history }) => {
   const { loader, categoryError, categorySuccessMessage } = useSelector(
     (state) => state.dashCategoryReducers
   );
-  console.log(loader);
+
   const [state, setState] = useState({
     categoryName: "",
     categoryDes: "",

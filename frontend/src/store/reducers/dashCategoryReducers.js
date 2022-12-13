@@ -2,6 +2,9 @@ const categoryState = {
   loader: false,
   categoryError: "",
   categorySuccessMessage: "",
+  allCatrgory: [],
+  perPage: 0,
+  categoryCount: 0,
 };
 
 export const dashCategoryReducers = (state = categoryState, action) => {

@@ -1,5 +1,6 @@
 const categoryModel = require("../../models/categoryModel");
 
+// category add controller
 module.exports.category_add = async (req, res) => {
   const { categoryName, categoryDes } = req.body;
   //   console.log(categoryName);
@@ -39,5 +40,51 @@ module.exports.category_add = async (req, res) => {
     }
   } else {
     res.status(400).json({ errorMessage: error });
+  }
+};
+
+// category get controller
+module.exports.category_get = async (req, res) => {
+  const { page, searchValue } = req.query;
+
+  // for pagination
+  const perPage = 2;
+  const skipPage = parseInt(page - 1) * perPage;
+  if (searchValue === "undefined" || !searchValue) {
+    try {
+      const categoryCount = await categoryModel.find({}).countDocuments();
+      const getCategory = await categoryModel
+        .find({})
+        .skip(skipPage)
+        .limit(perPage)
+        .sort({ createdAt: -1 });
+      res.status(200).json({
+        allCategory: getCategory,
+        perPage,
+        categoryCount,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  } else {
+    try {
+      const categoryCount = await categoryModel.find({}).countDocuments();
+      let getCategory = await categoryModel.find({});
+      getCategory = getCategory.filter(
+        (c) =>
+          c.categoryName.toUpperCase().indexOf(searchValue.toUpperCase()) > -1
+      );
+      res.status(200).json({
+        allCategory: getCategory,
+        perPage,
+        categoryCount,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
   }
 };
