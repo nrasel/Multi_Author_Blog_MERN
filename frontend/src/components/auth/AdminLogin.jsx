@@ -50,7 +50,7 @@ const AdminLogin = ({ history }) => {
       <Navbar />
       <div className="admin_login">
         <Toaster
-          position={"bottom-center"}
+          position={"top-center"}
           reverseOrder={false}
           toastOptions={{
             style: {

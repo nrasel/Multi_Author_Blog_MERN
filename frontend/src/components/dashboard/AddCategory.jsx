@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { add_Category } from "../../store/actions/Dashboard/categoryAction";
 
-const AddCategory = () => {
+const AddCategory = ({ history }) => {
   const dispatch = useDispatch();
+  const { loader, categoryError, categorySuccessMessage } = useSelector(
+    (state) => state.dashCategoryReducers
+  );
+  console.log(loader);
   const [state, setState] = useState({
     categoryName: "",
     categoryDes: "",
@@ -21,8 +26,33 @@ const AddCategory = () => {
     dispatch(add_Category(state));
   };
 
+  useEffect(() => {
+    if (categoryError && categoryError.error) {
+      toast.error(categoryError.error);
+      dispatch({
+        type: "CATEGORY_ERROR_MESSAGE_CLEAR",
+      });
+    }
+    if (categorySuccessMessage) {
+      toast.success(categorySuccessMessage);
+      dispatch({
+        type: "CATEGORY_SUCCESS_MESSAGE_CLEAR",
+      });
+      history.push("/dashboard/all-category");
+    }
+  }, [history, dispatch, categoryError, categorySuccessMessage]);
+
   return (
     <div className="add-category">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>Category Add</title>
       </Helmet>
@@ -44,7 +74,9 @@ const AddCategory = () => {
               name="categoryName"
               id="category_name"
             />
-            <p className="error">Please Provide category name</p>
+            <p className="error">
+              {categoryError ? categoryError.categoryName : ""}
+            </p>
           </div>
           <div className="form-group">
             <label htmlFor="category_desc">Category Description</label>
@@ -57,10 +89,22 @@ const AddCategory = () => {
               rows="10"
               placeholder="Write Description.."
             ></textarea>
-            <p className="error">Please Provide category name</p>
+            <p className="error">
+              {categoryError ? categoryError.categoryDes : ""}
+            </p>
           </div>
           <div className="form-group">
-            <button className="btn btn-block">Add Category</button>
+            {loader ? (
+              <button className="btn btn-block">
+                <div className="spinner">
+                  <div className="spinner1"></div>
+                  <div className="spinner2"></div>
+                  <div className="spinner3"></div>
+                </div>
+              </button>
+            ) : (
+              <button className="btn btn-block">Add Category</button>
+            )}
           </div>
         </form>
       </div>

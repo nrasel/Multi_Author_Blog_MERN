@@ -1,6 +1,7 @@
 import axios from "axios";
 // higher order function
 export const admin_login = (data) => async (dispatch) => {
+  // এই টাইপ টা ডিসপ্যাচ করে রিডিউচার এর মধ্যে পাঠাচ্ছি।যেইটা একশন এর মধ্যে পাচ্ছি।
   dispatch({
     type: "LOADER_RUN",
   });
