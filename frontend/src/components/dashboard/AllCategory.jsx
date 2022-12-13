@@ -72,7 +72,7 @@ const AllCategory = () => {
                     <div className="name">{c.categoryName}</div>
                     <div className="action">
                       <span>
-                        <Link to={`dashboard/category/edit/${c.categorySlug}`}>
+                        <Link to={`/dashboard/category/edit/${c.categorySlug}`}>
                           <MdEdit />
                         </Link>
                       </span>

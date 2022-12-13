@@ -5,6 +5,8 @@ const categoryState = {
   allCatrgory: [],
   perPage: 0,
   categoryCount: 0,
+  editCategory: "",
+  editRequest: false,
 };
 
 export const dashCategoryReducers = (state = categoryState, action) => {
@@ -33,6 +35,18 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       allCatrgory: payload.allCategory,
       perPage: payload.perPage,
       categoryCount: payload.categoryCount,
+    };
+  }
+  if (type === "EDIT_CATEGORY_GET_SUCCESS") {
+    return {
+      ...state,
+      editCategory: payload.editCategory,
+    };
+  }
+  if (type === "EDIT_REQUEST_SET") {
+    return {
+      ...state,
+      editRequest: true,
     };
   }
   if (

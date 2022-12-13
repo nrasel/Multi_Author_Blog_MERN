@@ -44,10 +44,27 @@ export const delete_category = (id) => async (dispatch) => {
   try {
     const response = await axios.delete(`/rest-api/delete-category/${id}`);
     dispatch({
-      type:'CATEGORY_DELETE_SUCCESS_MESSEGE',
-      payload:{
-        successMessage:response.data.successMessage
-      }
+      type: "CATEGORY_DELETE_SUCCESS_MESSEGE",
+      payload: {
+        successMessage: response.data.successMessage,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const edit_category = (categorySlug) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/rest-api/edit-category/${categorySlug}`);
+    dispatch({
+      type: "EDIT_CATEGORY_GET_SUCCESS",
+      payload: {
+        editCategory: response.data.editCategory,
+      },
+    });
+    dispatch({
+      type: 'EDIT_REQUEST_SET'
     })
   } catch (error) {
     console.log(error);

@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { edit_category } from "../../store/actions/Dashboard/categoryAction";
 
 const EditCategory = () => {
+  const { catSlug } = useParams();
+  const dispatch = useDispatch();
+  const { editCategory, editRequest } = useSelector(
+    (state) => state.dashCategoryReducers
+  );
+  const [state, setState] = useState({
+    categoryName: "",
+    categoryDes: "",
+  });
+
+  useEffect(() => {
+    dispatch(edit_category(catSlug));
+  }, [dispatch, catSlug]);
+  useEffect(() => {
+    if (editRequest) {
+      setState({
+        categoryName: editCategory.categoryName,
+        categoryDes: editCategory.categoryDes,
+      });
+    }
+  }, [editCategory, editRequest]);
   return (
     <div className="add-category">
       <Helmet>
@@ -22,8 +45,9 @@ const EditCategory = () => {
               type="text"
               placeholder="Category Name"
               className="form-control"
-              name="cat_name"
+              name="categoryName"
               id="category_name"
+              value={state.categoryName}
             />
             <p className="error">Please Provide category name</p>
           </div>
@@ -32,10 +56,11 @@ const EditCategory = () => {
             <textarea
               className="form-control"
               name="cate_desc"
-              id="category_desc"
+              id="categoryDes"
               cols="30"
               rows="10"
               placeholder="Write Description.."
+              value={state.categoryDes}
             ></textarea>
             <p className="error">Please Provide category name</p>
           </div>

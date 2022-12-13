@@ -2,7 +2,7 @@
 module.exports.admin_middleware = (req, res, next) => {
   const { blog_token } = req.cookies;
   if (!blog_token) {
-    res.staus(409).json({ errorMessage: { error: "Please login first" } });
+    res.status(409).json({ errorMessage: { error: "Please login first" } });
   } else {
     next();
   }

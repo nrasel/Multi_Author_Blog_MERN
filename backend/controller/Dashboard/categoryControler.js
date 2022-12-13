@@ -100,3 +100,17 @@ module.exports.category_delete = async (req, res) => {
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
   }
 };
+
+module.exports.category_edit = async (req, res) => {
+  const { categorySlug } = req.params;
+
+  try {
+    const editCategory = await categoryModel.findOne({ categorySlug });
+
+    res.status(200).json({
+      editCategory,
+    });
+  } catch (error) {
+    res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
+  }
+};
