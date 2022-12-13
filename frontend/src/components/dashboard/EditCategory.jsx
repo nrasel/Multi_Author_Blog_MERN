@@ -15,17 +15,20 @@ const EditCategory = () => {
     categoryDes: "",
   });
 
-  useEffect(() => {
-    dispatch(edit_category(catSlug));
-  }, [dispatch, catSlug]);
+  // set category name and description and pass category slug to ediCategory action
   useEffect(() => {
     if (editRequest) {
       setState({
         categoryName: editCategory.categoryName,
         categoryDes: editCategory.categoryDes,
       });
+    } else {
+      dispatch(edit_category(catSlug));
     }
-  }, [editCategory, editRequest]);
+    dispatch({
+      type: "EDIT_REQUEST_CLEAR",
+    });
+  }, [editCategory, editRequest, catSlug, dispatch]);
   return (
     <div className="add-category">
       <Helmet>

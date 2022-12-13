@@ -58,6 +58,12 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       categorySuccessMessage: "",
     };
   }
+  if (type === "EDIT_REQUEST_CLEAR") {
+    return {
+      ...state,
+      editRequest: false,
+    };
+  }
   if (type === "CATEGORY_ADD_FAIL") {
     return {
       ...state,
