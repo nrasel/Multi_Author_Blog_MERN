@@ -35,8 +35,21 @@ export const get_all_category = (page, searchValue) => async (dispatch) => {
         categoryCount: response.data.categoryCount,
       },
     });
-    console.log(response);
   } catch (error) {
     console.log(error.response);
+  }
+};
+
+export const delete_category = (id) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/rest-api/delete-category/${id}`);
+    dispatch({
+      type:'CATEGORY_DELETE_SUCCESS_MESSEGE',
+      payload:{
+        successMessage:response.data.successMessage
+      }
+    })
+  } catch (error) {
+    console.log(error);
   }
 };

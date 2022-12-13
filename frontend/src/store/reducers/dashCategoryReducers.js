@@ -16,7 +16,10 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       loader: true,
     };
   }
-  if (type === "CATEGORY_ADD_SUCCESS") {
+  if (
+    type === "CATEGORY_ADD_SUCCESS" ||
+    type === "CATEGORY_DELETE_SUCCESS_MESSEGE"
+  ) {
     return {
       ...state,
       loader: false,
@@ -32,7 +35,10 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       categoryCount: payload.categoryCount,
     };
   }
-  if (type === "CATEGORY_SUCCESS_MESSAGE_CLEAR") {
+  if (
+    type === "CATEGORY_SUCCESS_MESSAGE_CLEAR" ||
+    type === "CATEGORY_DELETE_MESSAGE_CLEAR"
+  ) {
     return {
       ...state,
       categorySuccessMessage: "",

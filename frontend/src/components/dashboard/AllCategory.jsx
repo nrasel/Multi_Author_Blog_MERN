@@ -1,25 +1,43 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { toast, Toaster } from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { get_all_category } from "../../store/actions/Dashboard/categoryAction";
+import {
+  delete_category,
+  get_all_category,
+} from "../../store/actions/Dashboard/categoryAction";
 import Pagination from "../home/Pagination";
 
 const AllCategory = () => {
   const dispatch = useDispatch();
   const { currentPage } = useParams();
-  const { perPage, allCatrgory, categoryCount } = useSelector(
-    (state) => state.dashCategoryReducers
-  );
-  console.log(perPage, allCatrgory);
+  const { perPage, allCatrgory, categoryCount, categorySuccessMessage } =
+    useSelector((state) => state.dashCategoryReducers);
+
   useEffect(() => {
+    if (categorySuccessMessage) {
+      toast.success(categorySuccessMessage);
+      dispatch({
+        type: "CATEGORY_DELETE_MESSAGE_CLEAR",
+      });
+    }
     // get_all_category action er moddhe current page pathano holo (page-12) just ei number take neoa holo jodi number ta na thake taile 1 pass hobe
     dispatch(get_all_category(currentPage ? currentPage.split("-")[1] : 1));
-  }, [currentPage, dispatch]);
+  }, [currentPage, dispatch, categorySuccessMessage]);
   return (
     <div className="all-category">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>All Category</title>
       </Helmet>
@@ -49,8 +67,8 @@ const AllCategory = () => {
         <div className="height-60vh">
           <div className="categories">
             {allCatrgory.length > 0
-              ? allCatrgory.map((c) => (
-                  <div className="category">
+              ? allCatrgory.map((c, index) => (
+                  <div key={index} className="category">
                     <div className="name">{c.categoryName}</div>
                     <div className="action">
                       <span>
@@ -58,7 +76,7 @@ const AllCategory = () => {
                           <MdEdit />
                         </Link>
                       </span>
-                      <span>
+                      <span onClick={() => dispatch(delete_category(c._id))}>
                         <MdDelete />
                       </span>
                     </div>

@@ -88,3 +88,15 @@ module.exports.category_get = async (req, res) => {
     }
   }
 };
+
+module.exports.category_delete = async (req, res) => {
+  const { categoryId } = req.params;
+  try {
+    await categoryModel.findByIdAndDelete(categoryId);
+    res.status(200).json({
+      successMessage: "Category Delete Success",
+    });
+  } catch (error) {
+    res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
+  }
+};
