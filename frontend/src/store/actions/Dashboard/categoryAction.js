@@ -27,6 +27,14 @@ export const get_all_category = (page, searchValue) => async (dispatch) => {
     const response = await axios.get(
       `/rest-api/get-category?page=${page}&&searchValue=${searchValue}`
     );
+    dispatch({
+      type: "DASHBOARD_CATEGORY_GET_SUCCESS",
+      payload: {
+        allCategory: response.data.allCategory,
+        perPage: response.data.perPage,
+        categoryCount: response.data.categoryCount,
+      },
+    });
     console.log(response);
   } catch (error) {
     console.log(error.response);

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { get_all_category } from "../../store/actions/Dashboard/categoryAction";
 import Pagination from "../home/Pagination";
@@ -10,10 +10,14 @@ import Pagination from "../home/Pagination";
 const AllCategory = () => {
   const dispatch = useDispatch();
   const { currentPage } = useParams();
+  const { perPage, allCatrgory, categoryCount } = useSelector(
+    (state) => state.dashCategoryReducers
+  );
+  console.log(perPage, allCatrgory);
   useEffect(() => {
     // get_all_category action er moddhe current page pathano holo (page-12) just ei number take neoa holo jodi number ta na thake taile 1 pass hobe
     dispatch(get_all_category(currentPage ? currentPage.split("-")[1] : 1));
-  });
+  }, [currentPage, dispatch]);
   return (
     <div className="all-category">
       <Helmet>
@@ -44,71 +48,23 @@ const AllCategory = () => {
         </div>
         <div className="height-60vh">
           <div className="categories">
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/category/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/category/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/category/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/category/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/category/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
+            {allCatrgory.length > 0
+              ? allCatrgory.map((c) => (
+                  <div className="category">
+                    <div className="name">{c.categoryName}</div>
+                    <div className="action">
+                      <span>
+                        <Link to={`dashboard/category/edit/${c.categorySlug}`}>
+                          <MdEdit />
+                        </Link>
+                      </span>
+                      <span>
+                        <MdDelete />
+                      </span>
+                    </div>
+                  </div>
+                ))
+              : "Please Add Category"}
           </div>
         </div>
         <Pagination />

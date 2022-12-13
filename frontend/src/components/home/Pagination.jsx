@@ -17,13 +17,13 @@ const Pagination = () => {
           </span>
         </button>
         <li className="active">
-          <Link>1</Link>
+          <Link to="/">1</Link>
         </li>
         <li>
-          <Link>2</Link>
+          <Link to="/">2</Link>
         </li>
         <li>
-          <Link>3</Link>
+          <Link to="/">3</Link>
         </li>
         <li>
           <Link to="/">

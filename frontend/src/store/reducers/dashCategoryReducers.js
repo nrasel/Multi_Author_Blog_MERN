@@ -24,6 +24,14 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       categoryError: "",
     };
   }
+  if (type === "DASHBOARD_CATEGORY_GET_SUCCESS") {
+    return {
+      ...state,
+      allCatrgory: payload.allCategory,
+      perPage: payload.perPage,
+      categoryCount: payload.categoryCount,
+    };
+  }
   if (type === "CATEGORY_SUCCESS_MESSAGE_CLEAR") {
     return {
       ...state,
