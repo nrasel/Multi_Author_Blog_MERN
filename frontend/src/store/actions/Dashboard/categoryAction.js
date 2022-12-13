@@ -20,3 +20,16 @@ export const add_Category = (data) => async (dispatch) => {
     });
   }
 };
+
+export const get_all_category = (page, searchValue) => async (dispatch) => {
+  console.log(page);
+  try {
+    //পেজিনেশন করার জন্য মূলত পেজ নাম্বার এবং সার্চ ভেলু পাঠানো হচ্ছে।
+    const response = await axios.get(
+      `/res-api/get-category?page=${page}&&searchValue=${searchValue}`
+    );
+    console.log(response);
+  } catch (error) {
+    console.log(error.response);
+  }
+};
