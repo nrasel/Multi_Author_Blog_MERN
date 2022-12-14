@@ -3,10 +3,12 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import ThunkMiddleware from "redux-thunk";
 import { adminReducer } from "./reducers/adminReducers";
 import { dashCategoryReducers } from "./reducers/dashCategoryReducers";
+import { tagReducer } from "./reducers/dashTAgReducer";
 
 const rootReducer = combineReducers({
   adminReducer,
   dashCategoryReducers,
+  tagReducer,
 });
 
 const middleware = [ThunkMiddleware];

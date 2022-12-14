@@ -15,6 +15,7 @@ module.exports.category_add = async (req, res) => {
   if (Object.keys(error).length == 0) {
     // ক্যাটাগরিটাকে চেনার জন্য একটা স্ল্যাগ বানাতে হবে। trim() দিয়ে স্ল্যাগ বানানোর সময় যদি কোন স্পেস দেওয়া হয় তাইলে সেইটা রিমুভ হয়ে যাবে । split() দিয়ে কোন ওয়ার্ড আলাদা থাকেল join() দিয়ে তাদের জয়েন করে দিবে।
     const categorySlug = categoryName.trim().split(" ").join("-");
+    
 
     // স্ল্যাগ তৈরি হবার পর আমরা চেক করব যে সেম নামে আর কোন স্ল্যাগ আছে কিনা।
     try {

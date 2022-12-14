@@ -1,0 +1,40 @@
+const tagModel = require("../../models/tagModel");
+
+module.exports.tag_add = async (req, res) => {
+  const { tagName, tagDes } = req.body;
+
+  const error = {};
+
+  if (!tagName) {
+    error.tagName = "Please Provide Tag Name";
+  }
+  if (!tagDes) {
+    error.tagDes = "Please Provide Tag Description";
+  }
+
+  if (Object.keys(error).length == 0) {
+    // tag চেনার জন্য একটা স্ল্যাগ বানাতে হবে। trim() দিয়ে স্ল্যাগ বানানোর সময় যদি কোন স্পেস দেওয়া হয় তাইলে সেইটা রিমুভ হয়ে যাবে । split() দিয়ে কোন ওয়ার্ড আলাদা থাকেল join() দিয়ে তাদের জয়েন করে দিবে।
+    const tagSlug = tagName.trim().split(" ").join("-");
+
+    // স্ল্যাগ তৈরি হবার পর আমরা চেক করব যে সেম নামে আর কোন স্ল্যাগ আছে কিনা।
+    try {
+      const checkTag = await tagModel.findOne({ tagSlug });
+      if (checkTag) {
+        res.status(404).json({ errorMessage: { error: "Already added tag" } });
+      } else {
+        await tagModel.create({
+          tagName: tagName.trim(),
+          tagSlug,
+          tagDes,
+        });
+      }
+      res.status(200).json({ successMessage: "Tag add successful" });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Serverr Error" } });
+    }
+  } else {
+    res.status(400).json({ errorMessage: error });
+  }
+};
