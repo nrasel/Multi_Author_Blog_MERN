@@ -114,3 +114,35 @@ module.exports.category_edit = async (req, res) => {
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
   }
 };
+
+module.exports.category_update = async (req, res) => {
+  const { categoryId } = req.params;
+  const { categoryName, categoryDes } = req.body;
+
+  const error = {};
+
+  if (!categoryName) {
+    error.categoryName = "Please Provide Category Name";
+  }
+  if (!categoryDes) {
+    error.categoryDes = "Please Provide Category Description";
+  }
+
+  if (Object.keys(error).length == 0) {
+    const categorySlug = categoryName.trim().split(" ").join("-");
+    try {
+      await categoryModel.findByIdAndUpdate(categoryId, {
+        categoryName: categoryName.trim(),
+        categorySlug,
+        categoryDes,
+      });
+      res.status(200).json({ successMessage: "Category update successful" });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  } else {
+    res.status(400).json({ errorMessage: error });
+  }
+};

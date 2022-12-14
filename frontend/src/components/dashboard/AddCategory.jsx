@@ -40,7 +40,7 @@ const AddCategory = ({ history }) => {
       });
       history.push("/dashboard/all-category");
     }
-  }, [history, dispatch, categoryError, categorySuccessMessage]);
+  }, [categoryError, categorySuccessMessage]);
 
   return (
     <div className="add-category">

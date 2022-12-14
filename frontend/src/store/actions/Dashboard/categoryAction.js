@@ -64,9 +64,29 @@ export const edit_category = (categorySlug) => async (dispatch) => {
       },
     });
     dispatch({
-      type: 'EDIT_REQUEST_SET'
-    })
+      type: "EDIT_REQUEST_SET",
+    });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const update_category = (id, data) => async (dispatch) => {
+  try {
+    const response = await axios.patch(`/rest-api/update-category/${id}`, data);
+
+    dispatch({
+      type: "CATEGORY_UPDATE_SUCCESS",
+      payload: {
+        successMessage: response.data.successMessage,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: "CATEGORY_UPDATE_FAIL",
+      payload: {
+        error: error.response.data.errorMessage,
+      },
+    });
   }
 };

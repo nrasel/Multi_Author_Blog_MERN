@@ -14,6 +14,7 @@ import Pagination from "../home/Pagination";
 const AllCategory = () => {
   const dispatch = useDispatch();
   const { currentPage } = useParams();
+  console.log(currentPage);
   const { perPage, allCatrgory, categoryCount, categorySuccessMessage } =
     useSelector((state) => state.dashCategoryReducers);
 
@@ -85,7 +86,12 @@ const AllCategory = () => {
               : "Please Add Category"}
           </div>
         </div>
-        <Pagination />
+        <Pagination
+          pageNumber={currentPage ? currentPage.split("-")[1] : 1}
+          perPage={perPage}
+          itemCount={categoryCount}
+          path="/dashboard/all-category"
+        />
       </div>
     </div>
   );

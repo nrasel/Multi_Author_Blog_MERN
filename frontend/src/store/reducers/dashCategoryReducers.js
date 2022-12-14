@@ -20,7 +20,8 @@ export const dashCategoryReducers = (state = categoryState, action) => {
   }
   if (
     type === "CATEGORY_ADD_SUCCESS" ||
-    type === "CATEGORY_DELETE_SUCCESS_MESSEGE"
+    type === "CATEGORY_DELETE_SUCCESS_MESSEGE" ||
+    type === "CATEGORY_UPDATE_SUCCESS"
   ) {
     return {
       ...state,
@@ -64,7 +65,7 @@ export const dashCategoryReducers = (state = categoryState, action) => {
       editRequest: false,
     };
   }
-  if (type === "CATEGORY_ADD_FAIL") {
+  if (type === "CATEGORY_ADD_FAIL" || type === "CATEGORY_UPDATE_FAIL") {
     return {
       ...state,
       loader: false,

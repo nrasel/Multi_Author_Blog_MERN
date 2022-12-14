@@ -1,36 +1,69 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+// import toast,{ Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { edit_category } from "../../store/actions/Dashboard/categoryAction";
+import {
+  edit_category,
+  update_category,
+} from "../../store/actions/Dashboard/categoryAction";
 
-const EditCategory = () => {
+const EditCategory = ({ history }) => {
   const { catSlug } = useParams();
   const dispatch = useDispatch();
-  const { editCategory, editRequest } = useSelector(
-    (state) => state.dashCategoryReducers
-  );
+  const { editCategory, editRequest, categorySuccessMessage, categoryError } =
+    useSelector((state) => state.dashCategoryReducers);
   const [state, setState] = useState({
     categoryName: "",
     categoryDes: "",
   });
 
+
   // set category name and description and pass category slug to ediCategory action
   useEffect(() => {
     if (editRequest) {
       setState({
-        categoryName: editCategory.categoryName,
-        categoryDes: editCategory.categoryDes,
+        categoryName: editCategory?.categoryName,
+        categoryDes: editCategory?.categoryDes,
       });
     } else {
       dispatch(edit_category(catSlug));
     }
-    dispatch({
-      type: "EDIT_REQUEST_CLEAR",
+    dispatch({ type: "EDIT_REQUEST_CLEAR" });
+  }, [editCategory, catSlug]);
+
+  // category update useEffect
+  useEffect(() => {
+    if (categorySuccessMessage) {
+      history.push("/dashboard/all-category");
+    }
+  }, [categorySuccessMessage]);
+
+  // input handle for update
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
     });
-  }, [editCategory, editRequest, catSlug, dispatch]);
+  };
+
+  // category update handle
+  const updateCategory = (e) => {
+    e.preventDefault();
+    dispatch(update_category(editCategory._id, state));
+  };
+
   return (
     <div className="add-category">
+      {/* <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      /> */}
       <Helmet>
         <title>Edit Category</title>
       </Helmet>
@@ -41,34 +74,40 @@ const EditCategory = () => {
             All Category
           </Link>
         </div>
-        <form>
+        <form onSubmit={updateCategory}>
           <div className="form-group">
             <label htmlFor="category_name">Category Name</label>
             <input
+              onChange={inputHandle}
+              value={state.categoryName}
               type="text"
               placeholder="Category Name"
               className="form-control"
               name="categoryName"
               id="category_name"
-              value={state.categoryName}
             />
-            <p className="error">Please Provide category name</p>
+            <p className="error">
+              {categoryError && categoryError.categoryName}
+            </p>
           </div>
           <div className="form-group">
             <label htmlFor="category_desc">Category Description</label>
             <textarea
+              onChange={inputHandle}
+              value={state.categoryDes}
               className="form-control"
-              name="cate_desc"
-              id="categoryDes"
+              name="categoryDes"
+              id="category_des"
               cols="30"
               rows="10"
               placeholder="Write Description.."
-              value={state.categoryDes}
             ></textarea>
-            <p className="error">Please Provide category name</p>
+            <p className="error">
+              {categoryError && categoryError.categoryDes}
+            </p>
           </div>
           <div className="form-group">
-            <button className="btn btn-block">Edit Category</button>
+            <button className="btn btn-block">Update Category</button>
           </div>
         </form>
       </div>
