@@ -16,7 +16,7 @@ export const dashTagReducer = (state = tagState, action) => {
       loader: true,
     };
   }
-  if (type === "TAG_ADD_SUCCESS") {
+  if (type === "TAG_ADD_SUCCESS" || type === "TAG_DELETE_SUCCESS_MESSAGE") {
     return {
       ...state,
       loader: false,
@@ -33,7 +33,10 @@ export const dashTagReducer = (state = tagState, action) => {
       tagCount: payload.tagCount,
     };
   }
-  if (type === "TAG_SUCCESS_MESSAGE_CLEAR") {
+  if (
+    type === "TAG_SUCCESS_MESSAGE_CLEAR" ||
+    type === "TAG_DELETE_MESSAGE_CELAR"
+  ) {
     return {
       ...state,
       tagSuccessMessage: "",

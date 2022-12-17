@@ -27,7 +27,7 @@ const AllCategory = () => {
     }
     // get_all_category action er moddhe current page pathano holo (page-12) just ei number take neoa holo jodi number ta na thake taile 1 pass hobe
     dispatch(get_all_category(currentPage ? currentPage.split("-")[1] : 1));
-  }, [currentPage, dispatch, categorySuccessMessage]);
+  }, [currentPage,  categorySuccessMessage]);
   return (
     <div className="all-category">
       <Toaster

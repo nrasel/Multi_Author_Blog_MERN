@@ -12,6 +12,7 @@ const {
 const {
   tag_add,
   tag_get,
+  tag_delete,
 } = require("../../controller/Dashboard/tagController");
 
 //মিডিল ওয়ার এর কারনে এডমিন লগিন না করে কোন ক্যাটগরি এড করতে পারবে না। তাই মিডিল ওয়ারটা ইউজ করা যায়। মিডিল ওয়ার মূলত ক্লাইয়েন্ট এবং সার্ভারের মাঝে থেকে ক্লায়েন্ট কে তার রিকুয়েস্ট অনুযায় রেস্পন্স করবে।
@@ -31,5 +32,6 @@ router.patch("/update-category/:categoryId", admin_middleware, category_update);
 // for tag route
 router.post("/add-tag", admin_middleware, tag_add);
 router.get("/get-tag", admin_middleware, tag_get);
+router.delete("/delete-tag/:tagId", admin_middleware, tag_delete);
 
 module.exports = router;

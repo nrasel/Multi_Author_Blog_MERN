@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import toast, { Toaster } from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { get_all_tag } from "../../store/actions/Dashboard/tagAction";
+import {
+  delete_tag,
+  get_all_tag,
+} from "../../store/actions/Dashboard/tagAction";
 import Pagination from "../home/Pagination";
 
 const AllTag = () => {
@@ -16,11 +20,27 @@ const AllTag = () => {
   );
 
   useEffect(() => {
+    if (tagSuccessMessage) {
+      toast.success(tagSuccessMessage);
+      dispatch({
+        type:'TAG_DELETE_MESSAGE_CELAR'
+      })
+    }
+
     dispatch(get_all_tag(currentPage ? currentPage.split("-")[1] : 1));
-  }, [currentPage]);
+  }, [currentPage, tagSuccessMessage]);
 
   return (
     <div className="all-category">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>All Tag</title>
       </Helmet>
@@ -59,7 +79,7 @@ const AllTag = () => {
                           <MdEdit />
                         </Link>
                       </span>
-                      <span>
+                      <span onClick={() => dispatch(delete_tag(t._id))}>
                         <MdDelete />
                       </span>
                     </div>
