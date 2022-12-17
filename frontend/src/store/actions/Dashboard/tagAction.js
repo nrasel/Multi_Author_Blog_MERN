@@ -22,3 +22,23 @@ export const add_tag = (data) => async (dispatch) => {
     });
   }
 };
+
+export const get_all_tag = (page, searchValue) => async (dispatch) => {
+  console.log(page);
+  try {
+    const response = await axios.get(
+      `/rest-api/get-tag?page=${page}&&searchValue=${searchValue}`
+    );
+    console.log(response.data);
+    dispatch({
+      type: "DASHBOARD_TAG_GET_SUCCESS",
+      payload: {
+        allTag: response.data.allTag,
+        perPage: response.data.perPage,
+        tagCount: response.data.tagCount,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

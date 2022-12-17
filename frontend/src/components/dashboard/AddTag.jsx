@@ -8,8 +8,9 @@ import { add_tag } from "../../store/actions/Dashboard/tagAction";
 const AddTag = ({ history }) => {
   const dispatch = useDispatch();
   const { loader, tagError, tagSuccessMessage } = useSelector(
-    (state) => state.tagReducer
+    (state) => state.dashTagReducer
   );
+
   const [state, setState] = useState({
     tagName: "",
     tagDes: "",

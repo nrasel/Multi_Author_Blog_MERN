@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { get_all_tag } from "../../store/actions/Dashboard/tagAction";
 import Pagination from "../home/Pagination";
 
 const AllTag = () => {
+  const dispatch = useDispatch();
+  const { currentPage } = useParams();
+
+  const { allTag, perPage, tagSuccessMessage, tagCount } = useSelector(
+    (state) => state.dashTagReducer
+  );
+
+  useEffect(() => {
+    dispatch(get_all_tag(currentPage ? currentPage.split("-")[1] : 1));
+  }, [currentPage]);
+
   return (
     <div className="all-category">
       <Helmet>
@@ -14,7 +27,7 @@ const AllTag = () => {
       <div className="show-category-action">
         <div className="numof-search-newAdd">
           <div className="numof">
-            <h2>Tag (22)</h2>
+            <h2>Tag ({tagCount})</h2>
           </div>
           <div className="searchof">
             <div className="search">
@@ -36,71 +49,23 @@ const AllTag = () => {
         </div>
         <div className="height-60vh">
           <div className="categories">
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/tag/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/tag/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/tag/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/tag/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
-            <div className="category">
-              <div className="name">Programming</div>
-              <div className="action">
-                <span>
-                  <Link to="/dashboard/tag/edit/:sdsl">
-                    <MdEdit />
-                  </Link>
-                </span>
-                <span>
-                  <MdDelete />
-                </span>
-              </div>
-            </div>
+            {allTag.length > 0
+              ? allTag.map((t, index) => (
+                  <div key={index} className="category">
+                    <div className="name">{t.tagName}</div>
+                    <div className="action">
+                      <span>
+                        <Link to={`/dashboard/tag/edit/${t.tagSlug}`}>
+                          <MdEdit />
+                        </Link>
+                      </span>
+                      <span>
+                        <MdDelete />
+                      </span>
+                    </div>
+                  </div>
+                ))
+              : "Please Add Tag"}
           </div>
         </div>
         <Pagination />

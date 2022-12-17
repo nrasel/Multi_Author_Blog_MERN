@@ -38,3 +38,30 @@ module.exports.tag_add = async (req, res) => {
     res.status(400).json({ errorMessage: error });
   }
 };
+
+module.exports.tag_get = async (req, res) => {
+  const { page, searchValue } = req.query;
+
+  //for paginationn
+
+  const perPage = 2;
+  const skipPage = parseInt(page - 1) * perPage;
+  if (searchValue === "undefined" || !searchValue) {
+    try {
+      const tagCount = await tagModel.find({}).countDocuments();
+      const getTag = await tagModel
+        .find({})
+        .skip(skipPage)
+        .limit(perPage)
+        .sort({ createdAt: -1 });
+
+      res.status(200).json({
+        allTag: getTag,
+        tagCount,
+        perPage,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};

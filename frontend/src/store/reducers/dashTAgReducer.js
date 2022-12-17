@@ -2,9 +2,12 @@ const tagState = {
   loader: false,
   tagError: "",
   tagSuccessMessage: "",
+  allTag: [],
+  perPage: 0,
+  tagCount: 0,
 };
 
-export const tagReducer = (state = tagState, action) => {
+export const dashTagReducer = (state = tagState, action) => {
   const { type, payload } = action;
 
   if (type === "SET_LOADER_TAG") {
@@ -22,6 +25,14 @@ export const tagReducer = (state = tagState, action) => {
     };
   }
 
+  if (type === "DASHBOARD_TAG_GET_SUCCESS") {
+    return {
+      ...state,
+      allTag: payload.allTag,
+      perPage: payload.perPage,
+      tagCount: payload.tagCount,
+    };
+  }
   if (type === "TAG_SUCCESS_MESSAGE_CLEAR") {
     return {
       ...state,
