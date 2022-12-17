@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { add_tag } from "../../store/actions/Dashboard/tagAction";
 
-const AddTag = () => {
+const AddTag = ({ history }) => {
   const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.tagReducer);
+  const { loader, tagError, tagSuccessMessage } = useSelector(
+    (state) => state.tagReducer
+  );
   const [state, setState] = useState({
     tagName: "",
     tagDes: "",
@@ -22,8 +25,34 @@ const AddTag = () => {
     e.preventDefault();
     dispatch(add_tag(state));
   };
+
+  useEffect(() => {
+    if (tagError && tagError.error) {
+      toast.error(tagError.error);
+      dispatch({
+        type: "TAG_ERROR_MESSAGE_CLEAR",
+      });
+    }
+    if (tagSuccessMessage) {
+      toast.success(tagSuccessMessage);
+      dispatch({
+        type: "TAG_SUCCESS_MESSAGE_CLEAR",
+      });
+      history.push("/dashboard/all-tag");
+    }
+  }, [tagError, tagSuccessMessage]);
+
   return (
     <div className="add-category">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>Tag Add</title>
       </Helmet>

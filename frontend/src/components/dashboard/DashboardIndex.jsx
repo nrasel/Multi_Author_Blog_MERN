@@ -61,7 +61,7 @@ const DashboardIndex = () => {
             </div>
           </div>
 
-          <Link className="single-card">
+          <Link to="/" className="single-card">
             <div className="card-icon">
               <BsFillPeopleFill />
             </div>
@@ -70,7 +70,7 @@ const DashboardIndex = () => {
               <span>Articles</span>
             </div>
           </Link>
-          <Link className="single-card">
+          <Link to="/" className="single-card">
             <div className="card-icon">
               <FaRegCaretSquareRight />
             </div>
@@ -79,7 +79,7 @@ const DashboardIndex = () => {
               <span>Categories</span>
             </div>
           </Link>
-          <Link className="single-card">
+          <Link to="/" className="single-card">
             <div className="card-icon">
               <FaTag />
             </div>

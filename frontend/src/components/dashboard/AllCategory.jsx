@@ -14,7 +14,7 @@ import Pagination from "../home/Pagination";
 const AllCategory = () => {
   const dispatch = useDispatch();
   const { currentPage } = useParams();
-  console.log(currentPage);
+
   const { perPage, allCatrgory, categoryCount, categorySuccessMessage } =
     useSelector((state) => state.dashCategoryReducers);
 
@@ -45,7 +45,7 @@ const AllCategory = () => {
       <div className="show-category-action">
         <div className="numof-search-newAdd">
           <div className="numof">
-            <h2>Category (22)</h2>
+            <h2>Category ({categoryCount})</h2>
           </div>
           <div className="searchof">
             <div className="search">

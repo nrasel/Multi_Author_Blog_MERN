@@ -23,8 +23,8 @@ const EditCategory = ({ history }) => {
   useEffect(() => {
     if (editRequest) {
       setState({
-        categoryName: editCategory?.categoryName,
-        categoryDes: editCategory?.categoryDes,
+        categoryName: editCategory.categoryName,
+        categoryDes: editCategory.categoryDes,
       });
     } else {
       dispatch(edit_category(catSlug));
@@ -55,15 +55,7 @@ const EditCategory = ({ history }) => {
 
   return (
     <div className="add-category">
-      {/* <Toaster
-        position={"top-center"}
-        reverseOrder={false}
-        toastOptions={{
-          style: {
-            fontSize: "15px",
-          },
-        }}
-      /> */}
+      
       <Helmet>
         <title>Edit Category</title>
       </Helmet>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const add_tag = (data) => async (dispatch) => {
   dispatch({
-    type: "SET_LOADER",
+    type: "SET_LOADER_TAG",
   });
   try {
     const response = await axios.post("/rest-api/add-tag", data);
