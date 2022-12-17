@@ -48,6 +48,7 @@ module.exports.tag_get = async (req, res) => {
   const skipPage = parseInt(page - 1) * perPage;
   if (searchValue === "undefined" || !searchValue) {
     try {
+      // যদি সার্চ ভেলু তাইলে এইটা
       const tagCount = await tagModel.find({}).countDocuments();
       const getTag = await tagModel
         .find({})
@@ -61,7 +62,23 @@ module.exports.tag_get = async (req, res) => {
         perPage,
       });
     } catch (error) {
-      console.log(error);
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  } else {
+    // আর যদি সার্চ ভেলু না থাকে তা ইলে এইটা
+    try {
+      const tagCount = await tagModel.find({}).countDocuments();
+      let getTag = await tagModel.find({});
+      getTag = getTag.filter(
+        (c) => c.tagName.toUpperCase().indexOf(searchValue.toUpperCase()) > -1
+      );
+      res.status(200).json({ allTag: allTag, perPage, tagCount });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
     }
   }
 };

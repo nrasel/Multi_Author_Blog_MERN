@@ -52,6 +52,7 @@ module.exports.category_get = async (req, res) => {
   const skipPage = parseInt(page - 1) * perPage;
   if (searchValue === "undefined" || !searchValue) {
     try {
+      // show tag in (all tage component)
       const categoryCount = await categoryModel.find({}).countDocuments();
       const getCategory = await categoryModel
         .find({})
