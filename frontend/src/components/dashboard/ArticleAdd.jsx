@@ -11,6 +11,53 @@ const ArticleAdd = () => {
   const { allTag, allCategory } = useSelector((state) => state.articleReducer);
   const [text, setText] = useState("");
   const editor = useRef();
+
+  // for all input field
+  const [state, setState] = useState({
+    title: "",
+    category: "",
+    tag: "",
+    image: "",
+  });
+  // for slug
+  const [slug, setSlug] = useState("");
+  // show and hide update button
+  const [updateBtn, setUpdateBtn] = useState(false);
+
+  // all field handler
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // for title handler
+  const titleHandler = (e) => {
+    setState({
+      ...state,
+      title: e.target.value,
+    });
+    // create slug using title value
+    const createSlug = e.target.value.trim().split(" ").join("-");
+    // set slug in slug state
+    setSlug(createSlug);
+  };
+
+  // slug handle field
+  const slugHandler = (e) => {
+    setSlug(e.target.value);
+    setUpdateBtn(true);
+  };
+
+  // update slug handler
+  const updateSlug = (e) => {
+    e.preventDefault();
+    const newSlug = slug.trim().split(" ").join("-");
+    setSlug(newSlug);
+    setUpdateBtn(false);
+  };
+
+  console.log(state);
   const config = {
     readonly: false,
   };
@@ -35,6 +82,8 @@ const ArticleAdd = () => {
           <div className="form-group">
             <label htmlFor="title">Article title</label>
             <input
+              onChange={titleHandler}
+              value={state.title}
               type="text"
               name="title"
               placeholder="Article Title"
@@ -46,6 +95,8 @@ const ArticleAdd = () => {
           <div className="form-group">
             <label htmlFor="slug">Article Slug</label>
             <input
+              onChange={slugHandler}
+              value={slug}
               type="text"
               className="form-control"
               placeholder="Article Slug"
@@ -54,10 +105,23 @@ const ArticleAdd = () => {
             />
             <p className="error">Please Provide article slug</p>
           </div>
-          <button className="btn">Update</button>
+          {updateBtn ? (
+            <button onClick={updateSlug} className="btn">
+              Update
+            </button>
+          ) : (
+            ""
+          )}
+
           <div className="form-group">
             <label htmlFor="categoryadd">Category</label>
-            <select className="form-control" name="category" id="categoryadd">
+            <select
+              onChange={inputHandle}
+              value={state.category}
+              className="form-control"
+              name="category"
+              id="categoryadd"
+            >
               <option value="">--Select Article Category--</option>
               {allCategory.length > 0
                 ? allCategory.map((c, index) => (
@@ -70,8 +134,14 @@ const ArticleAdd = () => {
             <p className="error">Please Provide article slug</p>
           </div>
           <div className="form-group">
-            <label htmlFor="tags">Category</label>
-            <select className="form-control" name="tags" id="tags">
+            <label htmlFor="tag">Category</label>
+            <select
+              onChange={inputHandle}
+              value={state.tag}
+              className="form-control"
+              name="tag"
+              id="tag"
+            >
               <option value="">--Select Article Tag--</option>
               {allTag.length > 0
                 ? allTag.map((t, index) => (
