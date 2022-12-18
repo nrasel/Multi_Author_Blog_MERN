@@ -92,3 +92,13 @@ module.exports.tag_delete = async (req, res) => {
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
   }
 };
+
+module.exports.tag_eidt = async (req, res) => {
+  const { tagSlug } = req.params;
+  try {
+    const editTag = await tagModel.findOne({ tagSlug });
+    res.status(200).json({
+      editTag,
+    });
+  } catch (error) {}
+};

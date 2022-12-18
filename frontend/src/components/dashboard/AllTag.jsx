@@ -23,8 +23,8 @@ const AllTag = () => {
     if (tagSuccessMessage) {
       toast.success(tagSuccessMessage);
       dispatch({
-        type:'TAG_DELETE_MESSAGE_CELAR'
-      })
+        type: "TAG_DELETE_MESSAGE_CELAR",
+      });
     }
 
     dispatch(get_all_tag(currentPage ? currentPage.split("-")[1] : 1));
@@ -88,7 +88,12 @@ const AllTag = () => {
               : "Please Add Tag"}
           </div>
         </div>
-        <Pagination />
+        <Pagination
+          pageNumber={currentPage ? currentPage.split("-")[1] : 1}
+          perPage={perPage}
+          itemCount={tagCount}
+          path="/dashboard/all-tag"
+        />
       </div>
     </div>
   );

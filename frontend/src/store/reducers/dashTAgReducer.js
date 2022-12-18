@@ -5,6 +5,8 @@ const tagState = {
   allTag: [],
   perPage: 0,
   tagCount: 0,
+  editTag: "",
+  editRequest: false,
 };
 
 export const dashTagReducer = (state = tagState, action) => {
@@ -33,6 +35,19 @@ export const dashTagReducer = (state = tagState, action) => {
       tagCount: payload.tagCount,
     };
   }
+  if (type === "TAG_EDIT_REQUEST_SET") {
+    return {
+      ...state,
+      editRequest: true,
+    };
+  }
+  if (type === "EDIT_TAG_GET_SUCCESS") {
+    return {
+      ...state,
+      editTag: payload.editTag,
+    };
+  }
+
   if (
     type === "TAG_SUCCESS_MESSAGE_CLEAR" ||
     type === "TAG_DELETE_MESSAGE_CELAR"
@@ -40,6 +55,12 @@ export const dashTagReducer = (state = tagState, action) => {
     return {
       ...state,
       tagSuccessMessage: "",
+    };
+  }
+  if (type === "EDIT_REQUEST_CLEAR_TAG") {
+    return {
+      ...state,
+      editRequest: false,
     };
   }
   if (type === "TAG_ADD_FAIL") {

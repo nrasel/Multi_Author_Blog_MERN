@@ -19,7 +19,7 @@ const Pagination = ({ pageNumber, perPage, itemCount, path }) => {
     const storeLink = [];
     for (var i = startLink; i < endLink; i++) {
       storeLink.push(
-        <li key={1} className={parseInt(pageNumber) === i ? "active" : ""}>
+        <li key={i} className={parseInt(pageNumber) === i ? "active" : ""}>
           <Link to={`${path}/page-${i}`}>{i}</Link>
         </li>
       );

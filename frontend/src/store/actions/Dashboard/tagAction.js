@@ -56,3 +56,20 @@ export const delete_tag = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const edit_tag = (tagSlug) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/rest-api/edit-tag/${tagSlug}`);
+    dispatch({
+      type: "EDIT_TAG_GET_SUCCESS",
+      payload: {
+        editTag: response.data.editTag,
+      },
+    });
+    dispatch({
+      type: "TAG_EDIT_REQUEST_SET",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
