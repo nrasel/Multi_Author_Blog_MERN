@@ -23,6 +23,11 @@ const ArticleAdd = () => {
   const [slug, setSlug] = useState("");
   // show and hide update button
   const [updateBtn, setUpdateBtn] = useState(false);
+  // for image handle state
+  const [image, setImage] = useState({
+    imageName: "",
+    img: "",
+  });
 
   // all field handler
   const inputHandle = (e) => {
@@ -57,7 +62,41 @@ const ArticleAdd = () => {
     setUpdateBtn(false);
   };
 
-  console.log(state);
+  // image handler
+  const imageHandle = (e) => {
+    // এখানে চেক করা হচ্ছে ইমেজ সিলেক্ট করা আছে কিনা
+    if (e.target.files.length !== 0) {
+      setState({
+        ...state,
+        image: e.target.files[0],
+      });
+      //এই ফাংশনটা দিয়ে মুলত ইমেজটা রিড করে ইস্টেট এর মদ্ধ্যে সেট করা হচ্ছে
+      const imageReader = new FileReader();
+      imageReader.onload = () => {
+        setImage({
+          ...image,
+          img: imageReader.result,
+          imageName: e.target.files[0].name,
+        });
+      };
+      //এই ফাংশন এর ভিতর ইমেজ টা সেট করে দিলাম যেনো ইমেজ ইউ আর এল ক্র্যেট হয়
+      imageReader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const addArticle = (e) => {
+    e.preventDefault();
+    const {title,image,category,tag} =state
+
+    // ইমেজকে স্বাভাবিক অবস্থায় ব্যাকেন্ডে পাঠাতে পারবো না তাই ফরমডাটা ব্যাবহার করতে হবে
+    const formData=new FormData();
+    formData.append('title',title);
+    formData.append('image',image);
+    formData.append('category',category);
+    formData.append('tag',tag);
+    formData.append('slug',slug);
+    formData.append('text',text);
+  };
   const config = {
     readonly: false,
   };
@@ -78,7 +117,7 @@ const ArticleAdd = () => {
             All Article
           </Link>
         </div>
-        <form>
+        <form onSubmit={addArticle}>
           <div className="form-group">
             <label htmlFor="title">Article title</label>
             <input
@@ -174,9 +213,14 @@ const ArticleAdd = () => {
           <div className="form-group">
             <label htmlFor="image">Image</label>
             <div className="image-select">
-              <span>Upload Image</span>
+              {image.imageName ? (
+                <span>{image.imageName}</span>
+              ) : (
+                <span>Upload Image</span>
+              )}
               <label htmlFor="image">Select Image</label>
               <input
+                onChange={imageHandle}
                 type="file"
                 className="form-control"
                 name="image"
@@ -184,10 +228,7 @@ const ArticleAdd = () => {
               />
             </div>
             <div className="image">
-              <img
-                src="http://localhost:3000/articleImage/artificial.jpg"
-                alt=""
-              />
+              {image.img ? <img src={image.img} alt="" /> : ""}
             </div>
             <p className="error">Please Provide Article Image</p>
           </div>
