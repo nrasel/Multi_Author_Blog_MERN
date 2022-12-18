@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 // redux thunk synchronus and asynchronus system handle
 import ThunkMiddleware from "redux-thunk";
 import { adminReducer } from "./reducers/adminReducers";
+import { articleReducer } from "./reducers/articleReducer";
 import { dashCategoryReducers } from "./reducers/dashCategoryReducers";
 import { dashTagReducer } from "./reducers/dashTAgReducer";
 
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   adminReducer,
   dashCategoryReducers,
   dashTagReducer,
+  articleReducer,
 });
 
 const middleware = [ThunkMiddleware];

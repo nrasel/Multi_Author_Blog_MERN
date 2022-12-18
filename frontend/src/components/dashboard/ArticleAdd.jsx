@@ -1,15 +1,24 @@
 import JoditEditor from "jodit-react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { BsCardImage } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { get_tag_category } from "../../store/actions/Dashboard/articleAction";
 
 const ArticleAdd = () => {
+  const dispatch = useDispatch();
+  const { allTag, allCategory } = useSelector((state) => state.articleReducer);
   const [text, setText] = useState("");
   const editor = useRef();
   const config = {
     readonly: false,
   };
+
+  useEffect(() => {
+    dispatch(get_tag_category());
+  }, []);
+
   return (
     <div className="add-article">
       <Helmet>
@@ -49,22 +58,28 @@ const ArticleAdd = () => {
           <div className="form-group">
             <label htmlFor="categoryadd">Category</label>
             <select className="form-control" name="category" id="categoryadd">
-              <option value="autoselect">--Select Article Category--</option>
-              <option value="cat1">Programming</option>
-              <option value="cat2">Algorithm</option>
-              <option value="cat3">Computer</option>
-              <option value="cat4">Electrical</option>
+              <option value="">--Select Article Category--</option>
+              {allCategory.length > 0
+                ? allCategory.map((c, index) => (
+                    <option key={index} value={c.categorySlug}>
+                      {c.categoryName}
+                    </option>
+                  ))
+                : ""}
             </select>
             <p className="error">Please Provide article slug</p>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Category</label>
             <select className="form-control" name="tags" id="tags">
-              <option value="autoselect">--Select Article Tag--</option>
-              <option value="cat1">Programming</option>
-              <option value="cat2">Algorithm</option>
-              <option value="cat3">Computer</option>
-              <option value="cat4">Electrical</option>
+              <option value="">--Select Article Tag--</option>
+              {allTag.length > 0
+                ? allTag.map((t, index) => (
+                    <option key={index} value={t.tagSlug}>
+                      {t.tagName}
+                    </option>
+                  ))
+                : ""}
             </select>
             <p className="error">Please Provide article slug</p>
           </div>

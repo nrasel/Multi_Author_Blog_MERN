@@ -7,6 +7,9 @@ const {
   category_edit,
   category_update,
 } = require("../../controller/Dashboard/categoryControler");
+const {
+  get_tag_category,
+} = require("../../controller/Dashboard/tagCategoryController");
 
 // import tag controller
 const {
@@ -37,5 +40,8 @@ router.get("/get-tag", admin_middleware, tag_get);
 router.delete("/delete-tag/:tagId", admin_middleware, tag_delete);
 router.get("/edit-tag/:tagSlug", admin_middleware, tag_eidt);
 router.patch("/update-tag/:tagId", admin_middleware, tag_update);
+
+// for article route
+router.get("/get-tag-category", admin_middleware, get_tag_category);
 
 module.exports = router;
