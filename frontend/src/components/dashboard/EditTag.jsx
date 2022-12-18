@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { edit_tag } from "../../store/actions/Dashboard/tagAction";
+import { edit_tag, update_tag } from "../../store/actions/Dashboard/tagAction";
 
-const EditTag = () => {
+const EditTag = ({ history }) => {
   const { tagSlug } = useParams();
   const dispatch = useDispatch();
-  const { editTag, editRequest } = useSelector((state) => state.dashTagReducer);
+  const { editTag, editRequest, tagError, tagSuccessMessage } = useSelector(
+    (state) => state.dashTagReducer
+  );
   const [state, setState] = useState({
     tagName: "",
     tagDes: "",
   });
 
-  console.log(tagSlug);
-
   useEffect(() => {
     if (editRequest) {
       setState({
-        tagName: editTag.tagName,
-        tagDes: editTag.tagDes,
+        tagName: editTag?.tagName,
+        tagDes: editTag?.tagDes,
       });
     } else {
       dispatch(edit_tag(tagSlug));
@@ -28,6 +28,12 @@ const EditTag = () => {
       type: "EDIT_REQUEST_CLEAR_TAG",
     });
   }, [tagSlug, editTag]);
+
+  useEffect(() => {
+    if (tagSuccessMessage) {
+      history.push("/dashboard/all-tag");
+    }
+  }, [tagSuccessMessage]);
   const inputHandler = (e) => {
     setState({
       ...state,
@@ -37,7 +43,7 @@ const EditTag = () => {
 
   const updateTag = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(update_tag(editTag?._id, state));
   };
 
   return (
@@ -64,7 +70,7 @@ const EditTag = () => {
               name="tagName"
               id="category_name"
             />
-            <p className="error">Please Provide tag name</p>
+            <p className="error">{tagError && tagError.tagName}</p>
           </div>
           <div className="form-group">
             <label htmlFor="category_desc">Tag Description</label>
@@ -78,7 +84,7 @@ const EditTag = () => {
               rows="10"
               placeholder="Write Description.."
             ></textarea>
-            <p className="error">Please Provide category name</p>
+            <p className="error">{tagError && tagError.tagDes}</p>
           </div>
           <div className="form-group">
             <button className="btn btn-block">Edit Tag</button>

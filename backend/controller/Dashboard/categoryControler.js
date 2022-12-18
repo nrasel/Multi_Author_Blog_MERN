@@ -144,6 +144,6 @@ module.exports.category_update = async (req, res) => {
         .json({ errorMessage: { error: "Internal Server Error" } });
     }
   } else {
-    res.status(400).json({ errorMessage: error });
+    res.status(404).json({ errorMessage: error });
   }
 };

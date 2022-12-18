@@ -102,3 +102,33 @@ module.exports.tag_eidt = async (req, res) => {
     });
   } catch (error) {}
 };
+
+module.exports.tag_update = async (req, res) => {
+  const { tagId } = req.params;
+  const { tagName, tagDes } = req.body;
+
+  const error = {};
+  if (!tagName) {
+    error.tagName = "Please Provide tag name";
+  }
+  if (!tagDes) {
+    error.tagDes = "Please Provide tag description";
+  }
+  if (Object.keys(error).length == 0) {
+    const tagSlug = tagName.trim().split(" ").join("-");
+    try {
+      await tagModel.findByIdAndUpdate(tagId, {
+        tagName: tagName.trim(),
+        tagSlug,
+        tagDes,
+      });
+      res.status(200).json({ successMessage: "Tag Update Successful" });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  } else {
+    res.status(404).json({ errorMessage: error });
+  }
+};

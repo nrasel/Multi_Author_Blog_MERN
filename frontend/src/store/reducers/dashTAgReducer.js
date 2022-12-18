@@ -18,7 +18,11 @@ export const dashTagReducer = (state = tagState, action) => {
       loader: true,
     };
   }
-  if (type === "TAG_ADD_SUCCESS" || type === "TAG_DELETE_SUCCESS_MESSAGE") {
+  if (
+    type === "TAG_ADD_SUCCESS" ||
+    type === "TAG_DELETE_SUCCESS_MESSAGE" ||
+    type === "TAG_UPDATE_SUCCESS"
+  ) {
     return {
       ...state,
       loader: false,
@@ -63,7 +67,7 @@ export const dashTagReducer = (state = tagState, action) => {
       editRequest: false,
     };
   }
-  if (type === "TAG_ADD_FAIL") {
+  if (type === "TAG_ADD_FAIL" || type === "TAG_UPDATE_FAIL") {
     return {
       ...state,
       loader: false,

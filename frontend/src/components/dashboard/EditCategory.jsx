@@ -18,7 +18,6 @@ const EditCategory = ({ history }) => {
     categoryDes: "",
   });
 
-
   // set category name and description and pass category slug to ediCategory action
   useEffect(() => {
     if (editRequest) {
@@ -55,7 +54,6 @@ const EditCategory = ({ history }) => {
 
   return (
     <div className="add-category">
-      
       <Helmet>
         <title>Edit Category</title>
       </Helmet>

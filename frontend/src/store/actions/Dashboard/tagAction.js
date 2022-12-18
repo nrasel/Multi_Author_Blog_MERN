@@ -73,3 +73,22 @@ export const edit_tag = (tagSlug) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const update_tag = (id, data) => async (dispatch) => {
+  try {
+    const response = await axios.patch(`/rest-api/update-tag/${id}`, data);
+    dispatch({
+      type: "TAG_UPDATE_SUCCESS",
+      payload: {
+        successMessage: response.data.successMessage,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: "TAG_UPDATE_FAIL",
+      payload: {
+        error: error.response.data.errorMessage,
+      },
+    });
+  }
+};
