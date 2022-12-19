@@ -23,7 +23,6 @@ module.exports.article_add = (req, res) => {
       //এখন এগুলো ভেলিডেট করতে হবে
       const { title, category, tag, slug, text } = fields;
       const { image } = files;
-      console.log(image);
     }
   });
 };
