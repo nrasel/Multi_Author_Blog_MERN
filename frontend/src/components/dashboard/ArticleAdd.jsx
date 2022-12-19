@@ -4,7 +4,10 @@ import { Helmet } from "react-helmet";
 import { BsCardImage } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { get_tag_category } from "../../store/actions/Dashboard/articleAction";
+import {
+  add_article,
+  get_tag_category,
+} from "../../store/actions/Dashboard/articleAction";
 
 const ArticleAdd = () => {
   const dispatch = useDispatch();
@@ -86,16 +89,17 @@ const ArticleAdd = () => {
 
   const addArticle = (e) => {
     e.preventDefault();
-    const {title,image,category,tag} =state
+    const { title, image, category, tag } = state;
 
     // ইমেজকে স্বাভাবিক অবস্থায় ব্যাকেন্ডে পাঠাতে পারবো না তাই ফরমডাটা ব্যাবহার করতে হবে
-    const formData=new FormData();
-    formData.append('title',title);
-    formData.append('image',image);
-    formData.append('category',category);
-    formData.append('tag',tag);
-    formData.append('slug',slug);
-    formData.append('text',text);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("image", image);
+    formData.append("category", category);
+    formData.append("tag", tag);
+    formData.append("slug", slug);
+    formData.append("text", text);
+    dispatch(add_article(formData));
   };
   const config = {
     readonly: false,
