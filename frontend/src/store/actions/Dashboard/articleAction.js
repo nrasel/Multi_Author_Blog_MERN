@@ -19,6 +19,6 @@ export const add_article = (data) => async (dispatch) => {
     const response = await axios.post("/rest-api/article-add", data);
     console.log(response.data);
   } catch (error) {
-    console.log(error.response);
+    console.log(error.response.data);
   }
 };
