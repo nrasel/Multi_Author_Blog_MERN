@@ -1,6 +1,7 @@
 import JoditEditor from "jodit-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
+import { Toaster } from "react-hot-toast";
 import { BsCardImage } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,9 +10,10 @@ import {
   get_tag_category,
 } from "../../store/actions/Dashboard/articleAction";
 
-const ArticleAdd = () => {
+const ArticleAdd = ({ history }) => {
   const dispatch = useDispatch();
-  const { allTag, allCategory } = useSelector((state) => state.articleReducer);
+  const { allTag, allCategory, loader, articleError, articleSuccessMessage } =
+    useSelector((state) => state.articleReducer);
   const [text, setText] = useState("");
   const editor = useRef();
 
@@ -109,8 +111,27 @@ const ArticleAdd = () => {
     dispatch(get_tag_category());
   }, []);
 
+  // success message notification
+  useEffect(() => {
+    if (articleSuccessMessage) {
+      dispatch({
+        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
+      });
+      history.push("/dashboard/all-article");
+    }
+  }, [articleSuccessMessage]);
+
   return (
     <div className="add-article">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>Article Add</title>
       </Helmet>
@@ -133,7 +154,7 @@ const ArticleAdd = () => {
               className="form-control"
               id="title"
             />
-            <p className="error">Please Provide article title</p>
+            <p className="error">{articleError && articleError.title}</p>
           </div>
           <div className="form-group">
             <label htmlFor="slug">Article Slug</label>
@@ -146,7 +167,7 @@ const ArticleAdd = () => {
               name="slug"
               id="slug"
             />
-            <p className="error">Please Provide article slug</p>
+            <p className="error">{articleError && articleError.slug}</p>
           </div>
           {updateBtn ? (
             <button onClick={updateSlug} className="btn">
@@ -174,7 +195,7 @@ const ArticleAdd = () => {
                   ))
                 : ""}
             </select>
-            <p className="error">Please Provide article slug</p>
+            <p className="error">{articleError && articleError.category}</p>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tag</label>
@@ -194,7 +215,7 @@ const ArticleAdd = () => {
                   ))
                 : ""}
             </select>
-            <p className="error">Please Provide article slug</p>
+            <p className="error">{articleError && articleError.tag}</p>
           </div>
           <div className="form-group img-upload">
             <div className="upload">
@@ -212,7 +233,7 @@ const ArticleAdd = () => {
               onBlur={(newText) => setText(newText)} // preferred to use only this option to update the content for performance reasons
               onChange={(newContent) => {}}
             />
-            <p className="error">Please Provide article slug</p>
+            <p className="error">{articleError && articleError.text}</p>
           </div>
           <div className="form-group">
             <label htmlFor="image">Image</label>
@@ -234,10 +255,20 @@ const ArticleAdd = () => {
             <div className="image">
               {image.img ? <img src={image.img} alt="" /> : ""}
             </div>
-            <p className="error">Please Provide Article Image</p>
+            <p className="error">{articleError && articleError.image}</p>
           </div>
           <div className="form-group">
-            <button className="btn btn-block">Add Article</button>
+            {loader ? (
+              <button className="btn btn-block">
+                <div className="spinner">
+                  <div className="spinner1"></div>
+                  <div className="spinner2"></div>
+                  <div className="spinner3"></div>
+                </div>
+              </button>
+            ) : (
+              <button className="btn btn-block">Add Article</button>
+            )}
           </div>
         </form>
       </div>

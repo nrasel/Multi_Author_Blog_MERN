@@ -15,10 +15,23 @@ export const get_tag_category = () => async (dispatch) => {
   }
 };
 export const add_article = (data) => async (dispatch) => {
+  dispatch({
+    type: "SET_LOADER_ARTICLE",
+  });
   try {
     const response = await axios.post("/rest-api/article-add", data);
-    console.log(response.data);
+    dispatch({
+      type: "ARTICLE_ADD_SUCCESS",
+      payload: {
+        successMessage: response.data.successMessage,
+      },
+    });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: "ARTICLE_ADD_FAIL",
+      payload: {
+        errorMessage: error.response.data.errorMessage,
+      },
+    });
   }
 };
