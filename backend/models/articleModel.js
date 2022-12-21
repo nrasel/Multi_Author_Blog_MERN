@@ -1,7 +1,5 @@
 const { model, Schema } = require("mongoose");
 
-module.exports = model("category", categorySchema);
-
 const articleSchema = new Schema(
   {
     adminId: {
@@ -82,4 +80,4 @@ const articleSchema = new Schema(
   { timestamps: true }
 );
 
-model.exports = model("article", articleSchema);
+module.exports = model("article", articleSchema);

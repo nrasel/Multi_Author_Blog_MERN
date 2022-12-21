@@ -1,5 +1,6 @@
 module.exports.article_validator = (data, files) => {
   const { title, category, tag, slug, text } = data;
+  const { mimetype } = files;
 
   let error = {};
   if (!title) {

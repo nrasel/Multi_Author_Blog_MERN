@@ -177,13 +177,13 @@ const ArticleAdd = () => {
             <p className="error">Please Provide article slug</p>
           </div>
           <div className="form-group">
-            <label htmlFor="tagadd">Tag</label>
+            <label htmlFor="tags">Tag</label>
             <select
               onChange={inputHandle}
               value={state.tag}
               className="form-control"
-              name="tagadd"
-              id="tag"
+              name="tag"
+              id="tags"
             >
               <option value="">--Select Article Tag--</option>
               {allTag.length > 0
