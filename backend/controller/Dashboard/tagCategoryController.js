@@ -2,6 +2,7 @@ const formidable = require("formidable");
 const tagModel = require("../../models/tagModel");
 const categoryModel = require("../../models/categoryModel");
 const { article_validator } = require("../../validator/validator");
+const fs = require("fs");
 module.exports.get_tag_category = async (req, res) => {
   try {
     const getTag = await tagModel.find({});
@@ -13,6 +14,10 @@ module.exports.get_tag_category = async (req, res) => {
 };
 
 module.exports.article_add = (req, res) => {
+  // eigula muloto authMiddleware er moddhe cookie take decode kore req er sathe set kora
+  // console.log(req.adminId);
+  // console.log(req.adminName);
+
   //req.body ভেতর ফর্ম ডাটা সিম্পল ভাবে এক্সেস করতে পারবো না তাই formidable npm package ব্যাবহার করতে হবে
   const formDataHandle = formidable({
     multiples: true,
@@ -20,14 +25,31 @@ module.exports.article_add = (req, res) => {
   formDataHandle.parse(req, (err, fields, files) => {
     //যদি কোন এরর না থাকে তাইলে পরের কাজ গুলো হবে
     if (!err) {
-      //এখন এগুলো ভেলিডেট করতে হবে
       const { title, category, tag, slug, text } = fields;
-      // const { image } = files;
+      //সিলেক্ট ফর্ম এর ভেলু হিসেবে ক্যাটেগরি স্ল্যাগ ক্যাটেগরির জন্য এবং ট্যাগ এর জন্য ট্যাগস্ল্যাগ ব্যাবহার করেছিলাম এইটা ( ArticleAdd.jsx ফাইল এর মধ্যে ) তাই fileds এর ভেলু গুলা আমরা পাচ্ছি স্ল্যাগ হিসেবে
+      // console.log(category,tag);
+
+      //এখন এগুলো ভেলিডেট করতে হবে
       // custom validator from validator folder and using article_validator() function
       const validate = article_validator(fields, files);
 
-      if (validate.validated) {
-        
+      if (!validate.validated) {
+        const categoryName = category.split("-").join(" ");
+        const tagName = tag.split("-").join(" ");
+
+        files.image.originalFilename =
+          Date.now() + files.image.originalFilename;
+        const uploadPath =
+          __dirname +
+          `../../../../frontend/public/articleImage/${files.image.originalFilename}`;
+        console.log(uploadPath);
+        fs.copyFile(files.image.filepath, uploadPath, (error) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("image upload success");
+          }
+        });
       } else {
         res.status(400).json({ errorMessage: validate.error });
       }
