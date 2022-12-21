@@ -35,3 +35,15 @@ export const add_article = (data) => async (dispatch) => {
     });
   }
 };
+
+export const get_all_article =
+  (currentPage, searchValue) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `/rest-api/get-article?currentPage=${currentPage}&&searchValue=${searchValue}`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };

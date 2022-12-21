@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import { FaRegEye, FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { get_all_article } from "../../store/actions/Dashboard/articleAction";
 import Pagination from "../home/Pagination";
 
 const DashboardArticle = () => {
+  const { currentPage } = useParams();
+
+  const dispatch = useDispatch();
+  // const {} = useSelector((state) => state.articleReducer);
   const text = "Lorem Ipsum is simply dummy text of the printing";
+  const handleArticleSearch = () => {};
+  useEffect(() => {
+    dispatch(get_all_article(currentPage ? currentPage.split("-")[1] : 1));
+  }, [currentPage]);
   return (
     <div className="dashboard-article">
       <Helmet>
@@ -20,6 +30,7 @@ const DashboardArticle = () => {
           <div className="searchof">
             <div className="search">
               <input
+                onChange={handleArticleSearch}
                 type="text"
                 className="form-control"
                 placeholder="Find Your Article"
@@ -53,7 +64,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>
@@ -78,7 +89,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>
@@ -103,7 +114,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>
@@ -128,7 +139,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>
@@ -153,7 +164,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>
@@ -178,7 +189,7 @@ const DashboardArticle = () => {
                   </Link>
                 </span>
                 <span>
-                  <Link>
+                  <Link to="/">
                     <FaRegEye />
                   </Link>
                 </span>

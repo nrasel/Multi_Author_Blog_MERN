@@ -81,3 +81,7 @@ module.exports.article_add = (req, res) => {
     }
   });
 };
+
+module.exports.article_get = (req, res) => {
+  console.log(req.query);
+};
