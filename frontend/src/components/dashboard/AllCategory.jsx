@@ -94,12 +94,16 @@ const AllCategory = () => {
               : "Category not found"}
           </div>
         </div>
-        <Pagination
-          pageNumber={currentPage ? currentPage.split("-")[1] : 1}
-          perPage={perPage}
-          itemCount={categoryCount}
-          path="/dashboard/all-category"
-        />
+        {categoryCount === 0 || categoryCount < perPage ? (
+          ""
+        ) : (
+          <Pagination
+            pageNumber={currentPage ? currentPage.split("-")[1] : 1}
+            perPage={perPage}
+            itemCount={categoryCount}
+            path="/dashboard/all-category"
+          />
+        )}
       </div>
     </div>
   );

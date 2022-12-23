@@ -96,12 +96,16 @@ const AllTag = () => {
               : "Tag not found"}
           </div>
         </div>
-        <Pagination
-          pageNumber={currentPage ? currentPage.split("-")[1] : 1}
-          perPage={perPage}
-          itemCount={tagCount}
-          path="/dashboard/all-tag"
-        />
+        {tagCount === 0 || tagCount < perPage ? (
+          ""
+        ) : (
+          <Pagination
+            pageNumber={currentPage ? currentPage.split("-")[1] : 1}
+            perPage={perPage}
+            itemCount={tagCount}
+            path="/dashboard/all-tag"
+          />
+        )}
       </div>
     </div>
   );
