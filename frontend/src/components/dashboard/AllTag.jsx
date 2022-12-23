@@ -52,6 +52,14 @@ const AllTag = () => {
           <div className="searchof">
             <div className="search">
               <input
+                onChange={(e) =>
+                  dispatch(
+                    get_all_tag(
+                      currentPage ? currentPage.split("-")[1] : 1,
+                      e.target.value
+                    )
+                  )
+                }
                 type="text"
                 className="form-control"
                 placeholder="Find Your Tag"
@@ -85,7 +93,7 @@ const AllTag = () => {
                     </div>
                   </div>
                 ))
-              : "Please Add Tag"}
+              : "Tag not found"}
           </div>
         </div>
         <Pagination

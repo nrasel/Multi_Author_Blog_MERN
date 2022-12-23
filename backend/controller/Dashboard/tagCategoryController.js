@@ -82,6 +82,64 @@ module.exports.article_add = (req, res) => {
   });
 };
 
-module.exports.article_get = (req, res) => {
-  console.log(req.query);
+module.exports.article_get = async (req, res) => {
+  const { adminId, role } = req;
+  const { currentPage, searchValue } = req.query;
+
+  const perPage = 2;
+  const skipPage = parseInt(currentPage - 1) * perPage;
+
+  let articles = [];
+
+  try {
+    let articleCount = 0;
+
+    if (searchValue === "undefined" || !searchValue) {
+      if (role === "admin") {
+        articleCount = await articleModel.find({}).countDocuments();
+        articles = await articleModel
+          .find({})
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+      } else {
+        articleCount = await articleModel.find({ adminId }).countDocuments();
+        articles = await articleModel
+          .find({ adminId })
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+      }
+    } else {
+      if (role === "admin") {
+        articleCount = await articleModel.find({}).countDocuments();
+        articles = await articleModel
+          .find({})
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+
+        articles = articles.filter(
+          (ar) => ar.title.toUpperCase().indexOf(searchValue.toUpperCase()) > -1
+        );
+      } else {
+        articleCount = await articleModel.find({ adminId }).countDocuments();
+        articles = await articleModel
+          .find({ adminId })
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+        articles = articles.filter(
+          (ar) => ar.title.toUpperCase().indexOf(searchValue.toUpperCase()) > -1
+        );
+      }
+    }
+    res.status(200).json({
+      allArticle: articles,
+      perPage,
+      articleCount,
+    });
+  } catch (error) {
+    res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
+  }
 };

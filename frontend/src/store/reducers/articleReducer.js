@@ -2,8 +2,8 @@ const initState = {
   loader: false,
   articleError: "",
   allArticle: [],
-  perPage: 0,
   articleCount: 0,
+  perPage: 0,
   editArticle: "",
   articleSuccessMessage: "",
   editRequest: false,
@@ -35,6 +35,7 @@ export const articleReducer = (state = initState, action) => {
       articleSuccessMessage: payload.successMessage,
     };
   }
+
   if (type === "ARTICLE_ADD_FAIL") {
     return {
       ...state,
@@ -49,5 +50,15 @@ export const articleReducer = (state = initState, action) => {
       articleSuccessMessage: "",
     };
   }
+
+  if (type === "DASH_ARTICLE_GET_SUCCESS") {
+    return {
+      ...state,
+      allArticle: payload.allArticle,
+      perPage: payload.perPage,
+      articleCount: payload.articleCount,
+    };
+  }
+
   return state;
 };

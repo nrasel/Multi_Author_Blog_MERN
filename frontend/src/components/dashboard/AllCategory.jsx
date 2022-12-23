@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { toast, Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +27,7 @@ const AllCategory = () => {
     }
     // get_all_category action er moddhe current page pathano holo (page-12) just ei number take neoa holo jodi number ta na thake taile 1 pass hobe
     dispatch(get_all_category(currentPage ? currentPage.split("-")[1] : 1));
-  }, [currentPage,  categorySuccessMessage]);
+  }, [currentPage, categorySuccessMessage]);
   return (
     <div className="all-category">
       <Toaster
@@ -50,6 +50,14 @@ const AllCategory = () => {
           <div className="searchof">
             <div className="search">
               <input
+                onChange={(e) =>
+                  dispatch(
+                    get_all_category(
+                      currentPage ? currentPage.split("-")[1] : 1,
+                      e.target.value
+                    )
+                  )
+                }
                 type="text"
                 className="form-control"
                 placeholder="Find Your Category"
@@ -83,7 +91,7 @@ const AllCategory = () => {
                     </div>
                   </div>
                 ))
-              : "Please Add Category"}
+              : "Category not found"}
           </div>
         </div>
         <Pagination

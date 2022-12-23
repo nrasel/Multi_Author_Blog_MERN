@@ -54,6 +54,7 @@ module.exports.category_get = async (req, res) => {
     try {
       // show tag in (all tage component)
       const categoryCount = await categoryModel.find({}).countDocuments();
+     
       const getCategory = await categoryModel
         .find({})
         .skip(skipPage)
@@ -72,7 +73,9 @@ module.exports.category_get = async (req, res) => {
   } else {
     try {
       const categoryCount = await categoryModel.find({}).countDocuments();
+     
       let getCategory = await categoryModel.find({});
+      // for search
       getCategory = getCategory.filter(
         (c) =>
           c.categoryName.toUpperCase().indexOf(searchValue.toUpperCase()) > -1

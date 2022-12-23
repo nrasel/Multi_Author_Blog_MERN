@@ -50,6 +50,7 @@ module.exports.tag_get = async (req, res) => {
     try {
       // যদি সার্চ ভেলু তাইলে এইটা
       const tagCount = await tagModel.find({}).countDocuments();
+
       const getTag = await tagModel
         .find({})
         .skip(skipPage)
@@ -70,12 +71,15 @@ module.exports.tag_get = async (req, res) => {
     // আর যদি সার্চ ভেলু না থাকে তা ইলে এইটা
     try {
       const tagCount = await tagModel.find({}).countDocuments();
+      console.log(tagCount);
       let getTag = await tagModel.find({});
+
       getTag = getTag.filter(
         (c) => c.tagName.toUpperCase().indexOf(searchValue.toUpperCase()) > -1
       );
-      res.status(200).json({ allTag: allTag, perPage, tagCount });
+      res.status(200).json({ allTag: getTag, perPage, tagCount });
     } catch (error) {
+      console.log(error);
       res
         .status(500)
         .json({ errorMessage: { error: "Internal Server Error" } });
