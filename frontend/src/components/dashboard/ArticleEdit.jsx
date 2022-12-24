@@ -15,7 +15,7 @@ const ArticleEdit = () => {
   const [text, setText] = useState("");
   const editor = useRef();
 
-  console.log(allCategory);
+  
 
   const [state, setState] = useState({
     title: "",
