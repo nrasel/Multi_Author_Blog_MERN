@@ -61,11 +61,21 @@ const DashboardArticle = () => {
             {allArticle.length > 0
               ? allArticle.map((art, index) => (
                   <div key={index} className="article">
-                    <img src={art.image} alt="" />
+                    <img
+                      src={`http://localhost:3000/articleImage/${art.image}`}
+                      alt=""
+                    />
                     <Link to={`/article/details/${art.slug}`}>
-                      {art.title.slice(0, 30)}
+                      {art.title.slice(0, 30)}...
                     </Link>
-                    <p>{htmlToText(art.article_text.slice(0, 50))}</p>
+                    <p
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {htmlToText(art.article_text.slice(0, 50))}
+                    </p>
                     <div className="action">
                       <span>
                         <Link to={`/dashboard/article/edit/${art.slug}`}>

@@ -60,5 +60,14 @@ export const articleReducer = (state = initState, action) => {
     };
   }
 
+  if (type === "EDIT_ARTICLE_GET_SUCCESS") {
+    return {
+      ...state,
+      editArticle: payload.editArticle,
+    };
+  }
+  if (type === "EDIT_ARTICLE_REQUEST_SET") {
+    return { ...state, editRequest: true };
+  }
   return state;
 };

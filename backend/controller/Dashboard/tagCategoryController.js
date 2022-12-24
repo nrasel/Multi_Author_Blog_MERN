@@ -143,3 +143,26 @@ module.exports.article_get = async (req, res) => {
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
   }
 };
+
+module.exports.article_edit = async (req, res) => {
+  const { articleSlug } = req.params;
+  //eita middleware theke asche
+  const { adminId, role } = req;
+
+  try {
+    //এখানে ফ্রন্ট এন্ড থেকে পাঠানো স্ল্যাগ এবং ডাটাবেজে ক্রিয়েট করা স্ল্যাগ ম্যাচ করা হচ্ছে
+    const getArticle = await articleModel.findOne({ slug: articleSlug });
+    if (
+      (getArticle && getArticle.adminId === adminId) ||
+      getArticle.role === role
+    ) {
+      res.status(200).json({
+        editArticle: getArticle,
+      });
+    } else {
+      res.status(404).json({
+        errorMessage: { error: "You can't edit this article" },
+      });
+    }
+  } catch (error) {}
+};

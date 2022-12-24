@@ -38,12 +38,11 @@ export const add_article = (data) => async (dispatch) => {
 
 export const get_all_article =
   (currentPage, searchValue) => async (dispatch) => {
-    
     try {
       const response = await axios.get(
         `/rest-api/get-article?currentPage=${currentPage}&&searchValue=${searchValue}`
       );
-     
+
       dispatch({
         type: "DASH_ARTICLE_GET_SUCCESS",
         payload: {
@@ -56,3 +55,21 @@ export const get_all_article =
       console.log(error.response.data);
     }
   };
+
+export const edit_article = (articleSlug) => async (dispatch) => {
+  console.log(articleSlug);
+  try {
+    const response = await axios.get(`/rest-api/edit-article/${articleSlug}`);
+    dispatch({
+      type: "EDIT_ARTICLE_GET_SUCCESS",
+      payload: {
+        editArticle: response.data.editArticle,
+      },
+    });
+    dispatch({
+      type: "EDIT_ARTICLE_REQUEST_SET",
+    });
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
