@@ -213,3 +213,28 @@ module.exports.article_update = async (req, res) => {
     res.status(400).json({ errorMessage: validate.error });
   }
 };
+
+module.exports.article_delete = async (req, res) => {
+  const { articleId } = req.params;
+  const { adminId, role } = req;
+  try {
+    const getArticle = await articleModel.findById(articleId);
+
+    if (
+      (getArticle && getArticle.adminId === adminId) ||
+      getArticle.role === role
+    ) {
+      await articleModel.findByIdAndDelete(articleId);
+      res.status(201).json({
+        successMessage: "Article Delete successful",
+      });
+    } else {
+      res.status(404).json({
+        errorMessage: { error: "Article Update failed" },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
+  }
+};

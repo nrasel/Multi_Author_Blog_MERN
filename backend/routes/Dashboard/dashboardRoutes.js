@@ -13,6 +13,7 @@ const {
   article_get,
   article_edit,
   article_update,
+  article_delete,
 } = require("../../controller/Dashboard/tagCategoryController");
 
 // import tag controller
@@ -51,5 +52,6 @@ router.post("/article-add", admin_middleware, article_add);
 router.get("/get-article", admin_middleware, article_get);
 router.get("/edit-article/:articleSlug", admin_middleware, article_edit);
 router.post("/update-article", admin_middleware, article_update);
+router.delete("/delete-article/:articleId", admin_middleware, article_delete);
 
 module.exports = router;

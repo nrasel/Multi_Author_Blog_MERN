@@ -27,7 +27,11 @@ export const articleReducer = (state = initState, action) => {
       loader: true,
     };
   }
-  if (type === "ARTICLE_ADD_SUCCESS" || type === "ARTICLE_UPDATE_SUCCESSFUL") {
+  if (
+    type === "ARTICLE_ADD_SUCCESS" ||
+    type === "ARTICLE_UPDATE_SUCCESSFUL" ||
+    type === "ARTICLE_DELETE_SUCCESSFUL"
+  ) {
     return {
       ...state,
       loader: false,
@@ -36,7 +40,11 @@ export const articleReducer = (state = initState, action) => {
     };
   }
 
-  if (type === "ARTICLE_ADD_FAIL" || type === "ARTICLE_UPDATE_FAIL") {
+  if (
+    type === "ARTICLE_ADD_FAIL" ||
+    type === "ARTICLE_UPDATE_FAIL" ||
+    type === "ARTICLE_DELETE_FAIL"
+  ) {
     return {
       ...state,
       loader: false,
@@ -44,7 +52,10 @@ export const articleReducer = (state = initState, action) => {
       articleSuccessMessage: "",
     };
   }
-  if (type === "ARTICLE_SUCCESS_MESSAGE_CLEAR") {
+  if (
+    type === "ARTICLE_SUCCESS_MESSAGE_CLEAR" ||
+    type === "ARTICLE_DELETE_MESSAGE_CLEAR"
+  ) {
     return {
       ...state,
       articleSuccessMessage: "",

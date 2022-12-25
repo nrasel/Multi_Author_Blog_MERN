@@ -91,3 +91,23 @@ export const update_article = (data) => async (dispatch) => {
     });
   }
 };
+export const delete_article = (articleId) => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      `/rest-api/delete-article/${articleId}`
+    );
+   dispatch({
+     type: "ARTICLE_DELETE_SUCCESSFUL",
+     payload: {
+       successMessage: response.data.successMessage,
+     },
+   });
+  } catch (error) {
+    dispatch({
+      type: "ARTICLE_DELETE_FAIL",
+      payload: {
+        errorMessage: error.response.data.errorMessage,
+      },
+    });
+  }
+};

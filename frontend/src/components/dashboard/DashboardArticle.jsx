@@ -6,7 +6,10 @@ import { FaRegEye, FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { get_all_article } from "../../store/actions/Dashboard/articleAction";
+import {
+  delete_article,
+  get_all_article,
+} from "../../store/actions/Dashboard/articleAction";
 import Pagination from "../home/Pagination";
 
 const DashboardArticle = () => {
@@ -15,19 +18,21 @@ const DashboardArticle = () => {
   const { allArticle, perPage, articleCount, articleSuccessMessage } =
     useSelector((state) => state.articleReducer);
 
-  // const {} = useSelector((state) => state.articleReducer);
-  useEffect(() => {
-    if (articleSuccessMessage) {
-      toast.success(articleSuccessMessage);
-      dispatch({
-        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
-      });
-    }
-  }, [articleSuccessMessage]);
-
   useEffect(() => {
     dispatch(get_all_article(currentPage ? currentPage.split("-")[1] : 1));
   }, [currentPage]);
+
+  useEffect(() => {
+    if (articleSuccessMessage) {
+      toast.success(articleSuccessMessage);
+
+      dispatch({
+        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
+      });
+      dispatch(get_all_article(currentPage ? currentPage.split("-")[1] : 1));
+    }
+  }, [articleSuccessMessage]);
+
   return (
     <div className="dashboard-article">
       <Toaster
@@ -104,7 +109,7 @@ const DashboardArticle = () => {
                           <FaRegEye />
                         </Link>
                       </span>
-                      <span>
+                      <span onClick={() => dispatch(delete_article(art._id))}>
                         <MdDelete />
                       </span>
                     </div>
