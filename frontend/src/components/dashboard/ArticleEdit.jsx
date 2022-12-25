@@ -51,6 +51,7 @@ const ArticleEdit = ({ history }) => {
       [e.target.name]: e.target.value,
     });
   };
+  console.log(articleError);
 
   // slug update handler
   const updateSlug = (e) => {
@@ -97,9 +98,6 @@ const ArticleEdit = ({ history }) => {
   // success message notification
   useEffect(() => {
     if (articleSuccessMessage) {
-      dispatch({
-        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
-      });
       history.push("/dashboard/all-article");
     }
   }, [articleSuccessMessage]);
@@ -145,7 +143,7 @@ const ArticleEdit = ({ history }) => {
               name="slug"
               id="slug"
             />
-            <p className="error">{articleError && articleError.title}</p>
+            <p className="error">{articleError && articleError.slug}</p>
           </div>
           {updateBtn ? (
             <button onSubmit={updateSlug} className="btn">
@@ -175,7 +173,7 @@ const ArticleEdit = ({ history }) => {
                   })
                 : ""}
             </select>
-            <p className="error">{articleError && articleError.title}</p>
+            <p className="error">{articleError && articleError.category}</p>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tag</label>
@@ -197,7 +195,7 @@ const ArticleEdit = ({ history }) => {
                   })
                 : ""}
             </select>
-            <p className="error">{articleError && articleError.title}</p>
+            <p className="error">{articleError && articleError.tag}</p>
           </div>
           <div className="form-group img-upload">
             <div className="upload">
@@ -215,7 +213,7 @@ const ArticleEdit = ({ history }) => {
               onBlur={(newText) => setText(newText)} // preferred to use only this option to update the content for performance reasons
               onChange={(newContent) => {}}
             />
-            <p className="error">{articleError && articleError.title}</p>
+            <p className="error">{articleError && articleError.text}</p>
           </div>
 
           <div className="form-group">

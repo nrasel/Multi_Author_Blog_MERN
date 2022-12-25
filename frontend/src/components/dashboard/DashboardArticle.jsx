@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Helmet from "react-helmet";
+import toast, { Toaster } from "react-hot-toast";
 import htmlToText from "react-html-parser";
 import { FaRegEye, FaSearch } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -11,17 +12,33 @@ import Pagination from "../home/Pagination";
 const DashboardArticle = () => {
   const { currentPage } = useParams();
   const dispatch = useDispatch();
-  const { allArticle, perPage, articleCount } = useSelector(
-    (state) => state.articleReducer
-  );
+  const { allArticle, perPage, articleCount, articleSuccessMessage } =
+    useSelector((state) => state.articleReducer);
 
   // const {} = useSelector((state) => state.articleReducer);
+  useEffect(() => {
+    if (articleSuccessMessage) {
+      toast.success(articleSuccessMessage);
+      dispatch({
+        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
+      });
+    }
+  }, [articleSuccessMessage]);
 
   useEffect(() => {
     dispatch(get_all_article(currentPage ? currentPage.split("-")[1] : 1));
   }, [currentPage]);
   return (
     <div className="dashboard-article">
+      <Toaster
+        position={"top-center"}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "15px",
+          },
+        }}
+      />
       <Helmet>
         <title>All Article</title>
       </Helmet>
