@@ -166,11 +166,50 @@ module.exports.article_edit = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
   }
 };
 
 module.exports.article_update = async (req, res) => {
-  
+  const { title, category, tag, slug, text, articleId } = req.body;
+  const { adminId, role } = req;
+  const validate = article_validator(req.body, "");
+
+  if (validate.validated) {
+    try {
+      const getArticle = await articleModel.findById(articleId);
+
+      if (
+        (getArticle && getArticle.adminId === adminId) ||
+        getArticle.role === role
+      ) {
+        const categoryName = category.split("-").join(" ");
+        const tagName = tag.split("-").join(" ");
+
+        await articleModel.findByIdAndUpdate(articleId, {
+          title: title.trim(),
+          slug: slug.trim(),
+          category: categoryName,
+          category_slug: category,
+          tag: tagName,
+          tag_slug: tag,
+          article_text: text,
+        });
+        res.status(201).json({
+          successMessage: "Article update successful",
+        });
+      } else {
+        res.status(404).json({
+          errorMessage: { error: "Article Update failed" },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  } else {
+    res.status(400).json({ errorMessage: validate.error });
+  }
 };

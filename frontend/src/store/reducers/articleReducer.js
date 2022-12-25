@@ -27,7 +27,7 @@ export const articleReducer = (state = initState, action) => {
       loader: true,
     };
   }
-  if (type === "ARTICLE_ADD_SUCCESS") {
+  if (type === "ARTICLE_ADD_SUCCESS" || type === "ARTICLE_UPDATE_SUCCESSFUL") {
     return {
       ...state,
       loader: false,
@@ -36,7 +36,7 @@ export const articleReducer = (state = initState, action) => {
     };
   }
 
-  if (type === "ARTICLE_ADD_FAIL") {
+  if (type === "ARTICLE_ADD_FAIL" || type === "ARTICLE_UPDATE_FAIL") {
     return {
       ...state,
       loader: false,

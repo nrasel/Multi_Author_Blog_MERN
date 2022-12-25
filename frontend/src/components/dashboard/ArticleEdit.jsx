@@ -10,7 +10,7 @@ import {
   update_article,
 } from "../../store/actions/Dashboard/articleAction";
 
-const ArticleEdit = () => {
+const ArticleEdit = ({ history }) => {
   const dispatch = useDispatch();
   const { articleSlug } = useParams();
   const {
@@ -66,7 +66,6 @@ const ArticleEdit = () => {
     setUpdateBtn(true);
   };
 
-  console.log(editArticle._id);
   useEffect(() => {
     if (editRequest) {
       setState({
@@ -94,6 +93,16 @@ const ArticleEdit = () => {
   useEffect(() => {
     dispatch(get_tag_category());
   }, []);
+
+  // success message notification
+  useEffect(() => {
+    if (articleSuccessMessage) {
+      dispatch({
+        type: "ARTICLE_SUCCESS_MESSAGE_CLEAR",
+      });
+      history.push("/dashboard/all-article");
+    }
+  }, [articleSuccessMessage]);
 
   const config = {
     readonly: false,

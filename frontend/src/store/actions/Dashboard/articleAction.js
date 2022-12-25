@@ -74,14 +74,20 @@ export const edit_article = (articleSlug) => async (dispatch) => {
 };
 
 export const update_article = (data) => async (dispatch) => {
-  console.log(data.articleId);
   try {
-    const response = await axios.patch(
-      `/rest-api/update-article/${data.articleId}`,
-      data
-    );
-    console.log(response.data);
+    const response = await axios.post("/rest-api/update-article", data);
+    dispatch({
+      type: "ARTICLE_UPDATE_SUCCESSFUL",
+      payload: {
+        successMessage: response.data.successMessage,
+      },
+    });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: "ARTICLE_UPDATE_FAIL",
+      payload: {
+        errorMessage: error.response.data.errorMessage,
+      },
+    });
   }
 };

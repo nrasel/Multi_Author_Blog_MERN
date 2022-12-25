@@ -50,6 +50,6 @@ router.get("/get-tag-category", admin_middleware, get_tag_category);
 router.post("/article-add", admin_middleware, article_add);
 router.get("/get-article", admin_middleware, article_get);
 router.get("/edit-article/:articleSlug", admin_middleware, article_edit);
-router.patch("/update-article/:articleId", admin_middleware, article_update);
+router.post("/update-article", admin_middleware, article_update);
 
 module.exports = router;
