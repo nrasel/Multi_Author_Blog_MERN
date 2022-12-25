@@ -93,7 +93,7 @@ const DashboardArticle = () => {
                     </div>
                   </div>
                 ))
-              : "Category not found"}
+              : "Article not found"}
           </div>
         </div>
         {articleCount === 0 || articleCount < perPage ? (

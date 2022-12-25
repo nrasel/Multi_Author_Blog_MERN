@@ -1,6 +1,6 @@
 module.exports.article_validator = (data, files) => {
   const { title, category, tag, slug, text } = data;
-  const { mimetype } = files;
+  
 
   let error = {};
   if (!title) {
@@ -19,8 +19,10 @@ module.exports.article_validator = (data, files) => {
     error.text = "Please Provide article text";
   }
 
-  if (Object.keys(files).length === 0) {
-    error.image = "Please Provide article image";
+  if (files) {
+    if (Object.keys(files).length === 0) {
+      error.image = "Please Provide article image";
+    }
   }
 
   if (Object.keys(error).length === 0) {

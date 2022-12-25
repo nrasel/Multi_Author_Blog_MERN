@@ -8,6 +8,7 @@ module.exports.get_tag_category = async (req, res) => {
   try {
     const getTag = await tagModel.find({});
     const getCategory = await categoryModel.find({});
+    // console.log(getTag);
     res.status(200).json({ getTag, getCategory });
   } catch (error) {
     res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
@@ -153,8 +154,8 @@ module.exports.article_edit = async (req, res) => {
     //এখানে ফ্রন্ট এন্ড থেকে পাঠানো স্ল্যাগ এবং ডাটাবেজে ক্রিয়েট করা স্ল্যাগ ম্যাচ করা হচ্ছে
     const getArticle = await articleModel.findOne({ slug: articleSlug });
     if (
-      (getArticle && getArticle.adminId === adminId) ||
-      getArticle.role === role
+      (getArticle && getArticle?.adminId === adminId) ||
+      getArticle?.role === role
     ) {
       res.status(200).json({
         editArticle: getArticle,
@@ -164,5 +165,12 @@ module.exports.article_edit = async (req, res) => {
         errorMessage: { error: "You can't edit this article" },
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errorMessage: { error: "Internal Server Error" } });
+  }
+};
+
+module.exports.article_update = async (req, res) => {
+  
 };

@@ -57,7 +57,6 @@ export const get_all_article =
   };
 
 export const edit_article = (articleSlug) => async (dispatch) => {
-  console.log(articleSlug);
   try {
     const response = await axios.get(`/rest-api/edit-article/${articleSlug}`);
     dispatch({
@@ -69,6 +68,19 @@ export const edit_article = (articleSlug) => async (dispatch) => {
     dispatch({
       type: "EDIT_ARTICLE_REQUEST_SET",
     });
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const update_article = (data) => async (dispatch) => {
+  console.log(data.articleId);
+  try {
+    const response = await axios.patch(
+      `/rest-api/update-article/${data.articleId}`,
+      data
+    );
+    console.log(response.data);
   } catch (error) {
     console.log(error.response.data);
   }

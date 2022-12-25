@@ -24,6 +24,7 @@ const ArticleAdd = ({ history }) => {
     tag: "",
     image: "",
   });
+
   // for slug
   const [slug, setSlug] = useState("");
   // show and hide update button
