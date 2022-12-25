@@ -90,21 +90,21 @@ const Footer = () => {
                       <div className="cate-item">
                         <li>
                           <FaChevronRight />
-                          <Link>Algorithm</Link>
+                          <Link to="/">Algorithm</Link>
                         </li>
                         <span>(4)</span>
                       </div>
                       <div className="cate-item">
                         <li>
                           <FaChevronRight />
-                          <Link>Algorithm</Link>
+                          <Link to="/">Algorithm</Link>
                         </li>
                         <span>(4)</span>
                       </div>
                       <div className="cate-item">
                         <li>
                           <FaChevronRight />
-                          <Link>Algorithm</Link>
+                          <Link to="/">Algorithm</Link>
                         </li>
                         <span>(4)</span>
                       </div>
@@ -116,28 +116,28 @@ const Footer = () => {
                     </div>
                     <ul className="tag-list">
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                       <li className="tag-item">
-                        <Link>Computer</Link>
+                        <Link to="/">Computer</Link>
                       </li>
                     </ul>
                   </div>

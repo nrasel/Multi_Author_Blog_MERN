@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const dbConnect = require("./config/dbConnect");
 const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/Dashboard/dashboardRoutes");
+const homeRoutes = require("./routes/home/homeRoutes");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use("/rest-api", authRoutes);
 app.use("/rest-api", dashboardRoutes);
+app.use("/rest-api", homeRoutes);
 
 // fonfigure
 dotEnv.config({

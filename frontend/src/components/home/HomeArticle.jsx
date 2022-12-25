@@ -1,8 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { get_all_article_home } from "../../store/actions/home/homeAction";
 import Pagination from "./Pagination";
-
 const HomeArticle = () => {
+  const dispatch = useDispatch();
+  const { currentPage } = useParams();
+  
+  useEffect(() => {
+    dispatch(
+      get_all_article_home(currentPage ? currentPage.split("-")[1] : ""),
+      ""
+    );
+  }, [currentPage]);
   return (
     <>
       <div className="home-articles">
