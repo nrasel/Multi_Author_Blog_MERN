@@ -91,7 +91,6 @@ const ArticleAdd = ({ history }) => {
   };
 
   const addArticle = (e) => {
-    e.preventDefault();
     const { title, image, category, tag } = state;
 
     // ইমেজকে স্বাভাবিক অবস্থায় ব্যাকেন্ডে পাঠাতে পারবো না তাই ফরমডাটা ব্যাবহার করতে হবে
@@ -103,6 +102,7 @@ const ArticleAdd = ({ history }) => {
     formData.append("slug", slug);
     formData.append("text", text);
     dispatch(add_article(formData));
+    e.preventDefault();
   };
   const config = {
     readonly: false,

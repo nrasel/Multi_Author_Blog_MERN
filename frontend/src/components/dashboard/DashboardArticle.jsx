@@ -80,42 +80,44 @@ const DashboardArticle = () => {
         </div>
         <div className="height-70vh">
           <div className="articles">
-            {allArticle.length > 0
-              ? allArticle.map((art, index) => (
-                  <div key={index} className="article">
-                    <img
-                      src={`http://localhost:3000/articleImage/${art.image}`}
-                      alt=""
-                    />
-                    <Link to={`/article/details/${art.slug}`}>
-                      {art.title.slice(0, 30)}...
-                    </Link>
-                    <p
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {htmlToText(art.article_text.slice(0, 50))}
-                    </p>
-                    <div className="action">
-                      <span>
-                        <Link to={`/dashboard/article/edit/${art.slug}`}>
-                          <MdEdit />
-                        </Link>
-                      </span>
-                      <span>
-                        <Link to={`/article/details/${art.slug}`}>
-                          <FaRegEye />
-                        </Link>
-                      </span>
-                      <span onClick={() => dispatch(delete_article(art._id))}>
-                        <MdDelete />
-                      </span>
-                    </div>
+            {allArticle.length > 0 ? (
+              allArticle.map((art, index) => (
+                <div key={index} className="article">
+                  <img
+                    src={`http://localhost:3000/articleImage/${art.image}`}
+                    alt=""
+                  />
+                  <Link to={`/article/details/${art.slug}`}>
+                    {art.title.slice(0, 30)}...
+                  </Link>
+                  <p
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {htmlToText(art.article_text.slice(0, 50))}
+                  </p>
+                  <div className="action">
+                    <span>
+                      <Link to={`/dashboard/article/edit/${art.slug}`}>
+                        <MdEdit />
+                      </Link>
+                    </span>
+                    <span>
+                      <Link to={`/article/details/${art.slug}`}>
+                        <FaRegEye />
+                      </Link>
+                    </span>
+                    <span onClick={() => dispatch(delete_article(art._id))}>
+                      <MdDelete />
+                    </span>
                   </div>
-                ))
-              : "Article not found"}
+                </div>
+              ))
+            ) : (
+              <h3>Article not found</h3>
+            )}
           </div>
         </div>
         {articleCount === 0 || articleCount < perPage ? (
