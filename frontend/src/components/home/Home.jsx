@@ -16,7 +16,6 @@ const Home = ({ history }) => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
   const { allTag, allCategory } = useSelector((state) => state.homeReducer);
-  console.log(allTag);
 
   const nav = useRef();
 
@@ -147,7 +146,7 @@ const Home = ({ history }) => {
                   <ul>
                     {allTag.length > 0
                       ? allTag.map((t, index) => (
-                          <li>
+                          <li key={index}>
                             <Link to="/article/tag/programming">{t}</Link>
                           </li>
                         ))

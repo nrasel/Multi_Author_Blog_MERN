@@ -56,7 +56,7 @@ module.exports.home_tag_category_get = async (req, res) => {
         },
       },
     ]);
-    console.log(getCategory);
+
     // এখানে সেম নামে ট্যাগ গুলা থেকে একটা ইউনিক ট্যাগ নিবো সেই জন্য মংগোজ এর বিল্ট ইন কুয়েরি ইউজ করছি
     const getTag = await articleModel.distinct("tag");
     return res.status(200).json({
@@ -70,4 +70,31 @@ module.exports.home_tag_category_get = async (req, res) => {
       },
     });
   }
+};
+
+module.exports.old_recent_article_get = async (req, res) => {
+  try {
+    // olda article get
+    const oldArticle = await articleModel.aggregate([
+      {
+        // কোন কিছু ম্যাচ করাতে হবে না তাই এইটা এম্পটি
+        $match: {},
+      },
+      {
+        // কইটা দেখাবো সেই জন্য স্যাম্পল নেওয়া
+        $sample: {
+          size: 3,
+        },
+      },
+    ]);
+
+    const recentArticle = await articleModel
+      .find({})
+      .limit(3)
+      .sort({ createdAt: -1 });
+    return res.status(200).json({
+      oldArticle,
+      recentArticle,
+    });
+  } catch (error) {}
 };

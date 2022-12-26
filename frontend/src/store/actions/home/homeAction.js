@@ -35,3 +35,14 @@ export const get_home_tag_category = () => async (dispatch) => {
     console.log(error.response.data);
   }
 };
+
+export const get_old_recent_article = () => async (dispatch) => {
+  const response = await axios.get("/rest-api/article/recent-old-get");
+  dispatch({
+    type:'GET_OLD_RECENT_ARTICLE',
+    payload:{
+      oldArticle:response.data.oldArticle,
+      recentArticle:response.data.recentArticle
+    }
+  })
+};
