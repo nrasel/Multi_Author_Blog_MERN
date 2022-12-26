@@ -50,7 +50,7 @@ module.exports.home_tag_category_get = async (req, res) => {
       {
         $group: {
           _id: "$category",
-          cout: {
+          count: {
             $sum: 1,
           },
         },

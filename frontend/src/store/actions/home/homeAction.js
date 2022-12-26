@@ -24,6 +24,13 @@ export const get_home_tag_category = () => async (dispatch) => {
   try {
     const response = await axios.get("/rest-api/home/get-tag-category");
     console.log(response.data);
+    dispatch({
+      type: "HOME_TAG_CATEGORY_GET",
+      payload: {
+        homeTag: response.data.allTag,
+        homeCategory: response.data.allCategory,
+      },
+    });
   } catch (error) {
     console.log(error.response.data);
   }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowUp, FaChevronRight } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
 import { get_home_tag_category } from "../../store/actions/home/homeAction";
 import ArticleDetails from "./ArticleDetails";
@@ -15,6 +15,8 @@ import TagArticle from "./TagArticle";
 const Home = ({ history }) => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
+  const { allTag, allCategory } = useSelector((state) => state.homeReducer);
+  console.log(allTag);
 
   const nav = useRef();
 
@@ -123,27 +125,19 @@ const Home = ({ history }) => {
                     <h3>Category</h3>
                   </div>
                   <ul className="cate-list">
-                    <div className="cate-item">
-                      <li>
-                        <FaChevronRight />
-                        <Link to="/article/category/algorithm">Algorithm</Link>
-                      </li>
-                      <span>(5)</span>
-                    </div>
-                    <div className="cate-item">
-                      <li>
-                        <FaChevronRight />
-                        <Link to="/article/category/algorithm">Algorithm</Link>
-                      </li>
-                      <span>(5)</span>
-                    </div>
-                    <div className="cate-item">
-                      <li>
-                        <FaChevronRight />
-                        <Link to="/article/category/algorithm">Algorithm</Link>
-                      </li>
-                      <span>(5)</span>
-                    </div>
+                    {allCategory.length
+                      ? allCategory.map((c, index) => (
+                          <div key={index} className="cate-item">
+                            <li>
+                              <FaChevronRight />
+                              <Link to="/article/category/algorithm">
+                                {c._id}
+                              </Link>
+                            </li>
+                            <span>({c.count})</span>
+                          </div>
+                        ))
+                      : ""}
                   </ul>
                 </div>
                 <div className="tag">
@@ -151,18 +145,13 @@ const Home = ({ history }) => {
                     <h3>Tag</h3>
                   </div>
                   <ul>
-                    <li>
-                      <Link to="/article/tag/programming">Programming</Link>
-                    </li>
-                    <li>
-                      <Link to="/article/tag/programming">Programming</Link>
-                    </li>
-                    <li>
-                      <Link to="/article/tag/programming">Programming</Link>
-                    </li>
-                    <li>
-                      <Link to="/article/tag/programming">Programming</Link>
-                    </li>
+                    {allTag.length > 0
+                      ? allTag.map((t, index) => (
+                          <li>
+                            <Link to="/article/tag/programming">{t}</Link>
+                          </li>
+                        ))
+                      : ""}
                   </ul>
                 </div>
               </div>
