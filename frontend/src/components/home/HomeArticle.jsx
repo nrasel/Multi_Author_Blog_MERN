@@ -7,7 +7,9 @@ import { get_all_article_home } from "../../store/actions/home/homeAction";
 import Pagination from "./Pagination";
 const HomeArticle = () => {
   const dispatch = useDispatch();
-  const { allArticle } = useSelector((state) => state.homeReducer);
+  const { allArticle, perPage, articleCount } = useSelector(
+    (state) => state.homeReducer
+  );
 
   const { currentPage } = useParams();
 
@@ -65,7 +67,14 @@ const HomeArticle = () => {
             ))
           : ""}
       </div>
-      <Pagination />
+      {perPage < articleCount ? (
+        <Pagination
+          pageNumber={currentPage ? currentPage.split("-")[1] : 1}
+          perPage={perPage}
+          itemCount={articleCount}
+          path="/article"
+        />
+      ) : null}
     </>
   );
 };

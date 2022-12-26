@@ -1,7 +1,6 @@
 const articleModel = require("../../models/articleModel");
 
 module.exports.home_article_get = async (req, res) => {
-  console.log(req.query);
   let { currentPage, searchValue } = req.query;
   currentPage = parseInt(currentPage);
 

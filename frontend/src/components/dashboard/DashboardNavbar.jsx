@@ -25,7 +25,7 @@ const DashboardNavbar = () => {
         </div>
         <div className="dashboard-navbar-right-side">
           <h2>
-            <Link to="/dashboard">
+            <Link to="/">
               <span>View Site</span>
             </Link>
           </h2>
