@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaArrowUp, FaChevronRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
+import { get_home_tag_category } from "../../store/actions/home/homeAction";
 import ArticleDetails from "./ArticleDetails";
 import CategoryArticle from "./CategoryArticle";
 import CreateAt from "./CreateAt";
@@ -12,6 +14,8 @@ import TagArticle from "./TagArticle";
 
 const Home = ({ history }) => {
   const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+
   const nav = useRef();
 
   const search = (e) => {
@@ -21,6 +25,11 @@ const Home = ({ history }) => {
   const scrollTop = () => {
     nav.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    dispatch(get_home_tag_category());
+  }, []);
+
   return (
     <div className="home">
       <Navbar nav={nav} />
