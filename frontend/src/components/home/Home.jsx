@@ -129,7 +129,12 @@ const Home = ({ history }) => {
                           <div key={index} className="cate-item">
                             <li>
                               <FaChevronRight />
-                              <Link to="/article/category/algorithm">
+                              <Link
+                                to={`/article/category/${c._id
+                                  .trim()
+                                  .split(" ")
+                                  .join("-")}`}
+                              >
                                 {c._id}
                               </Link>
                             </li>

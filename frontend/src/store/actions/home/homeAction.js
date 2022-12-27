@@ -23,7 +23,7 @@ export const get_all_article_home =
 export const get_home_tag_category = () => async (dispatch) => {
   try {
     const response = await axios.get("/rest-api/home/get-tag-category");
-    console.log(response.data);
+
     dispatch({
       type: "HOME_TAG_CATEGORY_GET",
       payload: {
@@ -39,10 +39,26 @@ export const get_home_tag_category = () => async (dispatch) => {
 export const get_old_recent_article = () => async (dispatch) => {
   const response = await axios.get("/rest-api/article/recent-old-get");
   dispatch({
-    type:'GET_OLD_RECENT_ARTICLE',
-    payload:{
-      oldArticle:response.data.oldArticle,
-      recentArticle:response.data.recentArticle
-    }
-  })
+    type: "GET_OLD_RECENT_ARTICLE",
+    payload: {
+      oldArticle: response.data.oldArticle,
+      recentArticle: response.data.recentArticle,
+    },
+  });
 };
+
+export const get_home_category =
+  (categoyrSlug, currentPage) => async (dispatch) => {
+    console.log(categoyrSlug, currentPage);
+    try {
+      const response = await axios.get(
+        `/rest-api/get-home-category?categorySlug=${categoyrSlug}&&currentPage=${currentPage}`
+      );
+      dispatch({
+        type:'CAT_ARTICLE_GET_SUCCESS',
+        
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };

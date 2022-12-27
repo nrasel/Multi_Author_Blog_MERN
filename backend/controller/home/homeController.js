@@ -98,3 +98,26 @@ module.exports.old_recent_article_get = async (req, res) => {
     });
   } catch (error) {}
 };
+
+module.exports.home_category_get = async (req, res) => {
+  const { currentPage, categorySlug } = req.query;
+  const perPage = 2;
+  const skipPage = parseInt(currentPage - 1) * perPage;
+
+  try {
+    const countArticle = await articleModel
+      .find({ category_slug: categorySlug })
+      .countDocuments();
+    const articles = await articleModel
+      .find({ category_slug: categorySlug })
+      .skip(skipPage)
+      .limit(perPage)
+      .sort({ createAt: -1 });
+    console.log(articles);
+    return res.status(200).json({
+      categoryArticle: articles,
+      perPage,
+      countCatArticle: countArticle,
+    });
+  } catch (error) {}
+};
