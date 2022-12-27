@@ -40,7 +40,7 @@ export const homeReducer = (state = initState, action) => {
       ...state,
       categoryArticle: payload.categoryArticle,
       perPage: payload.perPage,
-      articleCount: payload.countTagArticle,
+      articleCount: payload.countCatArticle,
     };
   }
   if (type === "TAG_ARTICLE_GET_SUCCESS") {

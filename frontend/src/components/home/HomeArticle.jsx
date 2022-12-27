@@ -65,7 +65,7 @@ const HomeArticle = () => {
                 </div>
               </div>
             ))
-          : ""}
+          : "Article not found"}
       </div>
       {perPage < articleCount ? (
         <Pagination

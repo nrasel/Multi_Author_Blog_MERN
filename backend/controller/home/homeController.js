@@ -119,7 +119,7 @@ module.exports.home_category_get = async (req, res) => {
       .skip(skipPage)
       .limit(perPage)
       .sort({ createAt: -1 });
-    console.log(articles);
+
     return res.status(200).json({
       categoryArticle: articles,
       perPage,
