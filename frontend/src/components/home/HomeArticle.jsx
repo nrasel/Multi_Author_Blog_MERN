@@ -18,7 +18,7 @@ const HomeArticle = () => {
       get_all_article_home(currentPage ? currentPage.split("-")[1] : ""),
       ""
     );
-  }, [currentPage]);
+  }, [dispatch, currentPage]);
   return (
     <>
       <div className="home-articles">

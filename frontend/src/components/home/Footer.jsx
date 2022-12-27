@@ -105,7 +105,7 @@ const Footer = () => {
               </div>
               {recentArticle.length > 0 &&
                 recentArticle.map((recentArt, index) => (
-                  <div className="some-recent-article">
+                  <div key={index} className="some-recent-article">
                     <div className="row">
                       <div className="col-4">
                         <div className="img">

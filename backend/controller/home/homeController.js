@@ -64,7 +64,7 @@ module.exports.home_tag_category_get = async (req, res) => {
       allTag: getTag,
     });
   } catch (error) {
-    return res.status(200).json({
+    return res.status(500).json({
       errorMessage: {
         error: "Internal Server Error",
       },
@@ -96,7 +96,13 @@ module.exports.old_recent_article_get = async (req, res) => {
       oldArticle,
       recentArticle,
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
 };
 
 module.exports.home_category_get = async (req, res) => {
@@ -119,5 +125,39 @@ module.exports.home_category_get = async (req, res) => {
       perPage,
       countCatArticle: countArticle,
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
+};
+
+module.exports.home_tag_get = async (req, res) => {
+  const { tagSlug, currentPage } = req.query;
+  const perPage = 2;
+  const skipPage = parseInt(currentPage - 1) * perPage;
+  try {
+    const countTagArticle = await articleModel
+      .find({ tag_slug: tagSlug })
+      .countDocuments();
+    const articles = await articleModel
+      .find({ tag_slug: tagSlug })
+      .skip(skipPage)
+      .limit(perPage)
+      .sort({ createAt: -1 });
+
+    return res.status(200).json({
+      tagArticle: articles,
+      perPage,
+      countTagArticle: countTagArticle,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
 };

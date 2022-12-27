@@ -58,9 +58,29 @@ export const get_home_category =
         type: "CAT_ARTICLE_GET_SUCCESS",
         payload: {
           categoryArticle: response.data.categoryArticle,
+          perPage: response.data.perPage,
+          countCatArticle: response.data.countCatArticle,
         },
       });
     } catch (error) {
       console.log(error);
     }
   };
+
+export const get_home_tag = (tagSlug, currentPage) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `/rest-api/get-tag-article/?tagSlug=${tagSlug}&&currentPage=${currentPage}`
+    );
+    dispatch({
+      type: "TAG_ARTICLE_GET_SUCCESS",
+      payload: {
+        tagArticle: response.data.tagArticle,
+        perPage: response.data.perPage,
+        countTagArticle: response.data.countTagArticle,
+      },
+    });
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};

@@ -7,6 +7,7 @@ const initState = {
   oldArticle: [],
   recentArticle: [],
   categoryArticle: [],
+  tagArticle: [],
 };
 
 export const homeReducer = (state = initState, action) => {
@@ -38,6 +39,16 @@ export const homeReducer = (state = initState, action) => {
     return {
       ...state,
       categoryArticle: payload.categoryArticle,
+      perPage: payload.perPage,
+      articleCount: payload.countTagArticle,
+    };
+  }
+  if (type === "TAG_ARTICLE_GET_SUCCESS") {
+    return {
+      ...state,
+      tagArticle: payload.tagArticle,
+      articleCount: payload.countTagArticle,
+      perPage: payload.perPage,
     };
   }
   return state;
