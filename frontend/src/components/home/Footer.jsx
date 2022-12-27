@@ -60,7 +60,12 @@ const Footer = () => {
                             <div key={index} className="cate-item">
                               <li>
                                 <FaChevronRight />
-                                <Link to={`/article/category/${c._id}`}>
+                                <Link
+                                  to={`/article/category/${c._id
+                                    .trim()
+                                    .split(" ")
+                                    .join("-")}`}
+                                >
                                   {c._id}
                                 </Link>
                               </li>
@@ -78,7 +83,14 @@ const Footer = () => {
                       {allTag.length > 0
                         ? allTag.map((t, index) => (
                             <li className="tag-item" key={index}>
-                              <Link to="/article/tag/programming">{t}</Link>
+                              <Link
+                                to={`/article/tag/${t
+                                  .trim()
+                                  .split(" ")
+                                  .join("-")}`}
+                              >
+                                {t}
+                              </Link>
                             </li>
                           ))
                         : ""}

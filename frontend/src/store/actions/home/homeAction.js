@@ -55,9 +55,11 @@ export const get_home_category =
         `/rest-api/get-home-category?categorySlug=${categoyrSlug}&&currentPage=${currentPage}`
       );
       dispatch({
-        type:'CAT_ARTICLE_GET_SUCCESS',
-        
-      })
+        type: "CAT_ARTICLE_GET_SUCCESS",
+        payload: {
+          categoryArticle: response.data.categoryArticle,
+        },
+      });
     } catch (error) {
       console.log(error);
     }

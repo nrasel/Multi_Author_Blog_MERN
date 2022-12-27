@@ -161,13 +161,15 @@
                 display: flex;
                 flex-wrap: wrap;
                 grid-gap: 10px;
+                justify-content: center;
+                align-items: center;
                 li {
                   padding: 5px 8px;
                   background-color: #4caf50;
                   transition: all 0.5s;
                   border-radius: 2px;
                   font-weight: 400;
-                  width: 100%;
+                  // width: 100%;
                   text-align: center;
                   a {
                     color: #fff;

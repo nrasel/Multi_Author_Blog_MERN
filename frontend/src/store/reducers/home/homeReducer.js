@@ -6,6 +6,7 @@ const initState = {
   allCategory: [],
   oldArticle: [],
   recentArticle: [],
+  categoryArticle: [],
 };
 
 export const homeReducer = (state = initState, action) => {
@@ -31,6 +32,12 @@ export const homeReducer = (state = initState, action) => {
       ...state,
       oldArticle: payload.oldArticle,
       recentArticle: payload.recentArticle,
+    };
+  }
+  if (type === "CAT_ARTICLE_GET_SUCCESS") {
+    return {
+      ...state,
+      categoryArticle: payload.categoryArticle,
     };
   }
   return state;

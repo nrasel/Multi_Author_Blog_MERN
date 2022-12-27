@@ -151,9 +151,12 @@ const Home = ({ history }) => {
                   <ul>
                     {allTag.length > 0
                       ? allTag.map((t, index) => (
-                          <li key={index}>
-                            <Link to="/article/tag/programming">{t}</Link>
-                          </li>
+                          <>
+                            <li key={index}>
+                              <Link to="/article/tag/programming">{t}</Link>
+                            </li>
+                            
+                          </>
                         ))
                       : ""}
                   </ul>
