@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsAt } from "react-icons/bs";
 import { FaLock, FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { register } from "../../store/actions/authAction";
 import Navbar from "../home/Navbar";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { authenticate, errorMessage, successMessage, loader } = useSelector(
+    (state) => state.adminReducer
+  );
+  const [state, setState] = useState({
+    name: "",
+    email: "",
+    password: "",
+    image: "",
+  });
+
+  const [showImage, setShowImage] = useState("");
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const imageHadle = (e) => {
+    if (e.target.files.length !== 0) {
+      setState({
+        ...state,
+        image: e.target.files[0],
+      });
+      const render = new FileReader();
+      render.onload = () => {
+        setShowImage(render.result);
+      };
+      render.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", state.name);
+    formData.append("email", state.email);
+    formData.append("password", state.password);
+    formData.append("image", state.image);
+    dispatch(register(formData));
+  };
+
   return (
     <>
       <Navbar />
@@ -12,7 +58,7 @@ const Register = () => {
         <div className="card">
           <div className="auth">
             <h3>Register</h3>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="userName">User Name</label>
                 <div className="icon-input">
@@ -20,6 +66,8 @@ const Register = () => {
                     <FaUser />
                   </div>
                   <input
+                    onChange={inputHandle}
+                    value={state.name}
                     type="text"
                     className="form-control"
                     name="name"
@@ -35,6 +83,8 @@ const Register = () => {
                     <BsAt />
                   </div>
                   <input
+                    onChange={inputHandle}
+                    value={state.value}
                     type="email"
                     className="form-control"
                     name="email"
@@ -50,6 +100,8 @@ const Register = () => {
                     <FaLock />
                   </div>
                   <input
+                    onChange={inputHandle}
+                    value={state.password}
                     type="password"
                     className="form-control"
                     name="password"
@@ -59,11 +111,19 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-group">
-                <input hidden type="file" name="image" id="reg-image" />
+                <input
+                  onChange={imageHadle}
+                  hidden
+                  type="file"
+                  name="image"
+                  id="reg-image"
+                />
                 <div className="image-file">
-                  <div className="image"></div>
+                  <div className="image">
+                    {showImage && <img src={`${showImage}`} alt="" />}
+                  </div>
                   <div className="file-name">
-                    <div className="form-control"></div>
+                    <div className="form-control">{state?.image?.name}</div>
                     <label className="browser" htmlFor="reg-image">
                       Browser
                     </label>
