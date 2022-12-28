@@ -213,6 +213,26 @@ module.exports.details_artcle = async (req, res) => {
         },
       },
     ]);
-    console.log(readMoreArticle);
-  } catch (error) {}
+    const moreTag = await articleModel.distinct("tag_slug", {
+      tag_slug: {
+        $ne: readArticle.tag_slug,
+      },
+    });
+
+    return res.status(200).json({
+      readArticle,
+      relatedArticle,
+      readMoreArticle: {
+        title: readMoreArticle.length > 0 ? readMoreArticle[0].title : "",
+        slug: readMoreArticle.length > 0 ? readMoreArticle[0].slug : "",
+      },
+      moreTag,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
 };
