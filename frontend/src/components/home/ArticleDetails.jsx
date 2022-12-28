@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillDislike, AiFillLike, AiFillTag } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { get_article_details } from "../../store/actions/home/articleReadAction";
 import Comment from "./Comment";
 
 const ArticleDetails = () => {
+  const { slug } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(get_article_details(slug));
+  }, [dispatch, slug]);
   return (
     <div className="article-details">
       <div className="path">

@@ -4,6 +4,7 @@ const {
   old_recent_article_get,
   home_category_get,
   home_tag_get,
+  details_artcle,
 } = require("../../controller/home/homeController");
 
 const router = require("express").Router();
@@ -14,5 +15,6 @@ router.get("/article/recent-old-get", old_recent_article_get);
 
 router.get("/get-home-category", home_category_get);
 router.get("/get-tag-article", home_tag_get);
+router.get("/article-details/:articleSlug", details_artcle);
 
 module.exports = router;

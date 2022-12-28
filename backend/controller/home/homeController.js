@@ -161,3 +161,58 @@ module.exports.home_tag_get = async (req, res) => {
     });
   }
 };
+
+module.exports.details_artcle = async (req, res) => {
+  const { articleSlug } = req.params;
+
+  try {
+    const readArticle = await articleModel.findOne({ slug: articleSlug });
+    const relatedArticle = await articleModel.aggregate([
+      {
+        $match: {
+          $and: [
+            {
+              category_slug: {
+                $eq: readArticle.category_slug,
+              },
+            },
+            {
+              slug: {
+                $ne: articleSlug,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $sample: {
+          size: 3,
+        },
+      },
+    ]);
+    const readMoreArticle = await articleModel.aggregate([
+      {
+        $match: {
+          $and: [
+            {
+              category_slug: {
+                $eq: readArticle.category_slug,
+              },
+            },
+            {
+              slug: {
+                $ne: articleSlug,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $sample: {
+          size: 1,
+        },
+      },
+    ]);
+    console.log(readMoreArticle);
+  } catch (error) {}
+};
