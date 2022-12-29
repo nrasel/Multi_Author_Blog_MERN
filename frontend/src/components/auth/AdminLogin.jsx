@@ -32,10 +32,6 @@ const AdminLogin = ({ history }) => {
     if (authenticate) {
       history.push("/dashboard");
     }
-    if (successMessage) {
-      toast.success(successMessage);
-      dispatch({ type: "LOGIN_SUCCESS_CLEAR" });
-    }
   }, [authenticate, dispatch, successMessage, history]);
 
   // show the error

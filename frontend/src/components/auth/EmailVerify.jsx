@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { email_verify } from "../../store/actions/authAction";
 import Navbar from "../home/Navbar";
 
-function EmailVerify() {
+function EmailVerify({ history }) {
   const dispatch = useDispatch();
-  const { errorMessage, successMessage, loader } = useSelector(
+  const { errorMessage, successMessage, loader, authenticate } = useSelector(
     (state) => state.adminReducer
   );
+  console.log(errorMessage);
   const [otp, setOtp] = useState("");
+  useEffect(() => {
+    if (authenticate) {
+      history.push("/dashboard");
+    }
+  }, [successMessage, errorMessage]);
   return (
     <div className="verify-email">
       <Navbar />

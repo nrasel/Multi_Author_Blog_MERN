@@ -9,7 +9,7 @@ import Navbar from "../home/Navbar";
 
 const Register = ({ history }) => {
   const dispatch = useDispatch();
-  const { errorMessage, successMessage, loader } = useSelector(
+  const { authenticate, errorMessage, successMessage, loader } = useSelector(
     (state) => state.adminReducer
   );
   const [state, setState] = useState({
@@ -53,6 +53,9 @@ const Register = ({ history }) => {
   };
 
   useEffect(() => {
+    if (authenticate) {
+      history.push("/dashboard");
+    }
     if (successMessage) {
       history.push("/register/email-verify");
       if (errorMessage.error) {
@@ -62,7 +65,7 @@ const Register = ({ history }) => {
         });
       }
     }
-  }, [dispatch, successMessage, errorMessage?.error]);
+  }, [dispatch, successMessage, errorMessage?.error, authenticate]);
 
   useEffect(() => {
     dispatch({

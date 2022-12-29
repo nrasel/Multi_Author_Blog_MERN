@@ -122,7 +122,7 @@ module.exports.user_register = async (req, res) => {
               to: email,
               subject: "Sending email mern blog",
               text: `${name} your OTP Code ${otp}`,
-              html: `<div style={{padding:'10px}}><h3>Your otp code ${otp}</h3></div>`,
+              html: `<div style={{padding:'10px}}><h3>Your otp code : ${otp}</h3></div>`,
             };
             transporter.sendMail(mailOption, async (error, info) => {
               if (error) {
@@ -169,7 +169,9 @@ module.exports.verify_email = async (req, res) => {
   const { otp } = req.body;
   const { emailVerify_token } = req.cookies;
   if (!otp) {
-    res.status(404).json({ errorMessage: "Please provide your otp" });
+    res
+      .status(404)
+      .json({ errorMessage: { error: "Please provide your otp" } });
   } else {
     const { name, email, password, otpCode, imageInfo } = await jwt.verify(
       emailVerify_token,
@@ -194,10 +196,40 @@ module.exports.verify_email = async (req, res) => {
               password: await bcrypt.hash(password, 10),
               image: `http://localhost:3000/userImage/${imageName}`,
             });
-            console.log(creatUser);
+            // make toke using user info
+            const token = jwt.sign(
+              {
+                id: creatUser._id,
+                email: creatUser.email,
+                name: creatUser.userName,
+                image: creatUser.image,
+                role: creatUser.role,
+                loginMethod: creatUser.loginMethod,
+                accessStatus: creatUser.accessStatus,
+                createdAt: creatUser.createdAt,
+              },
+              process.env.SECRET,
+              {
+                expiresIn: process.env.TOKEN_EXP,
+              }
+            );
+            const option = {
+              expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+            };
+
+            // ekhane muloto otp send korar jonno jei cookie set kora hoise seita remove kora hoise browser the and pore user registration er jonno cookie set kora hobe
+            res.clearCookie("emailVerify_token");
+            res
+              .status(201)
+              .cookie("blog_token", token, option)
+              .json({ successMessage: "Your register successfull", token });
           }
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
   }
 };

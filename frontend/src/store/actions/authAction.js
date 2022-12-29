@@ -8,6 +8,7 @@ export const admin_login = (data) => async (dispatch) => {
 
   try {
     const response = await axios.post("/rest-api/admin-login", data);
+    console.log(response);
     localStorage.setItem("blog_token", response.data.token);
     dispatch({
       type: "LOGIN_SUCCESS",
@@ -44,10 +45,21 @@ export const register = (data) => async (dispatch) => {
   }
 };
 export const email_verify = (otp) => async (dispatch) => {
-  dispatch({type:'LOADER_RUN'})
-  console.log(otp);
+  dispatch({ type: "LOADER_RUN" });
+
   try {
     const response = await axios.post(`/rest-api/verify-email`, { otp });
-    console.log(response.data);
-  } catch (error) {}
+  
+
+    localStorage.setItem("blog_token", response.data.token);
+    dispatch({
+      type: "REGISTER_SUCCESS",
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "REGISTER_ERROR",
+      payload: error.response.data.errorMessage,
+    });
+  }
 };

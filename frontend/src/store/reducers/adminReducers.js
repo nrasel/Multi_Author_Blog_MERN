@@ -37,14 +37,13 @@ export const adminReducer = (state = initState, action) => {
       loader: true,
     };
   }
-  if (type === "LOGIN_SUCCESS") {
+  if (type === "LOGIN_SUCCESS" || type === "REGISTER_SUCCESS") {
     return {
       ...state,
       loader: false,
       authenticate: true,
       errorMessage: "",
       userInfo: DT(payload.token),
-      successMessage: payload.successMessage,
     };
   }
   if (type === "LOGIN_SUCCESS_CLEAR") {
