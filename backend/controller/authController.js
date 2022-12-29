@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const formidable = require("formidable");
 const adminModel = require("../models/adminModel");
+const userModel = require("../models/userModel");
+const nodeMailer = require("nodemailer");
 
 module.exports.admin_login = async (req, res) => {
   // first of all req.body showed undefined. solve this problem we use body parser
@@ -75,7 +77,7 @@ module.exports.admin_login = async (req, res) => {
 
 module.exports.user_register = async (req, res) => {
   const formData = formidable();
-  formData.parse(req, (err, fields, files) => {
+  formData.parse(req, async (err, fields, files) => {
     if (err) {
       return res
         .status(500)
@@ -99,6 +101,39 @@ module.exports.user_register = async (req, res) => {
         errorData.image = "Please provide your image";
       }
       if (Object.keys(errorData).length === 0) {
+        try {
+          const getUser = await userModel.findOne({ email });
+          if (getUser) {
+            return res
+              .status(500)
+              .json({ errorMessage: { error: "Your email already used" } });
+          } else {
+            const otp = Math.floor(Math.random() * 100000 + 345678);
+            const transporter = nodeMailer.createTransport({
+              service: "Gmail",
+              auth: {
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASSWORD,
+              },
+            });
+            const mailOption = {
+              from: process.env.USER_EMAIL,
+              to: email,
+              subject: "Sending email mern blog",
+              text: `${name} your OTP Code ${otp}`,
+              html: `<div style={{padding:'10px}}><h3>Your otp code ${otp}</h3></div>`,
+            };
+            transporter.sendMail(mailOption, (error, info) => {
+              if (error) {
+                return res
+                  .status(500)
+                  .json({ errorMessage: { error: "Something went't wrong" } });
+              } else {
+                console.log("otp send success");
+              }
+            });
+          }
+        } catch (error) {}
       } else {
         return res.status(400).json({ errorMessage: errorData });
       }
