@@ -1,7 +1,9 @@
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const formidable = require("formidable");
 const adminModel = require("../models/adminModel");
+
 module.exports.admin_login = async (req, res) => {
   // first of all req.body showed undefined. solve this problem we use body parser
   // body parser mainly handle json data.
@@ -69,4 +71,37 @@ module.exports.admin_login = async (req, res) => {
         .json({ errorMessage: { error: "Internal Server Error" } });
     }
   }
+};
+
+module.exports.user_register = async (req, res) => {
+  const formData = formidable();
+  formData.parse(req, (err, fields, files) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ errorMessage: { error: "form data parse failed" } });
+    } else {
+      const { name, email, password } = fields;
+      const errorData = {};
+      if (!name) {
+        errorData.name = "Please provide your name";
+      }
+      if (!email) {
+        errorData.email = "Please provide your email";
+      }
+      if (email && !validator.isEmail(email)) {
+        errorData.email = "Please provide valid email";
+      }
+      if (!password) {
+        errorData.password = "Please provide your password";
+      }
+      if (Object.keys(files).length === 0) {
+        errorData.image = "Please provide your image";
+      }
+      if (Object.keys(errorData).length === 0) {
+      } else {
+        return res.status(400).json({ errorMessage: errorData });
+      }
+    }
+  });
 };

@@ -28,7 +28,7 @@ export const admin_login = (data) => async (dispatch) => {
 
 export const register = (data) => async (dispatch) => {
   try {
-    const response = await axios.post("/rest-api/register");
+    const response = await axios.post("/rest-api/register", data);
     console.log(response.data);
   } catch (error) {
     console.log(error.response.data);
