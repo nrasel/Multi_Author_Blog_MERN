@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { BsAt } from "react-icons/bs";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import Navbar from "../home/Navbar";
 
 const Register = ({ history }) => {
   const dispatch = useDispatch();
-  const { authenticate, errorMessage, successMessage, loader } = useSelector(
+  const { errorMessage, successMessage, loader } = useSelector(
     (state) => state.adminReducer
   );
   const [state, setState] = useState({
@@ -57,14 +57,32 @@ const Register = ({ history }) => {
       history.push("/register/email-verify");
       if (errorMessage.error) {
         toast.error(errorMessage?.error);
+        dispatch({
+          type: "REGISTER_ERROR_CLEAR",
+        });
       }
     }
   }, [dispatch, successMessage, errorMessage?.error]);
+
+  useEffect(() => {
+    dispatch({
+      type: "REGISTER_ERROR_CLEAR",
+    });
+  }, []);
 
   return (
     <>
       <Navbar />
       <div className="register">
+        <Toaster
+          position={"top-center"}
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              fontSize: "15px",
+            },
+          }}
+        />
         <div className="card">
           <div className="auth">
             <h3>Register</h3>
@@ -85,6 +103,7 @@ const Register = ({ history }) => {
                     placeholder="User Name"
                   />
                 </div>
+                <p>{errorMessage?.name}</p>
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -102,6 +121,7 @@ const Register = ({ history }) => {
                     placeholder="Your Email"
                   />
                 </div>
+                <p>{errorMessage?.email}</p>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -119,6 +139,7 @@ const Register = ({ history }) => {
                     placeholder="Password"
                   />
                 </div>
+                <p>{errorMessage?.password}</p>
               </div>
               <div className="form-group">
                 <input
@@ -139,6 +160,7 @@ const Register = ({ history }) => {
                     </label>
                   </div>
                 </div>
+                <p>{errorMessage?.image}</p>
               </div>
               <div className="form-group">
                 {loader ? (

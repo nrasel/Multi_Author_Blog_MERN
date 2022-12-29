@@ -37,6 +37,17 @@ export const register = (data) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: "REGISTER_ERROR",
+      payload: error.response.data.errorMessage,
+    });
   }
+};
+export const email_verify = (otp) => async (dispatch) => {
+  dispatch({type:'LOADER_RUN'})
+  console.log(otp);
+  try {
+    const response = await axios.post(`/rest-api/verify-email`, { otp });
+    console.log(response.data);
+  } catch (error) {}
 };

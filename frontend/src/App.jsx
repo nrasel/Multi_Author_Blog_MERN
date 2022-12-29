@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AdminLogin from "./components/auth/AdminLogin";
+import EmailVerify from "./components/auth/EmailVerify";
 import Login from "./components/auth/Login";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import Register from "./components/auth/Register";
@@ -12,6 +13,7 @@ function App() {
         {/* for user component route which just visit user*/}
         <Route path="/" component={Home} exact />
         <Route path="/register" component={Register} exact />
+        <Route path="/register/email-verify" component={EmailVerify} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/admin/login" component={AdminLogin} exact />
         {/*  article show for pagination route */}

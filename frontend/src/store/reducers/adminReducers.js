@@ -64,7 +64,7 @@ export const adminReducer = (state = initState, action) => {
     };
   }
 
-  if (type === "LOGIN_ERROR_CLEAR") {
+  if (type === "LOGIN_ERROR_CLEAR" || type === "REGISTER_ERROR_CLEAR") {
     return {
       ...state,
       errorMessage: "",
@@ -75,6 +75,13 @@ export const adminReducer = (state = initState, action) => {
     return {
       ...state,
       successMessage: payload.successMessage,
+      loader: false,
+    };
+  }
+  if (type === "REGISTER_ERROR") {
+    return {
+      ...state,
+      errorMessage: payload,
       loader: false,
     };
   }

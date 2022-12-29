@@ -1,3 +1,25 @@
+.verify-email {
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  .verify {
+    height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .otp {
+      background-color: #fff;
+      padding: 10px;
+      width: 380px;
+      border-radius: 5px;
+
+      button {
+        color: #fff;
+        background-color: #fa5c7c;
+      }
+    }
+  }
+}
 .register,
 .login,
 .admin_login {
@@ -99,6 +121,9 @@
     }
     form {
       .form-group {
+        p {
+          color: red;
+        }
         .icon-input {
           position: relative;
           display: flex;
