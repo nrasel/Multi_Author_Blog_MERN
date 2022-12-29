@@ -5,6 +5,7 @@ const formidable = require("formidable");
 const adminModel = require("../models/adminModel");
 const userModel = require("../models/userModel");
 const nodeMailer = require("nodemailer");
+const fs = require("fs");
 
 module.exports.admin_login = async (req, res) => {
   // first of all req.body showed undefined. solve this problem we use body parser
@@ -123,7 +124,7 @@ module.exports.user_register = async (req, res) => {
               text: `${name} your OTP Code ${otp}`,
               html: `<div style={{padding:'10px}}><h3>Your otp code ${otp}</h3></div>`,
             };
-            transporter.sendMail(mailOption, (error, info) => {
+            transporter.sendMail(mailOption, async (error, info) => {
               if (error) {
                 return res.status(500).json({
                   errorMessage: {
@@ -141,7 +142,7 @@ module.exports.user_register = async (req, res) => {
                   },
                   process.env.SECRET,
                   {
-                    expiresIn: process.env.COOKIE_EXP,
+                    expiresIn: process.env.TOKEN_EXP,
                   }
                 );
                 // cookie er moddhe jei token ase seita ei somoy por remove hoye jabe
@@ -161,4 +162,42 @@ module.exports.user_register = async (req, res) => {
       }
     }
   });
+};
+
+module.exports.verify_email = async (req, res) => {
+  console.log(req.body);
+  const { otp } = req.body;
+  const { emailVerify_token } = req.cookies;
+  if (!otp) {
+    res.status(404).json({ errorMessage: "Please provide your otp" });
+  } else {
+    const { name, email, password, otpCode, imageInfo } = await jwt.verify(
+      emailVerify_token,
+      process.env.SECRET
+    );
+
+    const imageName = Date.now() + imageInfo.image.originalFilename;
+
+    const disPath =
+      __dirname + `../../../frontend/public/userImage/${imageName}`;
+
+    try {
+      if (parseInt(otp) !== otpCode) {
+        res.status(404).json({ errorMessage: "Please provide your valid otp" });
+      } else {
+        fs.copyFile(imageInfo.image.filepath, disPath, async (err) => {
+          if (!err) {
+            const creatUser = await userModel.create({
+              userName: name,
+              email,
+              loginMethod: "manually",
+              password: await bcrypt.hash(password, 10),
+              image: `http://localhost:3000/userImage/${imageName}`,
+            });
+            console.log(creatUser);
+          }
+        });
+      }
+    } catch (error) {}
+  }
 };
