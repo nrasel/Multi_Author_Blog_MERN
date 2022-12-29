@@ -71,7 +71,12 @@ export const adminReducer = (state = initState, action) => {
     };
   }
 
+  if (type === "OTP_SEND_SUCCESS") {
+    return {
+      ...state,
+      successMessage: payload.successMessage,
+      loader: false,
+    };
+  }
   return state;
 };
-
-

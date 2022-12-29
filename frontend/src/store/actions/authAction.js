@@ -27,9 +27,15 @@ export const admin_login = (data) => async (dispatch) => {
 };
 
 export const register = (data) => async (dispatch) => {
+  dispatch({
+    type: "LOADER_RUN",
+  });
   try {
     const response = await axios.post("/rest-api/register", data);
-    console.log(response.data);
+    dispatch({
+      type: "OTP_SEND_SUCCESS",
+      payload: response.data,
+    });
   } catch (error) {
     console.log(error.response.data);
   }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { BsAt } from "react-icons/bs";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +7,7 @@ import { Link } from "react-router-dom";
 import { register } from "../../store/actions/authAction";
 import Navbar from "../home/Navbar";
 
-const Register = () => {
+const Register = ({ history }) => {
   const dispatch = useDispatch();
   const { authenticate, errorMessage, successMessage, loader } = useSelector(
     (state) => state.adminReducer
@@ -50,6 +51,15 @@ const Register = () => {
     formData.append("image", state.image);
     dispatch(register(formData));
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      history.push("/register/email-verify");
+      if (errorMessage.error) {
+        toast.error(errorMessage?.error);
+      }
+    }
+  }, [dispatch, successMessage, errorMessage?.error]);
 
   return (
     <>
@@ -131,14 +141,17 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-group">
-                <button className="btn btn-block">Register</button>
-                <button className="btn btn-block">
-                  <div className="spinner">
-                    <div className="spinner1"></div>
-                    <div className="spinner2"></div>
-                    <div className="spinner3"></div>
-                  </div>
-                </button>
+                {loader ? (
+                  <button className="btn btn-block">
+                    <div className="spinner">
+                      <div className="spinner1"></div>
+                      <div className="spinner2"></div>
+                      <div className="spinner3"></div>
+                    </div>
+                  </button>
+                ) : (
+                  <button className="btn btn-block">Register</button>
+                )}
               </div>
               <div className="form-group">
                 <div className="login-page">

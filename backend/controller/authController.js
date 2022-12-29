@@ -125,11 +125,33 @@ module.exports.user_register = async (req, res) => {
             };
             transporter.sendMail(mailOption, (error, info) => {
               if (error) {
-                return res
-                  .status(500)
-                  .json({ errorMessage: { error: "Something went't wrong" } });
+                return res.status(500).json({
+                  errorMessage: {
+                    error: "Something went't wrong please try again",
+                  },
+                });
               } else {
-                console.log("otp send success");
+                const verifyEmailToken = jwt.sign(
+                  {
+                    email,
+                    name,
+                    password,
+                    imageInfo: files,
+                    otpCode: otp,
+                  },
+                  process.env.SECRET,
+                  {
+                    expiresIn: process.env.COOKIE_EXP,
+                  }
+                );
+                // cookie er moddhe jei token ase seita ei somoy por remove hoye jabe
+                const option = {
+                  expeire: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+                };
+                res
+                  .status(201)
+                  .cookie("emailVerify_token", verifyEmailToken, option)
+                  .json({ successMessage: "Check your email and submit otp" });
               }
             });
           }
