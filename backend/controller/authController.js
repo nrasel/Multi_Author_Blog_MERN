@@ -233,3 +233,71 @@ module.exports.verify_email = async (req, res) => {
     }
   }
 };
+
+module.exports.login_user = async (req, res) => {
+  // first of all req.body showed undefined. solve this problem we use body parser
+  // body parser mainly handle json data.
+  // console.log(req.body);
+  // ফ্রন্ট এন্ড থেকে ইউজার যখন ডাটা পাঠাবে তখন ডাটা গুলা ভ্যালিড কিনা তা ব্যাকেন্ডে চেক করলে ভালো হয় ফ্রন্ট এন্ডেও চেক করা যায় তবে ব্যাক এন্ডে করলে ভালো হয়। তাই এখানে চেক করা হলো।
+  const { email, password } = req.body;
+  const error = {};
+  if (!email) {
+    error.email = "Please provide your email";
+  }
+  if (email && !validator.isEmail(email)) {
+    error.email = "Please provide valid email";
+  }
+  if (!password) {
+    error.password = "Please provide your password";
+  }
+
+  //যদি ইউজার ইনফরমেশন প্রোভাইড করে তাইলে কি সেট হবে নাইলে কি সেট হবে না সেই কন্ডিশন কে কানে লাগিয়ে নিচের কোডটা কাজ করবে
+  if (Object.keys(error).length > 0) {
+    return res.status(400).json({ errorMessage: error });
+  } else {
+    try {
+      const getUser = await userModel.findOne({ email }).select("+password");
+  
+      if (getUser) {
+        const matchPassword = await bcrypt.compare(password, getUser.password);
+
+     
+        if (matchPassword) {
+          const token = jwt.sign(
+            {
+              id: getUser._id,
+              email: getUser.email,
+              name: getUser.userName,
+              image: getUser.image,
+              role: getUser.role,
+              loginMethod: getUser.loginMethod,
+              accessStatus: getUser.accessStatus,
+              createdAt: getUser.createdAt,
+            },
+            process.env.SECRET,
+            { expiresIn: process.env.TOKEN_EXP }
+          );
+          const option = {
+            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+          };
+          res.status(201).cookie("blog_token", token, option).json({
+            successMessage: "Your login successful",
+            token,
+          });
+        } else {
+          return res
+            .status(400)
+            .json({ errorMessage: { error: "Password does'nt match" } });
+        }
+      } else {
+        return res
+          .status(400)
+          .json({ errorMessage: { error: "Email doesn't exist" } });
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ errorMessage: { error: "Internal Server Error" } });
+    }
+  }
+};

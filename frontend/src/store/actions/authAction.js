@@ -49,7 +49,6 @@ export const email_verify = (otp) => async (dispatch) => {
 
   try {
     const response = await axios.post(`/rest-api/verify-email`, { otp });
-  
 
     localStorage.setItem("blog_token", response.data.token);
     dispatch({
@@ -59,6 +58,28 @@ export const email_verify = (otp) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "REGISTER_ERROR",
+      payload: error.response.data.errorMessage,
+    });
+  }
+};
+
+export const user_login = (data) => async (dispatch) => {
+  dispatch({
+    type: "LOADER_RUN",
+  });
+
+  try {
+    const response = await axios.post("/rest-api/user-login", data);
+    dispatch({
+      type: "LOGIN_SUCCESS",
+      payload: {
+        successMessage: response.data.successMessage,
+        token: response.data.token,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: "LOGIN_ERROR",
       payload: error.response.data.errorMessage,
     });
   }

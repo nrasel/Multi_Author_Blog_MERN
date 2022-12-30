@@ -8,8 +8,9 @@ import Navbar from "../home/Navbar";
 
 const AdminLogin = ({ history }) => {
   const dispatch = useDispatch();
-  const { authenticate, userInfo, errorMessage, successMessage, loader } =
-    useSelector((state) => state.adminReducer);
+  const { authenticate, errorMessage, successMessage, loader } = useSelector(
+    (state) => state.adminReducer
+  );
 
   const [state, setState] = useState({
     email: "",

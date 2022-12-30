@@ -58,12 +58,12 @@ const Register = ({ history }) => {
     }
     if (successMessage) {
       history.push("/register/email-verify");
-      if (errorMessage.error) {
-        toast.error(errorMessage?.error);
-        dispatch({
-          type: "REGISTER_ERROR_CLEAR",
-        });
-      }
+    }
+    if (errorMessage.error) {
+      toast.error(errorMessage?.error);
+      dispatch({
+        type: "REGISTER_ERROR_CLEAR",
+      });
     }
   }, [dispatch, successMessage, errorMessage?.error, authenticate]);
 

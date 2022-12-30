@@ -52,11 +52,11 @@ export const adminReducer = (state = initState, action) => {
       successMessage: "",
     };
   }
-  if (type === "LOGIN_FAIL") {
+  if (type === "LOGIN_FAIL" || type === "LOGIN_ERROR") {
     return {
       ...state,
       loader: false,
-      errorMessage: payload.error,
+      errorMessage: payload,
       authenticate: false,
       userInfo: "",
       successMessage: "",
