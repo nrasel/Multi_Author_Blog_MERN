@@ -236,3 +236,47 @@ module.exports.details_artcle = async (req, res) => {
     });
   }
 };
+
+module.exports.dislike_like_get = async (req, res) => {
+  const { articleSlug } = req.params;
+  // এখানে লগিন ইউজার লাইক করল নাকি লগিন না করা ইউজার লাইক করল সেইটা বুঝার জন্য একটা মিডিল ওয়ার তৈরি করে হয়েছে
+  const { userId, userName, role } = req;
+
+  try {
+    // eita diye mulot article details theke jeigula lagbe seita nibo
+    const getArt = await articleModel
+      .findOne({ slug: articleSlug })
+      .select({ like: 1, dislike: 1, like_dislike: 1 });
+
+    const check_user = getArt.like_dislike.find(
+      (u) => u.like_disliker_id === userId
+    );
+
+    if (check_user) {
+      if (check_user.like_or_dislike === "like") {
+        res.status(200).json({
+          like_status: "like",
+          dislike_status: "",
+          like: getArt.like,
+          dislike: getArt.dislike,
+        });
+      } else {
+        res.status(200).json({
+          like_status: "",
+          dislike_status: "dislike",
+          like: getArt.like,
+          dislike: getArt.dislike,
+        });
+      }
+    } else {
+      res.status(200).json({
+        like_status: "",
+        dislike_status: "",
+        like: getArt.like,
+        dislike: getArt.dislike,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};

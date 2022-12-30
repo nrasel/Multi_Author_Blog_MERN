@@ -6,7 +6,10 @@ import { BsChevronRight } from "react-icons/bs";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { get_article_details } from "../../store/actions/home/articleReadAction";
+import {
+  get_article_details,
+  like_dislike_get,
+} from "../../store/actions/home/articleReadAction";
 import Comment from "./Comment";
 
 const ArticleDetails = () => {
@@ -18,6 +21,11 @@ const ArticleDetails = () => {
   useEffect(() => {
     dispatch(get_article_details(slug));
   }, [dispatch, slug]);
+
+  useEffect(() => {
+    dispatch(like_dislike_get(slug));
+  }, [slug]);
+
   return (
     <div className="article-details">
       <div className="path">

@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 //মিডিল ওয়ার এর কারনে এডমিন লগিন না করে কোন ক্যাটগরি এড করতে পারবে না। তাই মিডিল ওয়ারটা ইউজ করা যায়। মিডিল ওয়ার মূলত ক্লাইয়েন্ট এবং সার্ভারের মাঝে থেকে ক্লায়েন্ট কে তার রিকুয়েস্ট অনুযায় রেস্পন্স করবে।
+
+// ei middle ta dashboard handle korar jonno
 module.exports.admin_middleware = async (req, res, next) => {
   const { blog_token } = req.cookies;
   if (!blog_token) {
@@ -11,6 +13,23 @@ module.exports.admin_middleware = async (req, res, next) => {
 
     req.adminId = decodeToken.id;
     req.adminName = decodeToken.name;
+    req.role = decodeToken.role;
+    next();
+  }
+};
+
+// ei middleware ta public page gula handle korar jonno
+module.exports.user = async (req, res, next) => {
+  const { blog_token } = req.cookies;
+  if (!blog_token) {
+    req.userId = "";
+    req.userName = "";
+    req.role = "";
+  } else {
+    // eikhane jeigula set kortesi seigula homeController.js filer er req er moddhe pabo
+    const decodeToken = await jwt.verify(blog_token, process.env.SECRET);
+    req.userId = decodeToken.id;
+    req.userName = decodeToken.name;
     req.role = decodeToken.role;
     next();
   }

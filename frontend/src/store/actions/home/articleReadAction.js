@@ -4,7 +4,6 @@ export const get_article_details = (articleSlug) => async (dispatch) => {
     const response = await axios.get(
       `/rest-api/article-details/${articleSlug}`
     );
-    console.log(response.data);
 
     dispatch({
       type: "ARTICLE_DETAILS_GET_SUCCESS",
@@ -15,5 +14,16 @@ export const get_article_details = (articleSlug) => async (dispatch) => {
         readMoreArticle: response.data.readMoreArticle,
       },
     });
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const like_dislike_get = (articleSlug) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `/rest-api/like-dislike-get/${articleSlug}`
+    );
+    console.log(response.data);
   } catch (error) {}
 };
