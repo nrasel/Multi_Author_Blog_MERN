@@ -8,7 +8,7 @@ export const admin_login = (data) => async (dispatch) => {
 
   try {
     const response = await axios.post("/rest-api/admin-login", data);
-    console.log(response);
+
     localStorage.setItem("blog_token", response.data.token);
     dispatch({
       type: "LOGIN_SUCCESS",
@@ -70,6 +70,7 @@ export const user_login = (data) => async (dispatch) => {
 
   try {
     const response = await axios.post("/rest-api/user-login", data);
+    localStorage.setItem("blog_token", response.data.token);
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: {
