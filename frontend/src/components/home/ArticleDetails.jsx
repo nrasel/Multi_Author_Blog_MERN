@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   get_article_details,
   like_dislike_get,
+  user_article_dislike,
   user_article_like,
 } from "../../store/actions/home/articleReadAction";
 import Comment from "./Comment";
@@ -32,9 +33,11 @@ const ArticleDetails = () => {
   }, [slug]);
 
   useEffect(() => {
-    dispatch(like_dislike_get(slug));
-    dispatch({ type: "USER_LIKE_DISLIKE_MESSAGE_CLEAR" });
-  }, [like_dislike_message, slug]);
+    if (like_dislike_message) {
+      dispatch(like_dislike_get(slug));
+      dispatch({ type: "USER_LIKE_DISLIKE_MESSAGE_CLEAR" });
+    }
+  }, [like_dislike_message]);
 
   const articleLike = (e) => {
     e.preventDefault();
@@ -44,6 +47,16 @@ const ArticleDetails = () => {
       dislike_status,
     };
     dispatch(user_article_like(artObj));
+  };
+
+  const articleDislike = (e) => {
+    e.preventDefault();
+    const artObj = {
+      articleId: readArticle._id,
+      like_status,
+      dislike_status,
+    };
+    dispatch(user_article_dislike(artObj));
   };
 
   return (
@@ -98,6 +111,7 @@ const ArticleDetails = () => {
           <div className="dislike">
             {userInfo && userInfo.role === "user" ? (
               <button
+                onClick={articleDislike}
                 className={dislike_status === "dislike" ? "icon red" : "icon"}
               >
                 <AiFillDislike />

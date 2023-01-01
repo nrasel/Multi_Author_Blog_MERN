@@ -277,13 +277,17 @@ module.exports.dislike_like_get = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
   }
 };
 
-module.exports.article_like_dislike = async (req, res) => {
+module.exports.article_like = async (req, res) => {
   const { articleId, like_status, dislike_status } = req.body;
-  console.log(req.role);
+
   const { userName, userId } = req;
   try {
     const { like, slug, dislike } = await articleModel.findOne({
@@ -335,5 +339,67 @@ module.exports.article_like_dislike = async (req, res) => {
       res.status(200).json({ errorMessage: "You like this article" });
     }
     console.log(like);
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
+};
+
+module.exports.article_dislike = async (req, res) => {
+  const { articleId, like_status, dislike_status } = req.body;
+  const { userName, userId } = req;
+
+  try {
+    const { like, slug, dislike } = await articleModel.findOne({
+      _id: articleId,
+    });
+    if (!like_status && !dislike_status) {
+      await articleModel.updateOne(
+        { _id: articleId },
+        {
+          dislike: dislike + 1,
+          $push: {
+            like_dislike: {
+              like_or_dislike: "dislike",
+              like_disliker_id: userId,
+            },
+          },
+        }
+      );
+      res.status(200).json({ successMessage: "you dislike this article" });
+    } else if (!like_status && dislike_status) {
+      await articleModel.updateOne(
+        { _id: articleId },
+        {
+          dislike: dislike - 1,
+          $pull: {
+            like_disliker_id: userId,
+          },
+        }
+      );
+      res.status(200).json({ successMessage: "undo dislike" });
+    } else if (like_status && !dislike_status) {
+      await articleModel.updateOne(
+        {
+          _id: articleId,
+          "like_dislike.like_disliker_id": userId,
+        },
+        {
+          dislike: dislike + 1,
+          like: like - 1,
+          $set: { "like_dislike.$.like_or_dislike": "dislike" },
+        }
+      );
+      res.status(200).json({ successMessage: "You  dislike this article" });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      errorMessage: {
+        error: "Internal Server Error",
+      },
+    });
+  }
 };

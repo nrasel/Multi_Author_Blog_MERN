@@ -6,7 +6,8 @@ const {
   home_tag_get,
   details_artcle,
   dislike_like_get,
-  article_like_dislike,
+  article_like,
+  article_dislike,
 } = require("../../controller/home/homeController");
 const { user, auth_user } = require("../../middleware/authMiddleware");
 
@@ -21,6 +22,7 @@ router.get("/get-tag-article", home_tag_get);
 router.get("/article-details/:articleSlug", details_artcle);
 router.get("/like-dislike-get/:articleSlug", user, dislike_like_get);
 // ei route diye muloto user login obosthai thakleo kaj hosse na thakleo kaj hosse tai user middleware ta use kora hosse na. tai auth_user middle make kore kaj kora hosse
-router.put("/user-like-article", auth_user, article_like_dislike);
+router.put("/user-like-article", auth_user, article_like);
+router.put("/user-dislike-article", auth_user, article_dislike);
 
 module.exports = router;

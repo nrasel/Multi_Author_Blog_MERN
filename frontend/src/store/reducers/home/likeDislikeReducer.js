@@ -17,7 +17,7 @@ export const likeDislikeReducer = (state = initState, action) => {
       dislike_status: payload.dislike_status,
     };
   }
-  if (type === "USER_LIKE_SUCCESS") {
+  if (type === "USER_LIKE_SUCCESS" || type === "USER_DISLIKE_SUCCESS") {
     return {
       ...state,
       like_dislike_message: payload.successMessage,
