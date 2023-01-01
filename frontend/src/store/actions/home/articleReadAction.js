@@ -25,5 +25,11 @@ export const like_dislike_get = (articleSlug) => async (dispatch) => {
       `/rest-api/like-dislike-get/${articleSlug}`
     );
     console.log(response.data);
-  } catch (error) {}
+    dispatch({
+      type: "LIKE_DISLIKE_GET_SUCCESS",
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error.response.data);
+  }
 };

@@ -18,6 +18,12 @@ const ArticleDetails = () => {
   const { readMore, relatedArticle, moreTag, readArticle } = useSelector(
     (state) => state.homeReducer
   );
+  const { like, dislike, like_status, dislike_staus } = useSelector(
+    (state) => state.likeDislikeReducer
+  );
+  const { userInfo } = useSelector((state) => state.adminReducer);
+  console.log(userInfo);
+  console.log(like);
   useEffect(() => {
     dispatch(get_article_details(slug));
   }, [dispatch, slug]);
@@ -76,22 +82,32 @@ const ArticleDetails = () => {
       <div className="like-dislike-view">
         <div className="like-dislike">
           <div className="dislike">
-            <button className="icon red">
-              <AiFillDislike />
-            </button>
-            {/* <button disabled className="icon red">
-              <AiFillDislike />
-            </button> */}
-            <div className="like-number">(12)</div>
+            {userInfo && userInfo.role === "user" ? (
+              <button
+                className={dislike_staus === "dislike" ? "icon red" : "icon"}
+              >
+                <AiFillDislike />
+              </button>
+            ) : (
+              <button disabled className="icon ">
+                <AiFillDislike />
+              </button>
+            )}
+
+            <div className="like-number">({dislike})</div>
           </div>
           <div className="like">
-            <button className="icon">
-              <AiFillLike />
-            </button>
-            {/* <button disabled className="icon">
-              <AiFillLike />
-            </button> */}
-            <div className="like-number">(12)</div>
+            {userInfo && userInfo.role === "user" ? (
+              <button className={like_status === "like" ? "icon blue" : "icon"}>
+                <AiFillLike />
+              </button>
+            ) : (
+              <button disabled className="icon">
+                <AiFillLike />
+              </button>
+            )}
+
+            <div className="like-number">({like})</div>
           </div>
         </div>
         <div className="view">
@@ -134,7 +150,11 @@ const ArticleDetails = () => {
         <div className="articles">
           {relatedArticle.length > 0 ? (
             relatedArticle.map((art, index) => (
-              <Link to={`/article/details/${art.slug}`} className="article">
+              <Link
+                key={index}
+                to={`/article/details/${art.slug}`}
+                className="article"
+              >
                 <img
                   src={`http://localhost:3000/articleImage/${art.image}`}
                   alt=""
