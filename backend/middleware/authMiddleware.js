@@ -34,3 +34,22 @@ module.exports.user = async (req, res, next) => {
     next();
   }
 };
+
+module.exports.auth_user = async (req, res, next) => {
+  const { blog_token } = req.cookies;
+  if (!blog_token) {
+    res.status(409).json({ errorMessage: { error: "Please login first" } });
+  } else {
+    const decodeToken = jwt.verify(blog_token, process.env.SECRET);
+    if (decodeToken.role === "user" && decodeToken.accessStatus === "unblock") {
+      req.userId = decodeToken.id;
+      req.role = decodeToken.role;
+      req.userName = decodeToken.name;
+      next();
+    } else {
+      res.status(404).json({
+        errorMessage: { error: "You can not access" },
+      });
+    }
+  }
+};

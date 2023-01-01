@@ -280,3 +280,51 @@ module.exports.dislike_like_get = async (req, res) => {
     console.log(error.message);
   }
 };
+
+module.exports.article_like_dislike = async (req, res) => {
+  const { articleId, like_status, dislike_status } = req.body;
+  console.log(req.role);
+  const { userName, userId } = req;
+  try {
+    const { like, slug, dislike } = await articleModel.findOne({
+      _id: articleId,
+    });
+    if (!like_status && !dislike_status) {
+      await articleModel.updateOne(
+        {
+          _id: articleId,
+        },
+        {
+          like: like + 1,
+          $push: {
+            like_dislike: {
+              like_or_dislike: "like",
+              like_disliker_id: userId,
+            },
+          },
+        }
+      );
+      res.status(200).json({ successMessage: "you like this article" });
+    } else if (like_status && !dislike_status) {
+      await articleModel.updateOne(
+        { _id: articleId },
+        {
+          like: like - 1,
+          $pull: {
+            like_dislike: {
+              like_disliker_id: userId,
+            },
+          },
+        }
+      );
+      res.status(200).json({ successMessage: "You dislike this article" });
+    }else if(!like_status && dislike_status){
+      await articleModel.updateOne(
+        {_id:articleId},{
+          
+        }
+      )
+    }
+    console.log(like);
+  } catch (error) {}
+};

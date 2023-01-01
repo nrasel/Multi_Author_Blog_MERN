@@ -89,6 +89,12 @@
     .like-dislike {
       display: flex;
       justify-content: flex-end;
+      .icon.blue {
+        color: #2374e1;
+      }
+      .icon.red {
+        color: rgb(236, 41, 15);
+      }
       .icon {
         font-size: 25px;
         padding: 0px 3px;
@@ -104,7 +110,7 @@
         display: flex;
         padding: 3px;
         margin-right: 10px;
-        background-color: rgb(250, 246, 15);
+        // background-color: rgb(250, 246, 15);
         border-radius: 5px;
         justify-content: center;
         align-items: center;
@@ -117,7 +123,7 @@
         display: flex;
         padding: 3px;
         margin-right: 10px;
-        background-color: rgb(22, 241, 22);
+        // background-color: rgb(22, 241, 22);
         border-radius: 5px;
         justify-content: center;
         align-items: center;

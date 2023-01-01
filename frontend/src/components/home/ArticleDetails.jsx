@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   get_article_details,
   like_dislike_get,
+  user_article_like,
 } from "../../store/actions/home/articleReadAction";
 import Comment from "./Comment";
 
@@ -18,12 +19,11 @@ const ArticleDetails = () => {
   const { readMore, relatedArticle, moreTag, readArticle } = useSelector(
     (state) => state.homeReducer
   );
-  const { like, dislike, like_status, dislike_staus } = useSelector(
+  const { like, dislike, like_status, dislike_status } = useSelector(
     (state) => state.likeDislikeReducer
   );
   const { userInfo } = useSelector((state) => state.adminReducer);
-  console.log(userInfo);
-  console.log(like);
+
   useEffect(() => {
     dispatch(get_article_details(slug));
   }, [dispatch, slug]);
@@ -31,6 +31,16 @@ const ArticleDetails = () => {
   useEffect(() => {
     dispatch(like_dislike_get(slug));
   }, [slug]);
+
+  const articleLike = (e) => {
+    e.preventDefault();
+    const artObj = {
+      articleId: readArticle._id,
+      like_status,
+      dislike_status,
+    };
+    dispatch(user_article_like(artObj));
+  };
 
   return (
     <div className="article-details">
@@ -84,7 +94,7 @@ const ArticleDetails = () => {
           <div className="dislike">
             {userInfo && userInfo.role === "user" ? (
               <button
-                className={dislike_staus === "dislike" ? "icon red" : "icon"}
+                className={dislike_status === "dislike" ? "icon red" : "icon"}
               >
                 <AiFillDislike />
               </button>
@@ -98,7 +108,10 @@ const ArticleDetails = () => {
           </div>
           <div className="like">
             {userInfo && userInfo.role === "user" ? (
-              <button className={like_status === "like" ? "icon blue" : "icon"}>
+              <button
+                onClick={articleLike}
+                className={like_status === "like" ? "icon blue" : "icon"}
+              >
                 <AiFillLike />
               </button>
             ) : (
