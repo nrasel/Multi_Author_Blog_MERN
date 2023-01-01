@@ -17,5 +17,17 @@ export const likeDislikeReducer = (state = initState, action) => {
       dislike_status: payload.dislike_status,
     };
   }
+  if (type === "USER_LIKE_SUCCESS") {
+    return {
+      ...state,
+      like_dislike_message: payload.successMessage,
+    };
+  }
+  if (type === "USER_LIKE_DISLIKE_MESSAGE_CLEAR") {
+    return {
+      ...state,
+      like_dislike_message: "",
+    };
+  }
   return state;
 };

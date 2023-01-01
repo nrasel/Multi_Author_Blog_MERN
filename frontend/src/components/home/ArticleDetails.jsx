@@ -19,9 +19,8 @@ const ArticleDetails = () => {
   const { readMore, relatedArticle, moreTag, readArticle } = useSelector(
     (state) => state.homeReducer
   );
-  const { like, dislike, like_status, dislike_status } = useSelector(
-    (state) => state.likeDislikeReducer
-  );
+  const { like, dislike, like_status, dislike_status, like_dislike_message } =
+    useSelector((state) => state.likeDislikeReducer);
   const { userInfo } = useSelector((state) => state.adminReducer);
 
   useEffect(() => {
@@ -31,6 +30,11 @@ const ArticleDetails = () => {
   useEffect(() => {
     dispatch(like_dislike_get(slug));
   }, [slug]);
+
+  useEffect(() => {
+    dispatch(like_dislike_get(slug));
+    dispatch({ type: "USER_LIKE_DISLIKE_MESSAGE_CLEAR" });
+  }, [like_dislike_message, slug]);
 
   const articleLike = (e) => {
     e.preventDefault();

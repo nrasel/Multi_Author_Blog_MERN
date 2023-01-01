@@ -317,13 +317,22 @@ module.exports.article_like_dislike = async (req, res) => {
           },
         }
       );
-      res.status(200).json({ successMessage: "You dislike this article" });
-    }else if(!like_status && dislike_status){
+      res.status(200).json({ successMessage: "undo like" });
+    } else if (!like_status && dislike_status) {
       await articleModel.updateOne(
-        {_id:articleId},{
-          
+        {
+          _id: articleId,
+          "like_dislike.like_disliker_id": userId,
+        },
+        {
+          like: like + 1,
+          dislike: dislike - 1,
+          $set: {
+            "like_dislike.$.like_or_dislike": "like",
+          },
         }
-      )
+      );
+      res.status(200).json({ errorMessage: "You like this article" });
     }
     console.log(like);
   } catch (error) {}

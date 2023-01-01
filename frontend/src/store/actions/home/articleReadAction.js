@@ -37,6 +37,10 @@ export const user_article_like = (data) => async (dispatch) => {
   try {
     const response = await axios.put("/rest-api/user-like-article", data);
     console.log(response.data);
+    dispatch({
+      type: "USER_LIKE_SUCCESS",
+      payload: response.data,
+    });
   } catch (error) {
     console.log(error.response.data);
   }
