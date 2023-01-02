@@ -7,14 +7,23 @@ import { user_comment } from "../../store/actions/home/homeCommentAction";
 
 const Comment = () => {
   const { userInfo } = useSelector((state) => state.adminReducer);
+  const { readArticle } = useSelector((state) => state.homeReducer);
+  // console.log(readArticle);
   const dispatch = useDispatch();
 
   const [comment, setComment] = useState("");
 
   const commentSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(user_comment(comment));
+    const artObj = {
+      articleId: readArticle._id,
+      articleSlug: readArticle.slug,
+      articleTitle: readArticle.title,
+      userName: userInfo.name,
+      userImage: userInfo.image,
+      comment,
+    };
+    dispatch(user_comment(artObj));
   };
 
   return (

@@ -30,7 +30,7 @@ const ArticleDetails = () => {
 
   useEffect(() => {
     dispatch(like_dislike_get(slug));
-  }, [slug]);
+  }, [dispatch, slug]);
 
   useEffect(() => {
     if (like_dislike_message) {
@@ -78,7 +78,7 @@ const ArticleDetails = () => {
       </div>
       <div className="title">
         <h3>
-          <Link to="#">{readArticle?.title}</Link>
+          <Link to="/">{readArticle?.title}</Link>
         </h3>
       </div>
       <div className="auth-time">
