@@ -49,7 +49,6 @@ export const get_old_recent_article = () => async (dispatch) => {
 
 export const get_home_category =
   (categoyrSlug, currentPage) => async (dispatch) => {
-    console.log(categoyrSlug, currentPage);
     try {
       const response = await axios.get(
         `/rest-api/get-home-category?categorySlug=${categoyrSlug}&&currentPage=${currentPage}`

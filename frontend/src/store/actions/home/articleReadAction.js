@@ -33,6 +33,7 @@ export const like_dislike_get = (articleSlug) => async (dispatch) => {
   }
 };
 
+// video -98,99,100,101,102
 export const user_article_like = (data) => async (dispatch) => {
   try {
     const response = await axios.put("/rest-api/user-like-article", data);

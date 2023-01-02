@@ -35,7 +35,9 @@ const ArticleDetails = () => {
   useEffect(() => {
     if (like_dislike_message) {
       dispatch(like_dislike_get(slug));
-      dispatch({ type: "USER_LIKE_DISLIKE_MESSAGE_CLEAR" });
+      dispatch({
+        type: "USER_LIKE_DISLIKE_MESSAGE_CLEAR",
+      });
     }
   }, [like_dislike_message]);
 

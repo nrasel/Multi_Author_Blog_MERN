@@ -1,7 +1,22 @@
-import React from "react";
-import { BsTrash } from "react-icons/bs";
+import React, { useState } from "react";
+import { BsFacebook, BsGoogle, BsTrash } from "react-icons/bs";
+import { FaLock } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { user_comment } from "../../store/actions/home/homeCommentAction";
 
 const Comment = () => {
+  const { userInfo } = useSelector((state) => state.adminReducer);
+  const dispatch = useDispatch();
+
+  const [comment, setComment] = useState("");
+
+  const commentSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(user_comment(comment));
+  };
+
   return (
     <>
       <div className="comments">
@@ -254,19 +269,47 @@ const Comment = () => {
       </div>
       <div className="comment-submit">
         <h3>Give Your Comments</h3>
-        <div className="form-group">
-          <textarea
-            placeholder="Write something"
-            className="form-control"
-            name=""
-            id=""
-            cols="20"
-            rows="10"
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <button className="btn">Submit</button>
-        </div>
+        {userInfo && userInfo.role === "user" ? (
+          <form onSubmit={commentSubmit}>
+            <div className="form-group">
+              <textarea
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Write something"
+                className="form-control"
+                name=""
+                id=""
+                cols="20"
+                rows="10"
+              ></textarea>
+            </div>
+            <div className="form-group">
+              <button className="btn">Submit</button>
+            </div>
+          </form>
+        ) : (
+          <ul className="login-first">
+            <li className="btn">
+              <span>
+                <BsFacebook />
+              </span>
+              <button className="btn">Login Facebook</button>
+            </li>
+            <li className="btn">
+              <span>
+                <FaLock />
+              </span>
+              <Link to="/login" className="btn">
+                Login
+              </Link>
+            </li>
+            <li className="btn">
+              <span>
+                <BsGoogle />
+              </span>
+              <button className="btn">Login Google</button>
+            </li>
+          </ul>
+        )}
       </div>
     </>
   );

@@ -141,4 +141,44 @@
       color: #fff;
     }
   }
+  .login-first {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 10px;
+    li {
+      transition: all 0.5s;
+      color: #fff;
+      span {
+        display: flex;
+      }
+      button,
+      a {
+        background-color: transparent;
+        color: #fff;
+        text-decoration: none;
+      }
+      &:nth-child(1) {
+        background-color: #7443e9;
+        border-color: #4826dd;
+        &:hover {
+          background-color: #6d3be0;
+        }
+      }
+      &:nth-child(2) {
+        background-color: #fa5c7c;
+        border-color: #4826dd;
+        &:hover {
+          background-color: #ec4d6d;
+        }
+      }
+      &:nth-child(3) {
+        background-color: #f44336;
+        border-color: #8862e0;
+        &:hover {
+          background-color: #d14014;
+        }
+      }
+    }
+  }
 }
