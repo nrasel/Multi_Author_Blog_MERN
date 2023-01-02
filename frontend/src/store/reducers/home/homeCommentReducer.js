@@ -1,6 +1,6 @@
 const initState = {
   loader: false,
-  comment: [],
+  comments: [],
   comment_message: "",
   comment_error: "",
 };
@@ -24,6 +24,12 @@ export const homeCommentReducer = (state = initState, action) => {
     return {
       ...state,
       comment_message: "",
+    };
+  }
+  if (type === "COMMENT_GET_SUCCESS") {
+    return {
+      ...state,
+      comments: payload.comment,
     };
   }
   return state;
