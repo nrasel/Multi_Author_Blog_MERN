@@ -17,3 +17,15 @@ module.exports.comment_user = async (req, res) => {
     });
   }
 };
+
+module.exports.comment_get = async (req, res) => {
+  const { articleId } = req.params;
+  try {
+    const getComment = await commentModel.find({ articleId });
+    res.status(200).json({
+      comment: getComment,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

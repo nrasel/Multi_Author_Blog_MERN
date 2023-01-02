@@ -4,7 +4,10 @@ import { BsFacebook, BsGoogle, BsTrash } from "react-icons/bs";
 import { FaLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { user_comment } from "../../store/actions/home/homeCommentAction";
+import {
+  get_comment,
+  user_comment,
+} from "../../store/actions/home/homeCommentAction";
 
 const Comment = () => {
   const { userInfo } = useSelector((state) => state.adminReducer);
@@ -40,6 +43,12 @@ const Comment = () => {
       });
     }
   }, [comment_message]);
+
+  useEffect(() => {
+    if (readArticle) {
+      dispatch(get_comment(readArticle._id));
+    }
+  }, [readArticle]);
 
   return (
     <>
