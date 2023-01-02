@@ -5,6 +5,7 @@ import { adminReducer } from "./reducers/adminReducers";
 import { articleReducer } from "./reducers/articleReducer";
 import { dashCategoryReducers } from "./reducers/dashCategoryReducers";
 import { dashTagReducer } from "./reducers/dashTAgReducer";
+import { homeCommentReducer } from "./reducers/home/homeCommentReducer";
 import { homeReducer } from "./reducers/home/homeReducer";
 import { likeDislikeReducer } from "./reducers/home/likeDislikeReducer";
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   articleReducer,
   homeReducer,
   likeDislikeReducer,
+  homeCommentReducer,
 });
 
 const middleware = [ThunkMiddleware];

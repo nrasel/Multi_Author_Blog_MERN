@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { BsFacebook, BsGoogle, BsTrash } from "react-icons/bs";
 import { FaLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +9,9 @@ import { user_comment } from "../../store/actions/home/homeCommentAction";
 const Comment = () => {
   const { userInfo } = useSelector((state) => state.adminReducer);
   const { readArticle } = useSelector((state) => state.homeReducer);
+  const { loader, comment_message } = useSelector(
+    (state) => state.homeCommentReducer
+  );
   // console.log(readArticle);
   const dispatch = useDispatch();
 
@@ -23,12 +27,32 @@ const Comment = () => {
       userImage: userInfo.image,
       comment,
     };
-    dispatch(user_comment(artObj));
+    if (comment) {
+      dispatch(user_comment(artObj));
+    }
   };
+
+  useEffect(() => {
+    if (comment_message) {
+      toast.success(comment_message);
+      dispatch({
+        type: "COMMENT_MESSAGE_CLEAR",
+      });
+    }
+  }, [comment_message]);
 
   return (
     <>
       <div className="comments">
+        <Toaster
+          position={"top-center"}
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              fontSize: "15px",
+            },
+          }}
+        />
         <div className="main-reply-comment">
           <div className="image-comment-time-name">
             <img
@@ -292,7 +316,9 @@ const Comment = () => {
               ></textarea>
             </div>
             <div className="form-group">
-              <button className="btn">Submit</button>
+              <button disabled={loader ? true : false} className="btn">
+                Submit
+              </button>
             </div>
           </form>
         ) : (
